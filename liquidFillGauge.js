@@ -122,7 +122,7 @@ function loadLiquidFillGauge(elementId, value, config) {
         .attr('transform','translate('+locationX+','+locationY+')');
 
     // Draw the outer circle.
-    var gaugeCircleArc = d3.svg.arc()
+    var gaugeCircleArc = d3.arc()
         .startAngle(gaugeCircleX(0))
         .endAngle(gaugeCircleX(1))
         .outerRadius(gaugeCircleY(radius))

@@ -1,5 +1,5 @@
 $.ajax({
-  dataType: "json",
+  dataType: "jsonp",
   url: 'http://portal-isense.fau.edu:8080/wrs/mongo?numSamples=2880',
   }).done(function ( data ) {
   // do my stuff

@@ -5,11 +5,10 @@
  * All rights reserved.
  *
  * Liquid Fill Gauge v1.1
+ *
+ * Modified by Shiree Hughes in 2017
+ *
  */
-
-/* Modified by Shiree Hughes
- * in 2017
- * /
 
 function liquidFillGaugeDefaultSettings(){
     return {

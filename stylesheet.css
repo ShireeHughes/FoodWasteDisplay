@@ -1,0 +1,39 @@
+.title-header { 
+     padding: 5px;
+     text-align: center;
+     background: #cc0000;
+  }
+  .title-header h1 {
+     color:#fff;
+     font-family: Anton;
+  }
+  .adh {     color: #00338C; }
+  body {
+     font-size:18px;
+     font-family:Athiti, Pontano Sans;
+  }
+  aside {
+    float: right;
+    width: 33%;
+    margin: 0;
+    background: #00338C;
+    border-left:#003366 2px solid;
+    color:#fff;
+    height: 500px;
+  }
+
+  h2 { font-family:Anton; }
+  article {
+    height: 500px;
+    width:66%;
+    float:left;
+  }
+
+  footer {
+    width: 100%;
+    font-size: 12px;
+    text-align: center;    
+  }
+  .main-display, .charts-tips-more {
+    padding: 0px 25px;
+  }

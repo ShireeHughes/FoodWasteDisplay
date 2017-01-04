@@ -51,7 +51,9 @@
 <script>
 //create data sets
 var data = [],
-    data2 = [];
+    data2 = [],
+    data3 = [],
+    data4 = [];
 
 //function for creating a timestamp in D3
 var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
@@ -69,6 +71,34 @@ function findMax(a,b) {
       return a;
    }
 }
+
+
+function getColor(value) {
+  switch(value) {
+     case 0:
+        return 'blue';
+        break;
+     case 1:
+        return 'darkgray';
+        break;
+     case 2:
+        return 'black';
+        break;
+     case 3:
+        return 'indigo';
+        break;
+     case 4:
+        return 'green';
+        break;
+     case 5:
+        return 'purple';
+        break;
+     case 6:
+        return 'red';
+        break;
+  } 
+}
+
 
 /* 
  * Function called in jsonp callback
@@ -103,10 +133,18 @@ function getData(result) {
                "x":parseTime(current.timestamp.$date),
                "y":cafe1Total
              });
+                          
+       //dummy datasets
+console.log(Math.pow(-1,ndx)*115);
+        data4.push({
+           "x":parseTime(current.timestamp.$date),
+           "y":cafe1Total + 115
+        });
+
         }
 
     
-        //add to cafe 1 dataset
+        //add to cafe 2 dataset
         if(current.trash_can_id == "cafe_2") {
 //           if(current.weight != 0) {
            if(testWeight != 0) {
@@ -120,6 +158,11 @@ function getData(result) {
               "x":parseTime(current.timestamp.$date),
               "y":cafe2Total
            });
+           //dummy datasets
+           data3.push({
+             "x":parseTime(current.timestamp.$date),
+             "y":cafe2Total - 120
+           });
         }
        
         //save max
@@ -127,10 +170,10 @@ function getData(result) {
            max = findMax(cafe1Total, cafe2Total);
         }
      }
-     graphData(max);
+     graphData(max,[data, data2, data3, data4]);
  }
 
-function graphData(max) {
+function graphData(max, datasets) {
 
    // define scales, area, and axis information
    var vis = d3.select("#visualisation"),
@@ -169,21 +212,16 @@ function graphData(max) {
       })
       .curve(d3.curveBasis);    //interpolation to smooth the line
 
-    //add first data set
-    vis.append('svg:path')
-     .attr('d', lineGen(data))
-     .attr('stroke', 'green')
-     .attr('stroke-width', 2)
-     .attr('fill', 'none');
-
-    //add second data set
-    vis.append('svg:path')
-     .attr('d', lineGen(data2))
-     .attr('stroke', 'blue')
-     .attr('stroke-width', 2)
-     .attr('fill', 'none');
+       //add datasets
+    var ndx;
+    for(ndx = 0; ndx < datasets.length; ndx++) {
+        vis.append('svg:path')
+           .attr('d', lineGen(datasets[ndx]))
+           .attr('stroke', getColor(ndx))
+           .attr('stroke-width', 2)
+           .attr('fill', 'none');
+    }
   }
-  console.log(data2);
   </script>
 <style>
 .axis path {

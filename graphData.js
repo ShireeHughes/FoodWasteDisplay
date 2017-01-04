@@ -87,7 +87,13 @@ function graphDataMultiLine(max, datasets) {
    vis.append("svg:g")
       .attr("class","axis") //allows us to manipulate the CSS
       .attr("transform", "translate(" + (MARGINS.left) + ",0)")
-      .call(yAxis);
+      .call(yAxis)
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("fill", "#000")
+      .text("Waste, lbs");
 
    //create line
    var lineGen = d3.line()

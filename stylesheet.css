@@ -19,12 +19,12 @@
     background: #00338C;
     border-left:#003366 2px solid;
     color:#fff;
-    height: 500px;
+    height: 1000px;
   }
 
   h2 { font-family:Anton; }
   article {
-    height: 500px;
+    height: 1000px;
     width:66%;
     float:left;
   }

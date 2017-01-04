@@ -37,3 +37,13 @@
   .main-display, .charts-tips-more {
     padding: 0px 25px;
   }
+
+.axis path {
+    fill: none;
+    stroke: #777;
+    shape-rendering: crispEdges;
+}
+.axis text {
+    font-family: Pontano Sans;
+    font-size: 13px;
+}

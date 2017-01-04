@@ -30,7 +30,7 @@
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/dd9fb85d815e1cbd3bbed698d3b6cc7511d525c2/retreiveData.js"></script>
-  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/9ed6875eceff9b4c7f826c76a9fd5fa08ed9f7c2/graphData"></script
+  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/00a2c0711ee0bf74b8ca8f0825cb69f208ca4259/graphData.js"></script
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
@@ -71,34 +71,6 @@ function findMax(a,b) {
       return a;
    }
 }
-
-
-function getColor(value) {
-  switch(value) {
-     case 0:
-        return 'blue';
-        break;
-     case 1:
-        return 'darkgray';
-        break;
-     case 2:
-        return 'black';
-        break;
-     case 3:
-        return 'indigo';
-        break;
-     case 4:
-        return 'green';
-        break;
-     case 5:
-        return 'purple';
-        break;
-     case 6:
-        return 'red';
-        break;
-  } 
-}
-
 
 /* 
  * Function called in jsonp callback
@@ -172,55 +144,6 @@ function getData(result) {
      graphDataMultiLine(max,[data, data2, data3, data4]);
  }
 
-function graphData(max, datasets) {
-
-   // define scales, area, and axis information
-   var vis = d3.select("#visualisation"),
-       WIDTH = 1000,
-       HEIGHT = 500,
-       MARGINS = {
-          top: 20,
-          right: 20,
-          bottom: 20,
-          left: 50
-       },
-      xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain([new Date('2016-12-17T00:00:00.000Z'), new Date('2016-12-18T00:00:00.000Z')]),
-      yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0,max]),
-      xAxis = d3.axisBottom(xScale),  
-      yAxis = d3.axisLeft(yScale);
-
-   //Append x-axis to the graph
-   vis.append("svg:g")
-      .attr("class","axis") //allows us to manipulate the CSS
-      .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")  //positions axis
-      .call(xAxis);
-
-   //Append y-axis to the graph
-   vis.append("svg:g")
-      .attr("class","axis") //allows us to manipulate the CSS
-      .attr("transform", "translate(" + (MARGINS.left) + ",0)")
-      .call(yAxis);
-
-   //create line
-   var lineGen = d3.line()
-      .x(function(d) {
-          return xScale(d.x);
-       })
-      .y(function(d) {
-          return yScale(d.y);
-      })
-      .curve(d3.curveBasis);    //interpolation to smooth the line
-
-       //add datasets
-    var ndx;
-    for(ndx = 0; ndx < datasets.length; ndx++) {
-        vis.append('svg:path')
-           .attr('d', lineGen(datasets[ndx]))
-           .attr('stroke', getColor(ndx))
-           .attr('stroke-width', 2)
-           .attr('fill', 'none');
-    }
-  }
   </script>
 <style>
 .axis path {

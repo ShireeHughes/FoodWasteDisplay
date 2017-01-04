@@ -30,7 +30,7 @@
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/dd9fb85d815e1cbd3bbed698d3b6cc7511d525c2/retreiveData.js"></script>
-
+  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/9ed6875eceff9b4c7f826c76a9fd5fa08ed9f7c2/graphData"></script
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
@@ -135,7 +135,6 @@ function getData(result) {
              });
                           
        //dummy datasets
-console.log(Math.pow(-1,ndx)*115);
         data4.push({
            "x":parseTime(current.timestamp.$date),
            "y":cafe1Total + 115
@@ -170,7 +169,7 @@ console.log(Math.pow(-1,ndx)*115);
            max = findMax(cafe1Total, cafe2Total);
         }
      }
-     graphData(max,[data, data2, data3, data4]);
+     graphDataMultiLine(max,[data, data2, data3, data4]);
  }
 
 function graphData(max, datasets) {

@@ -13,16 +13,18 @@
   <meta charset="utf-8">
 
   <title>Food Waste at Atlantic Dining Hall</title>
-  <meta name="description" content="food waste, FAU, Florida Atlantic University, I-SENSE, Institute of Sensing and Embedded Systems Engineering, IoT, Internet of Things, sustainability">
+  <meta name="description" content="food waste, FAU, Florida Atlantic University, I-SENSE, Institute of Sensing and Embedded Systems Engineering, IoT, Internet of Things, sustainability, Shiree Hughes">
   <meta name="author" content="Shiree Hughes">
 
   <!-- ************************************** -->
   <!-- * Links for fonts and CSS Stylesheet * -->
   <!-- ************************************** -->
-<!--  <link rel="stylesheet" type="text/css" href="https://rawgit.com/ShireeHughes/FoodWasteDisplay/master/stylesheet.css" /> -->
+  <link rel="stylesheet" type="text/css" href="https://rawgit.com/ShireeHughes/FoodWasteDisplay/master/stylesheet.css" />
   <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet" />
+  <script src='https://use.fontawesome.com/2016971a2a.js'></script>
+
 
   <!-- ************************************** -->
   <!-- *  Links for D3 and JQuery scripts   * -->
@@ -30,30 +32,38 @@
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/dd9fb85d815e1cbd3bbed698d3b6cc7511d525c2/retreiveData.js"></script>
-  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/00a2c0711ee0bf74b8ca8f0825cb69f208ca4259/graphData.js"></script
+  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/00a2c0711ee0bf74b8ca8f0825cb69f208ca4259/graphData.js"></script>
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
-<script>
-
-</script>
 </head>
 <body>
- <div class="container">
- 
-        <div class="jumbotron">
-<svg id="visualisation" width="1000" height="500"></svg>
- 
-        </div>
- 
+<div class="outer">
+    <header>
+    <div class="title-header">
+      <h1>Food Waste @ FAU<h1>
     </div>
+    </header>
+
+    <div class="container"> 
+           <svg id="visualisation" width="1000" height="500"></svg>
+    </div>
+
+    <div class="legend">
+        <center><h3>Legend</h3></center>
+        <span class="cafe1key"><i class="fa fa-square"></i></span> Trash Can #1<br />
+  	<span class="cafe2key"><i class="fa fa-square"></i></span> Trash Can #2<br />
+    </div>
+
+    <footer>
+       Copyright &copy; I-SENSE
+    </footer>
+</div>
 
 <script>
 //create data sets
 var data = [],
-    data2 = [],
-    data3 = [],
-    data4 = [];
+    data2 = [];
 
 //function for creating a timestamp in D3
 var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
@@ -94,45 +104,32 @@ function getData(result) {
 
         //add to cafe 1 dataset
         if(current.trash_can_id == "cafe_1") {
-//           if(current.weight != 0) {
-           if(testWeight != 0) {
+           if(current.weight != 0) {
               if(ndx > 0) {
                  cafe1Total -= result[ndx-1].weight;
               }
-              cafe1Total += testWeight; //current.weight
+              cafe1Total += current.weight;//testWeight;
            }           
            data.push({
                "x":parseTime(current.timestamp.$date),
                "y":cafe1Total
              });
                           
-       //dummy datasets
-        data4.push({
-           "x":parseTime(current.timestamp.$date),
-           "y":cafe1Total + 115
-        });
-
         }
 
     
         //add to cafe 2 dataset
         if(current.trash_can_id == "cafe_2") {
-//           if(current.weight != 0) {
-           if(testWeight != 0) {
+           if(current.weight != 0) {
               if(ndx > 0) {
                  cafe2Total -= result[ndx-1].weight;
               }
-              cafe2Total += testWeight//current[ndx].weight;
+              cafe2Total += current[ndx].weight;//testWeight
            }
 
            data2.push({
               "x":parseTime(current.timestamp.$date),
               "y":cafe2Total
-           });
-           //dummy datasets
-           data3.push({
-             "x":parseTime(current.timestamp.$date),
-             "y":cafe2Total - 120
            });
         }
        
@@ -141,11 +138,26 @@ function getData(result) {
            max = findMax(cafe1Total, cafe2Total);
         }
      }
-     graphDataMultiLine(max,[data, data2, data3, data4]);
+     if(max == 0) {max = 5;}
+     graphDataMultiLine(max,[data, data2]);
  }
 
   </script>
 <style>
+.container {
+	text-align:center;
+	padding:20px;
+}
+.cafe1key { color:deepskyblue; }
+.cafe2key { color:blue; }
+.legend {
+    border: 1px #333 solid;
+    padding: 10px;
+    font-size: 13px;
+    top: 170px;
+    right: 275px;
+    position: absolute;
+}
 .axis path {
     fill: none;
     stroke: #777;

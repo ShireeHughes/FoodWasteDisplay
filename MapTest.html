@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Food Waste at Atlantic Dining Hall</title>
-  <meta name="description" content="food waste, FAU, Florida Atlantic University, I-SENSE, Institute of Sensing and Embedded Systems Engineering, IoT, Internet of Things, sustainability">
+  <title>U.S. Map of Child Hunger</title>
+  <meta name="description" content="food waste, FAU, Florida Atlantic University, I-SENSE, Institute of Sensing and Embedded Systems Engineering, IoT, Internet of Things, sustainability, Shiree Hughes">
   <meta name="author" content="Shiree Hughes">
 
   <!-- ************************************** -->
@@ -19,68 +19,79 @@
   <!-- ************************************** -->
   <!-- *  Links for D3 and JQuery scripts   * -->
   <!-- ************************************** -->
-<!--  <script src="https://d3js.org/d3.v3.min.js"></script>-->
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/1c0a97ee79d088ce8d73c2b23119fd36fe9f7495/liquidFillGauge.js"></script>
   <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/dd9fb85d815e1cbd3bbed698d3b6cc7511d525c2/retreiveData.js"></script>
-  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/5c40a794a6d0c38bb70e9632df1bbc83c0fbf383/graphData.js"></script
-
+  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/5c40a794a6d0c38bb70e9632df1bbc83c0fbf383/graphData.js"></script>
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
 
 <style>
-	.state{
-		fill: none;
-		stroke: #a9a9a9;
-		stroke-width: 1;
-	}
-	.state:hover{
-		fill-opacity:0.5;
-	}
-	#tooltip {   
-		position: absolute;           
-		text-align: center;
-		padding: 20px;             
-		margin: 10px;
-		font: 12px sans-serif;        
-		background: lightsteelblue;   
-		border: 1px;      
-		border-radius: 2px;           
-		pointer-events: none;         
-	}
-	#tooltip h4{
-		margin:0;
-		font-size:14px;
-	}
-	#tooltip{
-		background:rgba(0,0,0,0.9);
-		border:1px solid grey;
-		border-radius:5px;
-		font-size:12px;
-		width:auto;
-		padding:4px;
-		color:white;
-		opacity:0;
-	}
-	#tooltip table{
-		table-layout:fixed;
-	}
-	#tooltip tr td{
-		padding:0;
-		margin:0;
-	}
-	#tooltip tr td:nth-child(1){
-		width:50px;
-	}
-	#tooltip tr td:nth-child(2){
-		text-align:center;
-	}
-        .citation {
-           font-size:13px;
-	   text-align:right;
-        }
+.us-map {
+	text-align:center;
+}
+
+.state{
+	fill: none;
+	stroke: #a9a9a9;
+	stroke-width: 1;
+}
+
+.state:hover{
+	fill-opacity:0.5;
+}
+
+#tooltip {   
+	position: absolute;           
+	text-align: center;
+	padding: 20px;             
+	margin: 10px;
+	font: 12px sans-serif;        
+	background: lightsteelblue;   
+	border: 1px;      
+	border-radius: 2px;           
+	pointer-events: none;         
+}
+
+#tooltip h4{
+	margin:0;
+	font-size:14px;
+}
+
+#tooltip{
+	background:rgba(0,0,0,0.9);
+	border:1px solid grey;
+	border-radius:5px;
+	font-size:12px;
+	width:auto;
+	padding:4px;
+	color:white;
+	opacity:0;
+}
+
+#tooltip table{
+	table-layout:fixed;
+}
+
+#tooltip tr td{
+	padding:0;
+	margin:0;
+}
+
+#tooltip tr td:nth-child(1){
+	width:50px;
+}
+
+#tooltip tr td:nth-child(2){
+	text-align:center;
+}
+
+.citation {
+	font-size:13px;
+	text-align:right;
+}
 </style>
 <script>
  
@@ -88,7 +99,6 @@
 </head>
 
 <body>
-<!--  <script src="js/scripts.js"></script> -->
   <div class="outer">
     <header>
     <div class="title-header">
@@ -97,10 +107,9 @@
     </header>
 
     <div class="main-display">
-       <div>
-<!--          <h2>Main-Display</h2> -->
+       <div>          
           <div class="us-map">
-             <center><h2>Children Living in Food-Insecure Households (2014)*</h2></center>
+ 	     <br />
              <div id="tooltip"></div><!-- div to hold tooltip. -->
              <svg width="960" height="600" id="statesvg"></svg> <!-- svg to hold the map. -->
              <script src="http://bl.ocks.org/NPashaP/raw/a74faf20b492ad377312/3513ad985b2fa93ea35f2fc864cb30540c298171/uStates.js"></script> <!-- creates uStates. -->
@@ -115,10 +124,7 @@
     </footer>
   </div>
 
-<script>        
-//<![CDATA[
-//]]>
-</script>
+  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/004c0a8a8b1379bdc787be7d97b564597d160ad8/Map.js"></script>
 
   </body>
 </html>

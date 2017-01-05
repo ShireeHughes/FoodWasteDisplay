@@ -2,6 +2,6 @@ function retreiveData() {
  $.ajax({
   method:"GET",
   dataType: "jsonp",
-  url: 'http://portal-isense.fau.edu:8080/wrs/mongo?numSamples=2880',
+  url: 'https://portal-isense.fau.edu:8080/wrs/mongo?numSamples=2880',
   });
 }

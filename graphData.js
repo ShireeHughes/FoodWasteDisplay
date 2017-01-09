@@ -61,6 +61,8 @@ function getColor(value) {
  * supports up to 12 lines (colorless)
  */
 function graphDataMultiLine(max, datasets) {
+   var today = new Date();
+   var yesterday = today.getHours() - 24;
 
    // define scales, area, and axis information
    var vis = d3.select("#visualisation"),
@@ -72,7 +74,7 @@ function graphDataMultiLine(max, datasets) {
           bottom: 20,
           left: 50
        },
-      xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain([new Date('2016-12-17T00:00:00.000Z'), new Date('2016-12-18T00:00:00.000Z')]),
+      xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain([yesterday, today]),
       yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0,max]),
       xAxis = d3.axisBottom(xScale),  
       yAxis = d3.axisLeft(yScale);

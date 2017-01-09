@@ -100,7 +100,6 @@ function getData(result) {
     //place samples in the correct dataset
     for(ndx = 0; ndx < result.length; ndx++) {
         var current = result[ndx];
-        var testWeight = Math.random() * 20 + 1;
 
         //add to cafe 1 dataset
         if(current.trash_can_id == "cafe_1") {
@@ -108,7 +107,7 @@ function getData(result) {
               if(ndx > 0) {
                  cafe1Total -= result[ndx-1].weight;
               }
-              cafe1Total += current.weight;//testWeight;
+              cafe1Total += current.weight;
            }           
            data.push({
                "x":parseTime(current.timestamp.$date),
@@ -124,7 +123,7 @@ function getData(result) {
               if(ndx > 0) {
                  cafe2Total -= result[ndx-1].weight;
               }
-              cafe2Total += current[ndx].weight;//testWeight
+              cafe2Total += current.weight;
            }
 
            data2.push({

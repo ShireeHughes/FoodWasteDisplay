@@ -62,7 +62,9 @@ function getColor(value) {
  */
 function graphDataMultiLine(max, datasets) {
    var today = new Date();
-   var yesterday = today.getHours() - 24;
+   var yesterday = new Date().setHours(today.getHours() - 24);
+console.log(yesterday);
+console.log(today);
 
    // define scales, area, and axis information
    var vis = d3.select("#visualisation"),

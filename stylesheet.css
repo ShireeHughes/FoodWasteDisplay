@@ -38,6 +38,40 @@
     padding: 0px 25px;
   }
 
+style>
+.container {
+	text-align:center;
+	padding:20px;
+}
+.legend span {
+    display: block;
+    padding: 2px;
+}
+
+.legend span:nth-child(1) i { color:deepskyblue; }
+.legend span:nth-child(2) i { color:blue; }
+.legend span:nth-child(3) i { color:forestgreen; }
+.legend span:nth-child(4) i { color:darkseagreen; }
+.legend span:nth-child(5) i { color:goldenrod; }
+.legend span:nth-child(6) i { color:darkorange; }
+.legend span:nth-child(7) i { color:crimson; }
+.legend span:nth-child(8) i { color:darkmagenta; }
+.legend span:nth-child(9) i { color:indigo; }
+.legend span:nth-child(10) i { color:light coral; }
+.legend span:nth-child(11) i { color:black; }
+.legend span:nth-child(12) i { color:darkgray; }
+
+
+.legend {
+    border: 1px #333 solid;
+    background: rgba(200, 200, 200,.5);
+    padding: 10px;
+    font-size: 13px;
+    top: 170px;
+    right: 275px;
+    position: absolute;
+}
+
 .axis path {
     fill: none;
     stroke: #777;

@@ -156,9 +156,18 @@ console.log(cafe2Total+cafe1Total);
      var start;
      if(data[0].x < data2[0].x) { start = data[0].x; }
      else { start = data2[0].x; }
+
+     d3.selectAll("svg > *").remove();
+
      graphDataMultiLine(max, start, [data, data2,data3,data4]);
+  //     graphDataMultiLine(max, start, [data, data2]);
 //       graphDataMultiLine(max,[data3, data4]);
 console.log(start);
+     setTimeout(retreiveData, 60000);
+      data = []
+      data2 = [];
+      data3 = [];
+      data4 = [];
  }
 
   </script>

@@ -60,11 +60,9 @@ function getColor(value) {
  * function to create a multiline graph 
  * supports up to 12 lines (colorless)
  */
-function graphDataMultiLine(max, datasets) {
+function graphDataMultiLine(max, yesterday, datasets) {
    var today = new Date();
-   var yesterday = new Date(new Date().setHours(today.getHours() - 24));
-console.log(yesterday);
-console.log(today);
+//   var yesterday = new Date(new Date().setHours(today.getHours() - 24));
 
    // define scales, area, and axis information
    var vis = d3.select("#visualisation"),

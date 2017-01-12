@@ -151,9 +151,13 @@ function getData(result) {
           }*/
      }
      if(max == 0) {max = 5;}
-console.log(cafe2Total);
-     graphDataMultiLine(max,[data, data2]);
+console.log(cafe2Total+cafe1Total);
+     var start;
+     if(data[0].x < data2[0].x) { start = data[0].x; }
+     else { start = data2[0].x; }
+     graphDataMultiLine(max, start, [data, data2,data3,data4]);
 //       graphDataMultiLine(max,[data3, data4]);
+console.log(start);
  }
 
   </script>

@@ -101,7 +101,7 @@
     width: 250px;
 }
 
-.citation a { color: cc0000!important; }
+.citation a { color: #cc0000!important; }
 
 #tooltip {   
 	position: absolute;           
@@ -188,8 +188,8 @@
     background: rgba(200, 200, 200,.5);
     padding: 10px;
     font-size: 13px;
-    top: 170px;
-    right: 275px;
+    top: 300px;
+    right: 20px;
     position: absolute;
 }
 
@@ -200,6 +200,6 @@
 }
 .axis text {
     font-family: Pontano Sans;
-    font-size: 15px;
-    color:#fff;
+    font-size: 13px;
+    stroke:#fff;
 }

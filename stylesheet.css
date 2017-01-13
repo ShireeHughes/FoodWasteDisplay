@@ -147,19 +147,7 @@
  * LINE GRAPH CSS 
  * *************************************/
 #visualisation {
-    height: 100%;
-    padding-bottom: 0px;
-    margin-bottom: -350px;
-  -moz-transform: scale(0.40, 0.40); 
-  -webkit-transform: scale(0.40, 0.40); 
-  -o-transform: scale(0.40, 0.40);
-  -ms-transform: scale(0.40, 0.40);
-  transform: scale(0.40, 0.40); 
-  -moz-transform-origin: top left;
-  -webkit-transform-origin: top left;
-  -o-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
+   margin-left: -100px;
 }
 
 .double-graph {
@@ -207,10 +195,11 @@
 
 .axis path {
     fill: none;
-    stroke: #777;
+    stroke: #fff;
     shape-rendering: crispEdges;
 }
 .axis text {
     font-family: Pontano Sans;
-    font-size: 13px;
+    font-size: 15px;
+    color:#fff;
 }

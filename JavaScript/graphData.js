@@ -63,16 +63,19 @@ function getColor(value) {
 function graphDataMultiLine(max, yesterday, datasets) {
    var today = new Date();
 //   var yesterday = new Date(new Date().setHours(today.getHours() - 24));
+   var height = $('#visualisation').height();
+   var width = $('#visualisation').width();
 
    // define scales, area, and axis information
    var vis = d3.select("#visualisation"),
-       WIDTH = 1000,
-       HEIGHT = 500,
+       WIDTH = width,
+       HEIGHT = height,
        MARGINS = {
           top: 20,
           right: 20,
           bottom: 20,
           left: 50
+
        },
       xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain([yesterday, today]),
       yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0,max]),
@@ -94,7 +97,7 @@ function graphDataMultiLine(max, yesterday, datasets) {
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
       .attr("dy", "0.71em")
-      .attr("fill", "#000")
+      .attr("fill", "#fff")
       .text("Waste, lbs");
 
    //create line

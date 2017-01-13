@@ -11,7 +11,7 @@
   <!-- ************************************** -->
   <!-- * Links for fonts and CSS Stylesheet * -->
   <!-- ************************************** -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/e9125c2ecfba9d4aeb1568246e3d2d2459a75e3e/stylesheet.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/256c41539d1b6b09036bb0ea47831783e8c1a221/stylesheet.css" />
   <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet" />
@@ -24,17 +24,147 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/6592ba070277840936d1f394cfb72deeb374814a/JavaScript/liquidFillGauge.js"></script>
   <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/dd9fb85d815e1cbd3bbed698d3b6cc7511d525c2/retreiveData.js"></script>
-  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/2bf67898dfdd7fa2112943a56abb6f64c9066f4b/graphData.js"></script
+<!--  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/2bf67898dfdd7fa2112943a56abb6f64c9066f4b/graphData.js"></script>-->
+<script>
+/*
+ * created 2017 by Shiree Hughes
+ * adapted from envato tuts+ tutorial -- Building a Multi Line Chart Using D3
+ *   ---> https://code.tutsplus.com/tutorials/building-a-multi-line-chart-using-d3js--cms-22935 tutorial
+ *
+ * updates to the original tutorial:
+ *   - fixed obsolete calls from d3 v3 (code is now compatible with v4)
+ *   - reconfigure to accept data from external source instead of static data
+ *   - reconfigured x-axis to use time series
+ */
+
+
+/*
+ * function to return color name for values
+ * allows mapping of legends to charts
+ */
+function getColor(value) {
+  switch(value) {
+     case 0:
+        return 'deepskyblue';
+        break;
+     case 1:
+        return 'blue';
+        break;
+     case 2:
+        return 'forestgreen';
+        break;
+     case 3:
+        return 'darkseagreen';
+        break;
+     case 4:
+        return 'goldenrod';
+        break;
+     case 5:
+        return 'darkorange';
+        break;
+     case 6:
+        return 'crimson';
+        break;
+     case 7:
+        return 'darkmagenta';
+        break;
+     case 8:
+        return 'indigo';
+        break;
+     case 9:
+        return 'lightcoral';
+        break;
+     case 10:
+        return 'black';
+        break;
+     case 11:
+        return 'darkgray';
+        break;
+  } 
+}
+
+
+/* 
+ * function to create a multiline graph 
+ * supports up to 12 lines (colorless)
+ */
+function graphDataMultiLine(max, yesterday, datasets) {
+   var today = new Date();
+//   var yesterday = new Date(new Date().setHours(today.getHours() - 24));
+
+   var height = $('#visualisation').height();
+   var width = $('#visualisation').width();
+
+   // define scales, area, and axis information
+   var vis = d3.select("#visualisation"),
+       WIDTH = width,
+       HEIGHT = height,
+       MARGINS = {
+          top: 20,
+          right: 20,
+          bottom: 20,
+          left: 50
+       },
+      xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain([yesterday, today]),
+      yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0,max]),
+      xAxis = d3.axisBottom(xScale),  
+      yAxis = d3.axisLeft(yScale);
+
+   //Append x-axis to the graph
+   vis.append("svg:g")
+      .attr("class","axis") //allows us to manipulate the CSS
+      .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")  //positions axis
+      .call(xAxis);
+
+   //Append y-axis to the graph
+   vis.append("svg:g")
+      .attr("class","axis") //allows us to manipulate the CSS
+      .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+      .call(yAxis)
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("fill", "#000")
+      .text("Waste, lbs");
+
+   //create line
+   var lineGen = d3.line()
+      .x(function(d) {
+          return xScale(d.x);
+       })
+      .y(function(d) {
+          return yScale(d.y);
+      })
+      .curve(d3.curveBasis);    //interpolation to smooth the line
+
+    //add datasets
+    var ndx;
+    for(ndx = 0; ndx < datasets.length; ndx++) {
+        vis.append('svg:path')
+           .attr('d', lineGen(datasets[ndx]))
+           .attr('stroke', getColor(ndx))
+           .attr('stroke-width', 2)
+           .attr('fill', 'none');
+    }
+  }
+</script>
 
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
 
 <style>
-</style>
-<script>
- 
-</script>
+.axis path {
+    fill: none;
+    stroke: #fff!important;
+    shape-rendering: crispEdges;
+}
+.axis text {
+    font-family: Pontano Sans;
+    font-size: 15px!important;
+    color:#fff!important;
+}</style>
 </head>
 
 <body>
@@ -70,7 +200,7 @@
              <div class="graph">
                   <div class="container"> 
                       <h2>Food Waste</h2>
-        	      <svg id="visualisation" width="1000" height="500"></svg>
+        	      <svg id="visualisation" width="500" height="250"></svg>
 		    </div>
 
 		    <div class="legend">

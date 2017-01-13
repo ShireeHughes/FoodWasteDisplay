@@ -24,7 +24,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/1c0a97ee79d088ce8d73c2b23119fd36fe9f7495/liquidFillGauge.js"></script>
   <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/dd9fb85d815e1cbd3bbed698d3b6cc7511d525c2/retreiveData.js"></script>
-  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/5c40a794a6d0c38bb70e9632df1bbc83c0fbf383/graphData.js"></script
+  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/2bf67898dfdd7fa2112943a56abb6f64c9066f4b/graphData.js"></script
 
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -100,12 +100,8 @@
           <div class="comic" style="text-align:center;">
               <h2>Reach For Your Goals</h2>
 <!--              <img src="https://github.com/ShireeHughes/FoodWasteDisplay/blob/master/Images/day-one.png?raw=true" /> -->
-		   <img src="https://raw.github.com/ShireeHughes/FoodWasteDisplay/blob/master/Images/1.png" alt="hi" class="inline"/>
+		   <img src="file:///Users/shughes/Documents/FoodWasteDisplay/Images/1.png" alt="hi" class="inline"/>
           </div>
-          <div class="main-charts">
-              <svg id="fillgauge1" width="97%" height="250" onclick="gauge1.update(NewValue());"></svg>
-          </div>
-<!--          <svg id="visualisation" width="900" height="500"></svg> -->
        </div>
     </div>
    </article>
@@ -113,7 +109,32 @@
     <aside>
     <div class="charts-tips-more">
        <div>
-          
+<!--          <table class="main-charts">
+             <td class="graph1">
+	             <center><h2>Total Food Wasted in 24hours</h2><center>
+        	     <svg id="fillgauge1" width="97%" height="250" onclick="gauge1.update(NewValue());"></svg>
+             </td>
+             <td class="graph2">
+        	     <div class="container"> 
+        		   <svg id="visualisation" width="1000" height="500"></svg>
+		    </div>
+
+		    <div class="legend">
+		        <span class="key"><i class="fa fa-square"></i> Trash Can #1</span>
+		  	<span class="key"><i class="fa fa-square"></i> Trash Can #2</span>
+		  	<span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #1</span>
+		  	<span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #2</span>
+		    </div>
+            </td>
+          </table>-->
+          <div class="double-graph">
+             <div class="graph">
+                <h2>Total Food Wasted in 24hours</h2>
+        	<svg id="fillgauge1" width="97%" height="250" onclick="gauge1.update(NewValue());"></svg>
+             </div>
+             <div class="graph"></div>
+	  </div>
+
           <div class="us-map">
              <h2>Children Living in Food-Insecure Households (2014)*</h2>
              <div id="tooltip"></div><!-- div to hold tooltip. -->
@@ -133,69 +154,8 @@
 <svg id="fillgauge6" width="19%" height="200" onclick="gauge6.update(NewValue());"></svg>-->
 <script language="JavaScript">
     var config1 = liquidFillGaugeDefaultSettings();
-//    config1.circleColor = "#FF7777";
-  //  config1.textColor = "#FF4444";
-  //  config1.waveTextColor = "#FFAAAA";
- //   config1.waveColor = "#FFDDDD";
-  //  config1.circleThickness = 0.2;
-  //  config1.textVertPosition = 0.2;
     config1.waveAnimateTime = 1000;
     var gauge1 = loadLiquidFillGauge("fillgauge1", 40, config1);
-/*    var gauge2= loadLiquidFillGauge("fillgauge2", 40, config1);
-    var config2 = liquidFillGaugeDefaultSettings();
-    config2.circleColor = "#D4AB6A";
-    config2.textColor = "#553300";
-    config2.waveTextColor = "#805615";
-    config2.waveColor = "#AA7D39";
-    config2.circleThickness = 0.1;
-    config2.circleFillGap = 0.2;
-    config2.textVertPosition = 0.8;
-    config2.waveAnimateTime = 2000;
-    config2.waveHeight = 0.3;
-    config2.waveCount = 1;
-    var gauge3 = loadLiquidFillGauge("fillgauge3", 60.1, config2);
-    var config3 = liquidFillGaugeDefaultSettings();
-    config3.textVertPosition = 0.8;
-    config3.waveAnimateTime = 5000;
-    config3.waveHeight = 0.15;
-    config3.waveAnimate = false;
-    config3.waveOffset = 0.25;
-    config3.valueCountUp = false;
-    config3.displayPercent = false;
-    var gauge4 = loadLiquidFillGauge("fillgauge4", 50, config3);
-    var config4 = liquidFillGaugeDefaultSettings();
-    config4.circleThickness = 0.15;
-    config4.circleColor = "#808015";
-    config4.textColor = "#555500";
-    config4.waveTextColor = "#FFFFAA";
-    config4.waveColor = "#AAAA39";
-    config4.textVertPosition = 0.8;
-    config4.waveAnimateTime = 1000;
-    config4.waveHeight = 0.05;
-    config4.waveAnimate = true;
-    config4.waveRise = false;
-    config4.waveHeightScaling = false;
-    config4.waveOffset = 0.25;
-    config4.textSize = 0.75;
-    config4.waveCount = 3;
-    var gauge5 = loadLiquidFillGauge("fillgauge5", 60.44, config4);
-    var config5 = liquidFillGaugeDefaultSettings();
-    config5.circleThickness = 0.4;
-    config5.circleColor = "#6DA398";
-    config5.textColor = "#0E5144";
-    config5.waveTextColor = "#6DA398";
-    config5.waveColor = "#246D5F";
-    config5.textVertPosition = 0.52;
-    config5.waveAnimateTime = 5000;
-    config5.waveHeight = 0;
-    config5.waveAnimate = false;
-    config5.waveCount = 2;
-    config5.waveOffset = 0.25;
-    config5.textSize = 1.2;
-    config5.minValue = 30;
-    config5.maxValue = 150
-    config5.displayPercent = false;
-    var gauge6 = loadLiquidFillGauge("fillgauge6", 120, config5);*/
 
     function NewValue(){
         if(Math.random() > .5){
@@ -262,7 +222,8 @@ var data = [],
     data4 = [];
 
 //function for creating a timestamp in D3
-var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
+//var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
+var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
 
 //call to retrieve data from MongoDB
 retreiveData();
@@ -288,7 +249,6 @@ function findMax(a,b) {
  * 
  */
 function getData(result) {
-console.log("getData");
     var ndx;
     var cafe1Total = 0;
     var cafe2Total = 0;
@@ -297,46 +257,69 @@ console.log("getData");
     //place samples in the correct dataset
     for(ndx = 0; ndx < result.length; ndx++) {
         var current = result[ndx];
-        var testWeight = Math.random() * 20 + 1;
-
         //add to cafe 1 dataset
         if(current.trash_can_id == "cafe_1") {
-//           if(current.weight != 0) {
-           if(testWeight != 0) {
+           if(current.weight != 0) {
               if(ndx > 0) {
                  cafe1Total -= result[ndx-1].weight;
               }
-              cafe1Total += testWeight; //current.weight
+              cafe1Total += current.weight;
            }           
            data.push({
                "x":parseTime(current.timestamp.$date),
+               "y":current.weight
+             });
+           data3.push({
+               "x":parseTime(current.timestamp.$date),
                "y":cafe1Total
-             });                         
+             });
+                          
         }
 
     
         //add to cafe 2 dataset
         if(current.trash_can_id == "cafe_2") {
-//           if(current.weight != 0) {
-           if(testWeight != 0) {
+           if(current.weight != 0) {
               if(ndx > 0) {
                  cafe2Total -= result[ndx-1].weight;
               }
-              cafe2Total += testWeight//current[ndx].weight;
+              cafe2Total += current.weight;
            }
-
            data2.push({
               "x":parseTime(current.timestamp.$date),
-              "y":cafe2Total
+              "y":current.weight
            });
+	   data4.push({
+               "x":parseTime(current.timestamp.$date),
+               "y":cafe2Total
+             });
         }
-       
+
         //save max
         if( max < cafe1Total || max < cafe2Total ) {
            max = findMax(cafe1Total, cafe2Total);
         }
+/*         if(max < current.weight) {
+            max = current.weight;
+          }*/
      }
-     graphDataMultiLine(max,[data, data2, data3, data4]);
+     if(max == 0) {max = 5;}
+console.log(cafe2Total+cafe1Total);
+     var start;
+     if(data[0].x < data2[0].x) { start = data[0].x; }
+     else { start = data2[0].x; }
+
+//     d3.selectAll("svg > *").remove();
+
+     graphDataMultiLine(max, start, [data, data2,data3,data4]);
+  //     graphDataMultiLine(max, start, [data, data2]);
+//       graphDataMultiLine(max,[data3, data4]);
+console.log(start);
+     setTimeout(retreiveData, 60000);
+      data = []
+      data2 = [];
+      data3 = [];
+      data4 = [];
  }
 
 function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
@@ -375,7 +358,7 @@ function tooltipHtml(n, d){	/* function to create html content string in tooltip
 .map-legend {
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,ffffee+0,800026+100,207cca+100 */
     position: absolute;
-    top: 593px;
+    top: 893px;
     right: 63px;
     background: #1e5799; /* Old browsers */
     background: -moz-linear-gradient(left,  #1e5799 0%, #ffffee 0%, #800026 100%, #207cca 100%); /* FF3.6-15 */
@@ -411,12 +394,63 @@ function tooltipHtml(n, d){	/* function to create html content string in tooltip
   transform-origin: top left;
 }
 
-.citation {
+.citation {    
     font-size: 13px;
     text-align: right;
     position: absolute;
-    top: 620px;
+    top: 820px;
     right: 63px;
+    word-wrap: break-word;
+    width: 250px;
+}
+
+.citation a { color: cc0000!important; }
+
+/* *************************************
+ * LINE GRAPH CSS 
+ * *************************************/
+#visualisation {
+    height: 900px;
+    padding-bottom: 0px;
+    margin-bottom: -150px;
+  -moz-transform: scale(0.50, 0.50); 
+  -webkit-transform: scale(0.50, 0.50); 
+  -o-transform: scale(0.50, 0.50);
+  -ms-transform: scale(0.50, 0.50);
+  transform: scale(0.50, 0.50); 
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+}
+
+/*#fillgauge1 {
+  //  height: 900px;
+    padding-bottom: 0px;
+  //  margin-bottom: -150px;
+  -moz-transform: scale(0.60, 0.60); 
+  -webkit-transform: scale(0.60, 0.60); 
+  -o-transform: scale(0.60, 0.60);
+  -ms-transform: scale(0.60, 0.60);
+  transform: scale(0.60, 0.60); 
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+}*/
+
+.container {width:300px!important;}
+
+.double-graph {
+   height:350px;
+   width:100%;
+}
+
+.double-graph .graph{
+  display:inline-block;
+  width:48%;
 }
 </style>
   </body>

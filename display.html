@@ -22,7 +22,7 @@
 <!--  <script src="https://d3js.org/d3.v3.min.js"></script>-->
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/1c0a97ee79d088ce8d73c2b23119fd36fe9f7495/liquidFillGauge.js"></script>
+  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/6592ba070277840936d1f394cfb72deeb374814a/JavaScript/liquidFillGauge.js"></script>
   <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/dd9fb85d815e1cbd3bbed698d3b6cc7511d525c2/retreiveData.js"></script>
   <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/2bf67898dfdd7fa2112943a56abb6f64c9066f4b/graphData.js"></script
 
@@ -31,53 +31,6 @@
   <![endif]-->
 
 <style>
-	.state{
-		fill: none;
-		stroke: #a9a9a9;
-		stroke-width: 1;
-	}
-	.state:hover{
-		fill-opacity:0.5;
-	}
-	#tooltip {   
-		position: absolute;           
-		text-align: center;
-		padding: 20px;             
-		margin: 10px;
-		font: 12px sans-serif;        
-		background: lightsteelblue;   
-		border: 1px;      
-		border-radius: 2px;           
-		pointer-events: none;  
-                z-index:400;       
-	}
-	#tooltip h4{
-		margin:0;
-		font-size:14px;
-	}
-	#tooltip{
-		background:rgba(0,0,0,0.9);
-		border:1px solid grey;
-		border-radius:5px;
-		font-size:12px;
-		width:auto;
-		padding:4px;
-		color:white;
-		opacity:0;
-	}
-	#tooltip table{
-		table-layout:fixed;
-	}
-	#tooltip tr td{
-		padding:0;
-		margin:0;
-	}
-	#tooltip tr td:nth-child(1){
-		width:50px;
-	}
-	#tooltip tr td:nth-child(2){
-		text-align:center;
-	}
 </style>
 <script>
  
@@ -96,11 +49,10 @@
     <article>
     <div class="main-display">
        <div>
-<!--          <h2>Main-Display</h2> -->
           <div class="comic" style="text-align:center;">
               <h2>Reach For Your Goals</h2>
-<!--              <img src="https://github.com/ShireeHughes/FoodWasteDisplay/blob/master/Images/day-one.png?raw=true" /> -->
-		   <img src="file:///Users/shughes/Documents/FoodWasteDisplay/Images/1.png" alt="hi" class="inline"/>
+              <img src="https://github.com/ShireeHughes/FoodWasteDisplay/blob/master/Images/1.png?raw=true" /> 
+<!--		   <img src="file:///Users/shughes/Documents/FoodWasteDisplay/Images/1.png" alt="hi" class="inline"/>-->
           </div>
        </div>
     </div>
@@ -109,14 +61,16 @@
     <aside>
     <div class="charts-tips-more">
        <div>
-<!--          <table class="main-charts">
-             <td class="graph1">
-	             <center><h2>Total Food Wasted in 24hours</h2><center>
-        	     <svg id="fillgauge1" width="97%" height="250" onclick="gauge1.update(NewValue());"></svg>
-             </td>
-             <td class="graph2">
-        	     <div class="container"> 
-        		   <svg id="visualisation" width="1000" height="500"></svg>
+
+          <div class="double-graph">
+             <div class="graph">
+                <h2>Total Food Wasted in 24hours</h2>
+        	<svg id="fillgauge1" width="97%" height="250" onclick="gauge1.update(NewValue());"></svg>
+             </div>
+             <div class="graph">
+                  <div class="container"> 
+                      <h2>Food Waste</h2>
+        	      <svg id="visualisation" width="1000" height="500"></svg>
 		    </div>
 
 		    <div class="legend">
@@ -125,14 +79,8 @@
 		  	<span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #1</span>
 		  	<span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #2</span>
 		    </div>
-            </td>
-          </table>-->
-          <div class="double-graph">
-             <div class="graph">
-                <h2>Total Food Wasted in 24hours</h2>
-        	<svg id="fillgauge1" width="97%" height="250" onclick="gauge1.update(NewValue());"></svg>
+
              </div>
-             <div class="graph"></div>
 	  </div>
 
           <div class="us-map">
@@ -352,106 +300,9 @@ function tooltipHtml(n, d){	/* function to create html content string in tooltip
 </script>
 <style>
 
-/* **************************** *
- *  CSS for US Map              *
- * **************************** */
-.map-legend {
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,ffffee+0,800026+100,207cca+100 */
-    position: absolute;
-    top: 893px;
-    right: 63px;
-    background: #1e5799; /* Old browsers */
-    background: -moz-linear-gradient(left,  #1e5799 0%, #ffffee 0%, #800026 100%, #207cca 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left,  #1e5799 0%,#ffffee 0%,#800026 100%,#207cca 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right,  #1e5799 0%,#ffffee 0%,#800026 100%,#207cca 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#207cca',GradientType=1 ); /* IE6-9 */
-    width:500px;
-}
 
-.map-legend li {
-    list-style-type: none;
-    display: inline-block;
-    width: 33%;
-}
 
-.map-legend li:nth-child(1) { color:#00338c;}
-.map-legend li:nth-child(2) { text-align: center;}
-.map-legend li:nth-child(3) { text-align: right; }
 
-#statesvg {
-    height: 900px;
-    padding-bottom: 0px;
-    margin-bottom: -150px;
-  -moz-transform: scale(0.60, 0.60); 
-  -webkit-transform: scale(0.60, 0.60); 
-  -o-transform: scale(0.60, 0.60);
-  -ms-transform: scale(0.60, 0.60);
-  transform: scale(0.60, 0.60); 
-  -moz-transform-origin: top left;
-  -webkit-transform-origin: top left;
-  -o-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-}
-
-.citation {    
-    font-size: 13px;
-    text-align: right;
-    position: absolute;
-    top: 820px;
-    right: 63px;
-    word-wrap: break-word;
-    width: 250px;
-}
-
-.citation a { color: cc0000!important; }
-
-/* *************************************
- * LINE GRAPH CSS 
- * *************************************/
-#visualisation {
-    height: 900px;
-    padding-bottom: 0px;
-    margin-bottom: -150px;
-  -moz-transform: scale(0.50, 0.50); 
-  -webkit-transform: scale(0.50, 0.50); 
-  -o-transform: scale(0.50, 0.50);
-  -ms-transform: scale(0.50, 0.50);
-  transform: scale(0.50, 0.50); 
-  -moz-transform-origin: top left;
-  -webkit-transform-origin: top left;
-  -o-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-}
-
-/*#fillgauge1 {
-  //  height: 900px;
-    padding-bottom: 0px;
-  //  margin-bottom: -150px;
-  -moz-transform: scale(0.60, 0.60); 
-  -webkit-transform: scale(0.60, 0.60); 
-  -o-transform: scale(0.60, 0.60);
-  -ms-transform: scale(0.60, 0.60);
-  transform: scale(0.60, 0.60); 
-  -moz-transform-origin: top left;
-  -webkit-transform-origin: top left;
-  -o-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-}*/
-
-.container {width:300px!important;}
-
-.double-graph {
-   height:350px;
-   width:100%;
-}
-
-.double-graph .graph{
-  display:inline-block;
-  width:48%;
-}
 </style>
   </body>
 </html>

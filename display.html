@@ -11,10 +11,11 @@
   <!-- ************************************** -->
   <!-- * Links for fonts and CSS Stylesheet * -->
   <!-- ************************************** -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/7b3378e6ef9edc5e88c07c5c72442a089d5e7f65/stylesheet.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/5e159ffc0b5390b33e9c0b25cec1f62fec981871/stylesheet.css" />
   <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet" />
+  <script src='https://use.fontawesome.com/2016971a2a.js'></script>
 
   <!-- ************************************** -->
   <!-- *  Links for D3 and JQuery scripts   * -->
@@ -107,17 +108,6 @@
 <svg id="fillgauge5" width="19%" height="200" onclick="gauge5.update(NewValue());"></svg>
 <svg id="fillgauge6" width="19%" height="200" onclick="gauge6.update(NewValue());"></svg>-->
 <script language="JavaScript">
-    var config1 = liquidFillGaugeDefaultSettings();
-    config1.waveAnimateTime = 1000;
-    var gauge1 = loadLiquidFillGauge("fillgauge1", 40, config1);
-
-    function NewValue(){
-        if(Math.random() > .5){
-            return Math.round(Math.random()*100);
-        } else {
-            return (Math.random()*100).toFixed(1);
-        }
-    }
 </script>
 
        </div>
@@ -174,6 +164,7 @@ var data = [],
     data2 = [],
     data3 = [],
     data4 = [];
+var total = 0;
 
 //function for creating a timestamp in D3
 //var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
@@ -206,6 +197,10 @@ function getData(result) {
     var ndx;
     var cafe1Total = 0;
     var cafe2Total = 0;
+    var last1 = 0;
+    var last2 = 0;
+    var ndx1 = 0;
+    var ndx2 = 0;
     var max = 0;
 
     //place samples in the correct dataset
@@ -213,12 +208,23 @@ function getData(result) {
         var current = result[ndx];
         //add to cafe 1 dataset
         if(current.trash_can_id == "cafe_1") {
-           if(current.weight != 0) {
-              if(ndx > 0) {
-                 cafe1Total -= result[ndx-1].weight;
+           if(current.weight < last1) {
+              if(ndx1 > 0) {
+                 if(current.weight - last1 > 1) {
+		    //significant difference
+                    //zero point
+                    console.log("Zero @: " + current.weight);
+                 }                               
+               }
+            } else {
+              if(ndx1 > 0) {
+                 cafe1Total -= result[ndx1].weight;
               }
               cafe1Total += current.weight;
-           }           
+            }
+           
+	   last1 = current.weight;
+           ndx1 = ndx;
            data.push({
                "x":parseTime(current.timestamp.$date),
                "y":current.weight
@@ -233,12 +239,23 @@ function getData(result) {
     
         //add to cafe 2 dataset
         if(current.trash_can_id == "cafe_2") {
-           if(current.weight != 0) {
-              if(ndx > 0) {
-                 cafe2Total -= result[ndx-1].weight;
+           if(current.weight < last2) {
+              if(ndx2 > 0) {
+                 if(current.weight - last2 > 1) {
+		    //significant difference
+                    //zero point
+                    console.log("Zero @: " + current.weight);
+                 }                               
+               }
+            } else {
+              if(ndx2 > 0) {
+                 cafe2Total -= result[ndx2].weight;
               }
               cafe2Total += current.weight;
-           }
+            }
+           
+	   last2 = current.weight;
+           ndx2 = ndx;
            data2.push({
               "x":parseTime(current.timestamp.$date),
               "y":current.weight
@@ -258,23 +275,45 @@ function getData(result) {
           }*/
      }
      if(max == 0) {max = 5;}
-console.log(cafe2Total+cafe1Total);
+
      var start;
      if(data[0].x < data2[0].x) { start = data[0].x; }
      else { start = data2[0].x; }
 
-//     d3.selectAll("svg > *").remove();
+    total = cafe1Total + cafe2Total;
+d3.selectAll(".double-graph svg > *").remove();
+    graphGauge(cafe1Total + cafe2Total);
+   
+/*     graphDataMultiLine(max, start, [data, data2,data3,data4]);
+       graphDataMultiLine(max, start, [data, data2]); */
+       graphDataMultiLine(max, start, [data3, data4]);
 
-//     graphDataMultiLine(max, start, [data, data2,data3,data4]);
-  //     graphDataMultiLine(max, start, [data, data2]);
-       graphDataMultiLine(max,[data3, data4]);
-console.log(start);
      setTimeout(retreiveData, 60000);
       data = []
       data2 = [];
       data3 = [];
       data4 = [];
  }
+
+function graphGauge(total) { 
+    poundsPerPerson = total / 3600;
+    wastePerDay = poundsPerPerson * 324372637; //map to US Population
+    wastePerYear = wastePerDay * 365;
+    wastePercent = total/300;//wastePerYear / 175000000000;
+console.log(total);
+    var config1 = liquidFillGaugeDefaultSettings();
+    config1.waveAnimateTime = 1000;
+    var gauge1 = loadLiquidFillGauge("fillgauge1", wastePercent, config1);
+}
+
+ function NewValue(){
+     if(Math.random() > .5){
+        return Math.round(Math.random()*100);
+     } else {
+         return (Math.random()*100).toFixed(1);
+     }
+ }
+
 
 function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
 		return "<h4>"+n+"</h4><table>"+
@@ -284,6 +323,8 @@ function tooltipHtml(n, d){	/* function to create html content string in tooltip
 			"</table>";
 	}
 	
+
+function mapData() {
 	var sampleData ={};	/* Sample random data. */	
 	["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
 	"ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
@@ -302,6 +343,7 @@ function tooltipHtml(n, d){	/* function to create html content string in tooltip
 	uStates.draw("#statesvg", sampleData, tooltipHtml);
 	
 	d3.select(self.frameElement).style("height", "600px");
+}
 //]]>
 </script>
 <style>

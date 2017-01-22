@@ -203,3 +203,37 @@
     font-size: 13px;
     stroke:#fff;
 }
+
+
+@media screen and (max-width: 1500px) {
+    article {
+        float:none!important;
+        width:100%!important;
+    }
+    
+    aside {
+        float: none!important;
+        width: 100%!important;
+        margin: 0;
+        background: #00338C;
+        border-left:#003366 2px solid;
+        color:#fff;
+        height: 1000px;
+    }
+    
+    .us-map {
+        text-align: center;
+    }
+    .map-legend {
+        position: absolute;
+        top: 1893px;
+        right: 63px;
+        width:500px;
+    }
+    .legend {
+        top: 1250px;
+        right: 75px;
+    }
+    
+    
+}

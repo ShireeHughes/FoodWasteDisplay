@@ -99,63 +99,70 @@
             </article>
             
             <aside>
-                <div class="charts-tips-more">
-                    <div>
-                        
-                        <div class="double-graph">
-                            <div class="graph">
-                                <h2>Total Food Wasted in 24hours</h2>
-                                <svg id="fillgauge1" width="97%" height="250" onclick="gauge1.update(NewValue());"></svg>
-                            </div>
-                            <div class="graph">
-                                <div class="container">
-                                    <h2>Food Waste</h2>
-                                    <svg id="visualisation" width="500" height="250"></svg>
-                                </div>
-                                
-                                <div class="legend">
-                                    <span class="key"><i class="fa fa-square"></i> Trash Can #1</span>
-                                    <span class="key"><i class="fa fa-square"></i> Trash Can #2</span>
-                                    <!--		  	<span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #1</span>
-                                     <span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #2</span> -->
-                                </div>
-                                
-                            </div>
-                        </div>
-                        
-                        <div class="us-map">
-                            <h2>Children Living in Food-Insecure Households (2014)*</h2>
-                            <div id="tooltip"></div><!-- div to hold tooltip. -->
-                            <svg width="960" height="600" id="statesvg"></svg> <!-- svg to hold the map. -->
-                            <script src="http://bl.ocks.org/NPashaP/raw/a74faf20b492ad377312/3513ad985b2fa93ea35f2fc864cb30540c298171/uStates.js"></script> <!-- creates uStates. -->
-                            <div class="map-legend">
-                                <li>0%</li><li>25%</li><li>50%</li>
-                            </div>
-                            <p class="citation">*Craig Gundersen et al. "<a href="http://www.feedingamerica.org/hunger-in-america/our-research/map-the-meal-gap/2014/map-the-meal-gap-2014-exec-summ.pdf" target="_blank">Map the Meal Gap</a>". <i>Feeding America</i>, pg. 30-31. 2015</p>
-                        </div>
-                        <svg id="visualisation" width="900" height="500"></svg>
-                        <svg id="fillgauge1" width="97%" height="250" onclick="gauge1.update(NewValue());"></svg>
-                        <!--<svg id="fillgauge2" width="97%" height="250" onclick="gauge2.update(NewValue());"></svg>
-                         <svg id="fillgauge3" width="19%" height="200" onclick="gauge3.update(NewValue());"></svg>
-                         <svg id="fillgauge4" width="19%" height="200" onclick="gauge4.update(NewValue());"></svg>
-                         <svg id="fillgauge5" width="19%" height="200" onclick="gauge5.update(NewValue());"></svg>
-                         <svg id="fillgauge6" width="19%" height="200" onclick="gauge6.update(NewValue());"></svg>-->
-                        <script language="JavaScript">
-                            var config1 = liquidFillGaugeDefaultSettings();
-                            config1.waveAnimateTime = 1000;
-                            var gauge1 = loadLiquidFillGauge("fillgauge1", 40, config1);
-                            
-                            function NewValue(){
-                                if(Math.random() > .5){
-                                    return Math.round(Math.random()*100);
-                                } else {
-                                    return (Math.random()*100).toFixed(1);
-                                }
-                            }
-                        </script>
-                        
+    <div class="charts-tips-more">
+        <div>
+
+            <div class="double-graph">
+                <h2>Total Food Wasted in 24hours</h2>
+                <div class="graph">
+                    <h3>Compared to Max Waste</h3>
+                    <svg id="fillgauge1" width="100%" height="200" onclick="gauge1.update(NewValue());"></svg>
+                </div>
+                <div class="graph">
+                    <h3>Compared to Min Waste</h3>
+                    <svg id="fillgauge2" width="100%" height="200" onclick="gauge2.update(NewValue());"></svg>
+                </div>
+            </div>
+<!--            <div class="double-graph">
+                <div class="graph"> -->
+                    <div class="container graph">
+                        <h2>Food Waste</h2>
+                        <svg id="visualisation" width="500" height="250"></svg>
                     </div>
-                    <div>
+
+                    <div class="legend">
+                        <span class="key"><i class="fa fa-square"></i> Trash Can #1</span>
+                        <span class="key"><i class="fa fa-square"></i> Trash Can #2</span>
+                        <!--		  	<span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #1</span>
+                                     <span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #2</span> -->
+                    </div>
+
+<!--                </div>
+                <div class="graph"> -->
+                    <div class="us-map">
+                        <h2>Children Living in Food-Insecure Households (2014)*</h2>
+                        <div id="tooltip"></div>
+                        <!-- div to hold tooltip. -->
+                        <svg width="960" height="600" id="statesvg"></svg>
+                        <!-- svg to hold the map. -->
+                        <script src="http://bl.ocks.org/NPashaP/raw/a74faf20b492ad377312/3513ad985b2fa93ea35f2fc864cb30540c298171/uStates.js"></script>
+                        <!-- creates uStates. -->
+                        <div class="map-legend">
+                            <li>0%</li>
+                            <li>25%</li>
+                            <li>50%</li>
+                        </div>
+                        <p class="citation">*Craig Gundersen et al. "<a href="http://www.feedingamerica.org/hunger-in-america/our-research/map-the-meal-gap/2014/map-the-meal-gap-2014-exec-summ.pdf" target="_blank">Map the Meal Gap</a>". <i>Feeding America</i>, pg. 30-31. 2015</p>
+                    </div>
+<!--                </div>
+            </div> -->
+            <script language="JavaScript">
+                var config1 = liquidFillGaugeDefaultSettings();
+                config1.waveAnimateTime = 1000;
+                var gauge1 = loadLiquidFillGauge("fillgauge1", 0, config1);
+                var gauge2 = loadLiquidFillGauge("fillgauge2", 0, config1);
+
+                function NewValue() {
+                    if (Math.random() > .5) {
+                        return Math.round(Math.random() * 100);
+                    } else {
+                        return (Math.random() * 100).toFixed(1);
+                    }
+                }
+            </script>
+
+        </div>
+        <!--                    <div>
                         <h2>Tips</h2>
                         <ol>
                             <li>Tip 1</li>
@@ -164,10 +171,9 @@
                             <li>Tip 4</li>
                             <li>Tip 5</li>
                         </ol>
-                    </div>
-                </div>
-            </aside>
-            
+                    </div>-->
+    </div>
+</aside>
             <footer>
                 Copyright &copy; I-SENSE
             </footer>
@@ -213,7 +219,7 @@
             
             //function for creating a timestamp in D3
             //var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
-            var parseTime = d3.utcParse("%b %d, %Y %I:%M:%S %p");
+            var parseTime = d3.timeParse("%b %d, %Y %I:%M:%S %p");
             
             //call to retrieve data from MongoDB
             retrieveData();
@@ -246,6 +252,7 @@
                 var todaysTotal = cafe1Total + cafe2Total;
                 console.log(result);
                 loadLiquidFillGauge("fillgauge1", todaysTotal/result[0].max, config1);
+                loadLiquidFillGauge("fillgauge2", todaysTotal/result[0].min, config1);
                 
             } else {
                     //place samples in the correct dataset
@@ -259,7 +266,7 @@
                              }
                              cafe1Total += current.weight;
                              }  */
-                            cafe1Total += current.total;
+                            cafe1Total = current.total;
                             data.push({
                                       "x":parseTime(current.timestamp),
                                       "y":current.weight
@@ -274,7 +281,7 @@
                         
                         //add to cafe 2 dataset
                         if(current.trash_can_id == "cafe_2") {
-                            cafe2Total += current.total;
+                            cafe2Total = current.total;
                             data2.push({
                                        "x":parseTime(current.timestamp),
                                        "y":current.weight
@@ -299,13 +306,13 @@
                     if(data[0].x < data2[0].x) { start = data[0].x; }
                     else { start = data2[0].x; }
                     
-                    d3.selectAll(".double-graph svg > *").remove();
+//                    d3.selectAll(".double-graph svg > *").remove();
+                    d3.selectAll(".graph svg > *").remove();
                     
                     //     graphDataMultiLine(max, start, [data, data2,data3,data4]);
                     //     graphDataMultiLine(max, start, [data, data2]);
                     graphDataMultiLine(max, start, [data3, data4]);
                     getMaxMin()
-                    //loadLiquidFillGauge("fillgauge1", 40, config1);
                     console.log(start);
                     setTimeout(retrieveData, 60000);
                     data = []
@@ -344,8 +351,16 @@
                   //]]>
             </script>
         <style>
-            
-            
+            .comic img {width:1200px;}
+            article {
+    height: 1000px;
+    width: 60%!important;
+    float: left;
+}
+
+            aside {
+    width: 39%!important;
+}
             
             
             </style>

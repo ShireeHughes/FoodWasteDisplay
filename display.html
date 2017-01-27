@@ -117,7 +117,7 @@
                 <div class="graph"> -->
                     <div class="container graph">
                         <h2>Food Waste</h2>
-                        <svg id="visualisation" width="500" height="250"></svg>
+                        <svg id="visualisation" width="700" height="300"></svg>
                     </div>
 
                     <div class="legend">
@@ -247,14 +247,18 @@
         function getData(result) {
             var ndx;
             var max = 0;
-            
+            var max2=0; var last2 =0;
+	    
             if(result.length == 1 && result[0].max != null) {
                 var todaysTotal = cafe1Total + cafe2Total;
+console.log("TOT: " + todaysTotal);
                 console.log(result);
-                loadLiquidFillGauge("fillgauge1", todaysTotal/result[0].max, config1);
-                loadLiquidFillGauge("fillgauge2", todaysTotal/result[0].min, config1);
+                loadLiquidFillGauge("fillgauge1", todaysTotal/result[0].max*100, config1);
+                loadLiquidFillGauge("fillgauge2", todaysTotal/result[0].min*100, config1);
                 
             } else {
+                    cafe2Total = 0;
+
                     //place samples in the correct dataset
                     for(ndx = 0; ndx < result.length; ndx++) {
                         var current = result[ndx];
@@ -281,14 +285,27 @@
                         
                         //add to cafe 2 dataset
                         if(current.trash_can_id == "cafe_2") {
-                            cafe2Total = current.total;
+//                            cafe2Total = current.total;
+if(cafe2Total == 0) { cafe2Total = current.weight; }
+           else {
+              if(last2 - current.weight > 5) {
+                 max2 = 0;
+                 cafe2Total = cafe2Total + current.weight;
+              } else {
+                 if(max2 < current.weight) {
+                   cafe2Total = cafe2Total - max2 + current.weight;
+                   max2 = current.weight;
+                 }
+              }
+           }
+           last2 = current.weight;
                             data2.push({
                                        "x":parseTime(current.timestamp),
                                        "y":current.weight
                                        });
                                        data4.push({
                                                   "x":parseTime(current.timestamp),
-                                                  "y":current.total
+                                                  "y":cafe2Total//current.total
                                                   });
                         }
                         
@@ -301,6 +318,9 @@
                          }*/
                     }
                     if(max == 0) {max = 5;}
+                    console.log("caf1 = " +cafe1Total);
+                    console.log("caf2 = "+cafe2Total);
+
                     console.log(cafe2Total+cafe1Total);
                     var start;
                     if(data[0].x < data2[0].x) { start = data[0].x; }

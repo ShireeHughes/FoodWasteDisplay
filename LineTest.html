@@ -111,13 +111,7 @@ var max1 = 0;
         var current = result[ndx];
         //add to cafe 1 dataset
         if(current.trash_can_id == "cafe_1") {
-    /*       if(current.weight != 0) {
-              if(ndx > 0) {
-                 cafe1Total -= result[ndx-1].weight;
-              }
-              cafe1Total += current.weight;
-           }          */ 
- if(cafe1Total == 0) { cafe1Total = current.weight; }
+           if(cafe1Total == 0) { cafe1Total = current.weight; }
            else {
               if(last1 - current.weight > 5) {
                  max1 = 0;
@@ -129,7 +123,7 @@ var max1 = 0;
                  }
               }
            }
-           last2 = current.weight;
+           last1 = current.weight;
 
            data.push({
                "x":parseTime(current.timestamp),
@@ -137,7 +131,7 @@ var max1 = 0;
              });
            data3.push({
                "x":parseTime(current.timestamp),
-               "y":current.total//cafe1Total
+               "y":cafe1Total
              });
                           
         }
@@ -145,12 +139,6 @@ var max1 = 0;
     
         //add to cafe 2 dataset
         if(current.trash_can_id == "cafe_2") {	   
-/*           if(current.weight != 0) {
-              if(ndx > 0) {
-                 cafe2Total -= result[ndx-1].weight;
-              }
-              cafe2Total += current.weight;
-           }*/
            if(cafe2Total == 0) { cafe2Total = current.weight; }
            else {
               if(last2 - current.weight > 5) {
@@ -178,23 +166,17 @@ var max1 = 0;
         if( max < cafe1Total || max < cafe2Total ) {
            max = findMax(cafe1Total, cafe2Total);
         }
-/*         if(max < current.weight) {
-            max = current.weight;
-          }*/
      }
      if(max == 0) {max = 5;}
-console.log(cafe2Total+cafe1Total);
+                    console.log("caf1 = " +cafe1Total);
+                    console.log("caf2 = "+cafe2Total);
+
      var start;
      if(data[0].x < data2[0].x) { start = data[0].x; }
      else { start = data2[0].x; }
-console.log(data[0]);
-console.log(data2[0]);
      d3.selectAll("svg > *").remove();
 
      graphDataMultiLine(max, start, [data, data2,data3,data4]);
-  //     graphDataMultiLine(max, start, [data, data2]);
-//       graphDataMultiLine(max,[data3, data4]);
-console.log(start);
      setTimeout(retrieveData, 60000);
       data = []
       data2 = [];

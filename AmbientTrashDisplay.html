@@ -49,15 +49,6 @@
                                 height: 1000px;
                             }
                             
-                            .us-map {
-                                text-align: center;
-                            }
-                            .map-legend {
-                                position: absolute;
-                                top: 1893px;
-                                right: 63px;
-                                width:500px;
-                            }
                             .legend {
                                 top: 1250px;
                                 right: 75px;
@@ -65,6 +56,16 @@
                             
                             
                         }
+ @media screen and (min-width: 2500px) {
+                           .legend {
+                                top: 600px;
+				right: 175px; 
+                           }
+                            
+                            
+                        }
+
+  
                     .axis path {
                         fill: none;
                         stroke: #fff!important;
@@ -104,15 +105,13 @@
                 <h2>Total Food Wasted in 24hours</h2>
                 <div class="graph">
                     <h3>Compared to Max Waste</h3>
-                    <svg id="fillgauge1" width="100%" height="200" onclick="gauge1.update(NewValue());"></svg>
+                    <svg id="fillgauge1" width="100%" height="200"></svg>
                 </div>
                 <div class="graph">
                     <h3>Compared to Min Waste</h3>
-                    <svg id="fillgauge2" width="100%" height="200" onclick="gauge2.update(NewValue());"></svg>
+                    <svg id="fillgauge2" width="100%" height="200"></svg>
                 </div>
             </div>
-<!--            <div class="double-graph">
-                <div class="graph"> -->
                     <div class="container graph">
                         <h2>Food Waste</h2>
                         <svg id="visualisation" width="700" height="300"></svg>
@@ -125,38 +124,11 @@
                                      <span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #2</span> -->
                     </div>
 
-<!--                </div>
-                <div class="graph"> -->
-                    <div class="us-map">
-                        <h2>Children Living in Food-Insecure Households (2014)*</h2>
-                        <div id="tooltip"></div>
-                        <!-- div to hold tooltip. -->
-                        <svg width="960" height="600" id="statesvg"></svg>
-                        <!-- svg to hold the map. -->
-                        <script src="http://bl.ocks.org/NPashaP/raw/a74faf20b492ad377312/3513ad985b2fa93ea35f2fc864cb30540c298171/uStates.js"></script>
-                        <!-- creates uStates. -->
-                        <div class="map-legend">
-                            <li>0%</li>
-                            <li>25%</li>
-                            <li>50%</li>
-                        </div>
-                        <p class="citation">*Craig Gundersen et al. "<a href="http://www.feedingamerica.org/hunger-in-america/our-research/map-the-meal-gap/2014/map-the-meal-gap-2014-exec-summ.pdf" target="_blank">Map the Meal Gap</a>". <i>Feeding America</i>, pg. 30-31. 2015</p>
-                    </div>
-<!--                </div>
-            </div> -->
             <script language="JavaScript">
                 var config1 = liquidFillGaugeDefaultSettings();
                 config1.waveAnimateTime = 1000;
                 var gauge1 = loadLiquidFillGauge("fillgauge1", 0, config1);
                 var gauge2 = loadLiquidFillGauge("fillgauge2", 0, config1);
-
-                function NewValue() {
-                    if (Math.random() > .5) {
-                        return Math.round(Math.random() * 100);
-                    } else {
-                        return (Math.random() * 100).toFixed(1);
-                    }
-                }
             </script>
 
         </div>
@@ -220,8 +192,8 @@
             var parseTime = d3.timeParse("%b %d, %Y %I:%M:%S %p");
             
             //call to retrieve data from MongoDB
-//            retrieveData();
-graphComic();
+            retrieveData();
+	    graphComic(cafe1Total+cafe2Total);
             
             /*
              * Function to return max value
@@ -250,7 +222,6 @@ graphComic();
 	    
             if(result.length == 1 && result[0].max != null) {
                 var todaysTotal = cafe1Total + cafe2Total;
-                console.log(result);
                 loadLiquidFillGauge("fillgauge1", todaysTotal/result[0].max*100, config1);
                 loadLiquidFillGauge("fillgauge2", todaysTotal/result[0].min*100, config1);
                 
@@ -330,7 +301,7 @@ graphComic();
                     //     graphDataMultiLine(max, start, [data, data2]);
                     graphDataMultiLine(max, start, [data3, data4]);
                     getMaxMin();
-                    graphComic();
+		    graphComic(cafe1Total+cafe2Total);
                     setTimeout(retrieveData, 60000);
                     data = []
                     data2 = [];
@@ -347,61 +318,10 @@ graphComic();
             "</table>";
         }
         
-function graphComic() {
-    var totalWaste = cafe1Total + cafe2Total;
-    var numBags = totalWaste/20;
-    if(totalWaste == 0 {
-        $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene.png?raw=true' alt='hi' class='inline'/>");
-        return;
-    }
-    switch(numBags) {
-        case 0:
-            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_00.png?raw=true' alt='hi' class='inline'/>");
-            break;
-        case 1:
-            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_01.png?raw=true' alt='hi' class='inline'/>");
-            break;
-        case 2:
-            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_02.png?raw=true' alt='hi' class='inline'/>");
-            break;
-        case 3:
-            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_03.png?raw=true' alt='hi' class='inline'/>");
-            break;
-        case 4:
-            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_04.png?raw=true' alt='hi' class='inline'/>");
-            break;
-        case 5:
-            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_05.png?raw=true' alt='hi' class='inline'/>");
-            break;
-        case 6:
-            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_06.png?raw=true' alt='hi' class='inline'/>");
-            break;
-
-    }
-}
-
-        var sampleData ={};	/* Sample random data. */	
-        ["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
-         "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
-         "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT", 
-         "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN", 
-         "WI", "MO", "AR", "OK", "KS", "LS", "VA"]
-         .forEach(function(d){ 
-                  var low=Math.round(100*Math.random()), 
-                  mid=Math.round(100*Math.random()), 
-                  high=Math.round(100*Math.random());
-                  sampleData[d]={low:d3.min([low,mid,high]), high:d3.max([low,mid,high]), 
-                  avg:Math.round((low+mid+high)/3), color:d3.interpolate("#ffffcc", "#800026")(low/100)}; 
-                  });
-                  
-                  /* draw states on id #statesvg */	
-                  uStates.draw("#statesvg", sampleData, tooltipHtml);
-                  
-                  d3.select(self.frameElement).style("height", "600px");
                   //]]>
             </script>
         <style>
-            .comic img {width:1200px;}
+            .comic img {width:1200px; height:1000px;}
             article {
     height: 1000px;
     width: 60%!important;

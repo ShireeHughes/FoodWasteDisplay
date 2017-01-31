@@ -1,5 +1,6 @@
-function graphComic(totalWase) {
+function graphComic(totalWaste) {
     var numBags = totalWaste / 20;
+    console.log(numBags);
     if (totalWaste == 0) {
         $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene.png?raw=true' alt='hi' class='inline'/>");
         return;

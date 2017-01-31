@@ -12,6 +12,7 @@
                     <!-- * Links for fonts and CSS Stylesheet * -->
                     <!-- ************************************** -->
                     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/7b3378e6ef9edc5e88c07c5c72442a089d5e7f65/stylesheet.css" />
+                    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/0f27ca0e45d821c1f70e33d4c7da2b9679d08a0a/ambientTrashStyle.css"></script>
                     <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet" />
@@ -26,6 +27,7 @@
                     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/6592ba070277840936d1f394cfb72deeb374814a/JavaScript/liquidFillGauge.js"></script>
                     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/server-side-calculations/JavaScript/retreiveData.js"></script>
                     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/7b3378e6ef9edc5e88c07c5c72442a089d5e7f65/JavaScript/graphData.js"></script>
+                    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/0f27ca0e45d821c1f70e33d4c7da2b9679d08a0a/JavaScript/ambientTrash.js"></script>
                     
                     <!--[if lt IE 9]>
                      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -150,9 +152,7 @@
         </div>
         
         
-        <!-- *************** SCRIPTS *************** -->
-        <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/004c0a8a8b1379bdc787be7d97b564597d160ad8/Map.js"></script>
-        
+        <!-- *************** SCRIPTS *************** -->        
         <script>
             function writeDate() {
                 var today = new Date();
@@ -186,6 +186,7 @@
             data4 = [];
             var cafe1Total = 0;
             var cafe2Total = 0;
+            var totalWaste = 0;
             
             //function for creating a timestamp in D3
             //var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
@@ -193,7 +194,7 @@
             
             //call to retrieve data from MongoDB
             retrieveData();
-	    graphComic(cafe1Total+cafe2Total);
+	    graphComic(totalWaste);
             
             /*
              * Function to return max value
@@ -289,20 +290,28 @@
                     console.log("caf1 = " +cafe1Total);
                     console.log("caf2 = "+cafe2Total);
 
-                    console.log(cafe2Total+cafe1Total);
+                    totalWaste = Math.floor((Math.random() * 110)); //cafe2Total+cafe1Total;
+                    console.log(totalWaste);
                     var start;
-                    if(data[0].x < data2[0].x) { start = data[0].x; }
-                    else { start = data2[0].x; }
+
+		    if(data.length > 0) {
+	                    if(data[0].x < data2[0].x) { start = data[0].x; }
+	                    else { start = data2[0].x; }
+		    } else {
+                       start = new Date(2017,0,20);
+		    }
                     
-//                    d3.selectAll(".double-graph svg > *").remove();
-                    d3.selectAll(".graph svg > *").remove();
-                    
-                    //     graphDataMultiLine(max, start, [data, data2,data3,data4]);
-                    //     graphDataMultiLine(max, start, [data, data2]);
-                    graphDataMultiLine(max, start, [data3, data4]);
-                    getMaxMin();
-		    graphComic(cafe1Total+cafe2Total);
+
+		    //graph everything
+                    d3.selectAll(".graph svg > *").remove(); 		//remove old graphs                   
+                    graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
+                    getMaxMin();					//graph fil gauges
+		    graphComic(totalWaste);				//display proper number of trash bags
+
+		    //set timer to update everything 1 minute from now
                     setTimeout(retrieveData, 60000);
+
+		    //reset data arrays
                     data = []
                     data2 = [];
                     data3 = [];

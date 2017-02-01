@@ -27,8 +27,8 @@
                     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/6592ba070277840936d1f394cfb72deeb374814a/JavaScript/liquidFillGauge.js"></script>
                     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/server-side-calculations/JavaScript/retreiveData.js"></script>
                     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/7b3378e6ef9edc5e88c07c5c72442a089d5e7f65/JavaScript/graphData.js"></script>
-                    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/066e90e88d678bde47d22263cf96034e9c9a4c4e/JavaScript/ambientTrash.js"></script>
-                    
+                    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/4bbf2731fe6bdb6f3056522cc13c851601f4de79/JavaScript/ambientTrash.js"></script>
+
                     <!--[if lt IE 9]>
                      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
                      <![endif]-->
@@ -290,7 +290,7 @@
                     console.log("caf1 = " +cafe1Total);
                     console.log("caf2 = "+cafe2Total);
 
-                    totalWaste = Math.floor((Math.random() * 110)); //cafe2Total+cafe1Total;
+                    totalWaste = cafe2Total+cafe1Total;
                     console.log(totalWaste);
                     var start;
 

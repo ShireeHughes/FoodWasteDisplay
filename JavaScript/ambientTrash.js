@@ -28,6 +28,36 @@ console.log($(".comic"));
         case 6:
             $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_06.png?raw=true' alt='hi' class='inline'/>");
             break;
+        case 7:
+            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_07.png?raw=true' alt='hi' class='inline'/>");
+            break;
+        case 8:
+            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_08.png?raw=true' alt='hi' class='inline'/>");
+            break;
+        case 9:
+            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_09.png?raw=true' alt='hi' class='inline'/>");
+            break;
+        case 10:
+            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_10.png?raw=true' alt='hi' class='inline'/>");
+            break;
+        case 11:
+            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_11.png?raw=true' alt='hi' class='inline'/>");
+            break;
+        case 12:
+            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_12.png?raw=true' alt='hi' class='inline'/>");
+            break;
+        case 13:
+            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_13.png?raw=true' alt='hi' class='inline'/>");
+            break;
+	case 14:
+            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_14.png?raw=true' alt='hi' class='inline'/>");
+            break;
+        case 15:
+            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_15.png?raw=true' alt='hi' class='inline'/>");
+            break;
+        default:
+            $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_15.png?raw=true' alt='hi' class='inline'/>");
+            break;
 
     }
 }

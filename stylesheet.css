@@ -188,8 +188,10 @@
     background: rgba(200, 200, 200,.5);
     padding: 10px;
     font-size: 13px;
-    top: 300px;
-    right: 20px;
+//    top: 300px;
+//    right: 20px;
+	top: 600px;
+	right:300px;
     position: absolute;
 }
 

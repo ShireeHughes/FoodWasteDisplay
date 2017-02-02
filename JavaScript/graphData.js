@@ -20,7 +20,7 @@ function getColor(value) {
         return 'deepskyblue';
         break;
      case 1:
-        return 'blue';
+        return 'lightcoral';
         break;
      case 2:
         return 'forestgreen';
@@ -44,7 +44,7 @@ function getColor(value) {
         return 'indigo';
         break;
      case 9:
-        return 'lightcoral';
+        return 'red';
         break;
      case 10:
         return 'black';

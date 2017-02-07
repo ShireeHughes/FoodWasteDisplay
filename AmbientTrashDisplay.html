@@ -11,7 +11,7 @@
                     <!-- ************************************** -->
                     <!-- * Links for fonts and CSS Stylesheet * -->
                     <!-- ************************************** -->
-                    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/3ab3e415ccef12f6960dd9b4c5f709e40310a85a/stylesheet.css" />
+                    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/c423c47816567edf6fcf64f63edf8c10acd5d828/stylesheet.css" />
                     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/0f27ca0e45d821c1f70e33d4c7da2b9679d08a0a/ambientTrashStyle.css"></script>
                     <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
@@ -24,7 +24,7 @@
                     <!--  <script src="https://d3js.org/d3.v3.min.js"></script>-->
                     <script src="https://d3js.org/d3.v4.min.js"></script>
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-                    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/6592ba070277840936d1f394cfb72deeb374814a/JavaScript/liquidFillGauge.js"></script>
+                    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/c423c47816567edf6fcf64f63edf8c10acd5d828/JavaScript/liquidFillGauge.js"></script>
                     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/server-side-calculations/JavaScript/retreiveData.js"></script>
                     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/3ab3e415ccef12f6960dd9b4c5f709e40310a85a/JavaScript/graphData.js"></script>
                     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/b1956f542ce864c7267adcf4ee97cc6d5e622604/JavaScript/ambientTrash.js"></script>
@@ -34,7 +34,7 @@
                      <![endif]-->
                     
                     <style>
-                        
+                        .axis text:nth-child(odd) {display:none;}
                         @media screen and (max-width: 1500px) {
                             article {
                                 float:none!important;
@@ -58,26 +58,13 @@
                             
                             
                         }
- @media screen and (min-width: 2500px) {
+                	 @media screen and (min-width: 2500px) {
                            .legend {
-                                top: 600px;
-				right: 175px; 
+                                top: 1250//900px;
+				right: 300px; 
                            }
-                            
-                            
                         }
-
-  
-                    .axis path {
-                        fill: none;
-                        stroke: #fff!important;
-                        shape-rendering: crispEdges;
-                    }
-                    .axis text {
-                        font-family: Pontano Sans;
-                        font-size: 15px!important;
-                        stroke:#fff!important;
-                    }</style>
+</style>
     </head>
     
     <body>
@@ -104,16 +91,23 @@
         <div>
 
             <div class="double-graph">
-                <center><h2>Food Wasted in 24hours</h2></center>
+                <center><h2>Food Wasted in 24 Hours</h2></center>
                 <div class="graph">
-                    <h3>Compared to Max Waste</h3>
-                    <svg id="fillgauge1" width="100%" height="200"></svg>
+                    <center><h3>Compared to Max Waste</h3></center>
+                    <svg id="fillgauge1" width="100%" height="300"></svg>
                 </div>
                 <div class="graph">
-                    <h3>Compared to Min Waste</h3>
-                    <svg id="fillgauge2" width="100%" height="200"></svg>
+                    <center><h3>Compared to Min Waste</h3></center>
+                    <svg id="fillgauge2" width="100%" height="300"></svg>
                 </div>
             </div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <br />
 <br />
 

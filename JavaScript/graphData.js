@@ -79,7 +79,7 @@ function graphDataMultiLine(max, yesterday, datasets) {
        },
       xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain([yesterday, today]),
       yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0,max]),
-      xAxis = d3.axisBottom(xScale),  
+      xAxis = d3.axisBottom(xScale).ticks(5),  
       yAxis = d3.axisLeft(yScale);
 
    //Append x-axis to the graph

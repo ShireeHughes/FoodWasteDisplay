@@ -11,8 +11,8 @@
                     <!-- ************************************** -->
                     <!-- * Links for fonts and CSS Stylesheet * -->
                     <!-- ************************************** -->
-                    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/stylesheet.css" />
-                    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/0f27ca0e45d821c1f70e33d4c7da2b9679d08a0a/ambientTrashStyle.css"></script>
+<!--                    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/stylesheet.css" />-->
+<!--                    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/0f27ca0e45d821c1f70e33d4c7da2b9679d08a0a/ambientTrashStyle.css"></script> -->
                     <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet" />
@@ -34,22 +34,109 @@
                      <![endif]-->
                     
                     <style>
-                        .axis text:nth-child(odd) {display:none;}
+			/* ****************************** */
+			/* *******     General    ******* */
+			/* ****************************** */
+			body {
+			   font: 18px Pontano Sans, Ahiti;
+			}
+			/* ****************************** */
+
+			/* ****************************** */
+			/* ******* Header section ******* */
+			/* ****************************** */
+			.title-header {
+   			   background: #cc0000;
+ 			   padding: 5px;
+			   text-align: center;
+                           font: 28px Anton, sans-serif;
+			   color: #fff;
+                        }
+
+			/* *** Cafe Name Emphasis *** */			
+			.adh {
+			   text-shadow: #fff 1px 1px;
+                           color: #00338c;
+			}
+			/* ****************************** */
+
+			/* ****************************** */
+			/* *******  Comic  Image  ******* */
+			/* ****************************** */
+ 			.comic { text-align: center; }
+			.comic img {
+			   padding:5px;
+			   width:900px;
+			   height: 900px;
+			}
+			/* ****************************** */
+
+			/* ****************************** */
+			/* *******  GRAPH  SPACE  ******* */
+			/* ****************************** */
+                        aside {
+                          background: #00338C;
+                          color:#fff; 
+                          height: 1000px;
+                        }
+
+			aside h2 {
+			   font:28px Anton, sans-serif;
+			   padding-top: 40px;
+			}
+			/* ****************************** */
+
+			/* ****************************** */
+			/* *******     GAUGES     ******* */
+			/* ****************************** */
+			aside h3 {
+			   font:25px Athiti, sans-serif;
+			}
+			.double-graph {
+    			   text-align: center;
+			}
+			.double-graph .graph {
+			   display: inline-block;
+			   padding: 40px;
+			}			
+			/* ****************************** */
+
+			/* ****************************** */
+			/* *******      GRAPH     ******* */
+			/* ****************************** */
+
+			.container.graph {
+			    text-align: center;
+			    padding: 25px;
+			}
+
+			.axis text {
+			   stroke: #fff;
+			   font-size: 15px;
+			}
+			
+			.axis path {
+			   stroke: #fff;
+			}
+
+			.legend {
+			    background: rgba(255,255,255,.5);
+			    border: #fff;
+			    position: relative;
+			    top: -300px;
+			    left: 250px;
+			    width: 112px;
+			    font-size: 15px;
+			    padding: 10px;
+			}
+			/* ****************************** */
+
                         @media screen and (max-width: 1500px) {
                             article {
                                 float:none!important;
                                 width:100%!important;
                             }
                             
-                            aside {
-                                float: none!important;
-                                width: 100%!important;
-                                margin: 0;
-                                background: #00338C;
-                                border-left:#003366 2px solid;
-                                color:#fff;
-                                height: 1000px;
-                            }
                             
                             .legend {
                                 top: 1250px;
@@ -93,23 +180,14 @@
             <div class="double-graph">
                 <center><h2>Food Wasted in 24 Hours</h2></center>
                 <div class="graph">
-                    <center><h3>Compared to Max Waste</h3></center>
+                    <h3>Compared to Max Waste</h3>
                     <svg id="fillgauge1" width="100%" height="300"></svg>
                 </div>
                 <div class="graph">
-                    <center><h3>Compared to Min Waste</h3></center>
+                    <h3>Compared to Min Waste</h3>
                     <svg id="fillgauge2" width="100%" height="300"></svg>
                 </div>
             </div>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
                     <div class="container graph">
 <!--                        <h2>Food Waste</h2>-->
@@ -341,17 +419,5 @@ cafe2Total = current.weight; }
         
                   //]]>
             </script>
-        <style>
-            .comic img {width:1200px; height:1000px;}
-            article {
-    height: 1000px;
-    width: 60%!important;
-    float: left;
-}
-
-            aside {
-    width: 39%!important;
-}
-                        </style>
     </body>
 </html>

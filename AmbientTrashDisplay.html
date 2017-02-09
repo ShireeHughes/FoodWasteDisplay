@@ -34,14 +34,82 @@
                      <![endif]-->
                     
                     <style>
-			/* ****************************** */
-			/* *******     General    ******* */
-			/* ****************************** */
+			/* *********************************************************** */
+			/* **********          Regardless of Size           ********** */
+                        /* *********************************************************** */
 			body {
 			   font: 18px Pontano Sans, Ahiti;
 			}
+
+			aside {
+                          background: #00338C;
+                          color:#fff; 
+                          height: 1000px;
+                        }
+
+		
+			/* ****************************** */
+			/* *******      GRAPH     ******* */
+			/* ****************************** */
+			.double-graph {
+    			   text-align: center;
+			}
+
+			.container.graph {
+			    text-align: center;
+			    padding: 25px;
+			}
+
+			.axis text {
+			   stroke: #fff;
+			   font-size: 15px;
+			}
+			
+			.axis path {
+			   fill: none;
+                           stroke: #fff!important;
+                           shape-rendering: crispEdges;
+			}
+
+			.legend {
+			    background: rgba(255,255,255,.5);
+			    border: #fff;
+			    position: relative;			    
+			    font-size: 15px;
+			    padding: 10px;
+			}
+
+			.legend span:nth-child(1) i { color:deepskyblue; }
+			.legend span:nth-child(2) i { color:lightcoral; }
+			.legend span:nth-child(3) i { color:forestgreen; }
+			.legend span:nth-child(4) i { color:darkseagreen; }
+			.legend span:nth-child(5) i { color:goldenrod; }
+			.legend span:nth-child(6) i { color:darkorange; }
+			.legend span:nth-child(7) i { color:crimson; }
+			.legend span:nth-child(8) i { color:darkmagenta; }
+			.legend span:nth-child(9) i { color:indigo; }
+			.legend span:nth-child(10) i { color:red; }
+			.legend span:nth-child(11) i { color:black; }
+			.legend span:nth-child(12) i { color:darkgray; }
 			/* ****************************** */
 
+			/* ****************************** */
+			/* *******  Comic  Image  ******* */
+			/* ****************************** */
+ 			.comic { text-align: center; }
+			/* ****************************** */
+
+			/* ****************************** */
+			/* *******     FOOTER     ******* */
+			/* ****************************** */
+			footer {
+			   text-align: center;
+			   font-size: 13px;
+			   padding:10px;
+			   color: #cc0000;
+			}
+			/* ****************************** */      
+			
 			/* ****************************** */
 			/* ******* Header section ******* */
 			/* ****************************** */
@@ -49,7 +117,7 @@
    			   background: #cc0000;
  			   padding: 5px;
 			   text-align: center;
-                           font: 28px Anton, sans-serif;
+                           font-family: Anton, sans-serif;
 			   color: #fff;
                         }
 
@@ -60,10 +128,25 @@
 			}
 			/* ****************************** */
 
+			/* *********************************************************** */
+
+
+                        /* *********************************************************** */
+			/* **********                 Compact               ********** */
+                        /* *********************************************************** */
+                        @media screen and (max-width: 1500px) {
+
+			/* ****************************** */
+			/* ******* Header section ******* */
+			/* ****************************** */
+			.title-header {
+                           font: 28px Anton, sans-serif;
+                        }
+			/* ****************************** */
+
 			/* ****************************** */
 			/* *******  Comic  Image  ******* */
 			/* ****************************** */
- 			.comic { text-align: center; }
 			.comic img {
 			   padding:5px;
 			   width:900px;
@@ -74,15 +157,87 @@
 			/* ****************************** */
 			/* *******  GRAPH  SPACE  ******* */
 			/* ****************************** */
-                        aside {
-                          background: #00338C;
-                          color:#fff; 
-                          height: 1000px;
+                 	aside h2 {
+			   font-size:28px;
+			   padding-top: 40px;
+			}
+			/* ****************************** */
+
+			/* ****************************** */
+			/* *******     GAUGES     ******* */
+			/* ****************************** */
+			aside h3 {
+			   font:25px Athiti, sans-serif;
+			}
+			
+			.double-graph .graph {
+			   display: inline-block;
+			   padding: 40px;
+			}			
+			/* ****************************** */
+
+			/* ****************************** */
+			/* *******      GRAPH     ******* */
+			/* ****************************** */
+			.legend {
+			    top: -300px;
+			    left: 250px;
+			    width: 112px;
+			}
+			/* ****************************** */			                                  
                         }
 
+
+			/* *********************************************************** */
+			/* **********               Desktop                 ********** */
+                        /* *********************************************************** */
+                	@media screen and (min-width: 1500px) and (max-width: 2500px) {
+
+			/* ****************************** */
+			/* *******     General    ******* */
+			/* ****************************** */
+			body {
+			   font: 18px Pontano Sans, Ahiti;
+			}
+
+			article {
+			    float: left;
+			    width: 60%;
+			    height: 920px;
+			}
+
+			aside {
+			    float: right;
+			    width: 40%;
+			    height: 920px;
+			}
+			/* ****************************** */
+
+			/* ****************************** */
+			/* ******* Header section ******* */
+			/* ****************************** */
+			.title-header {
+                           font-size: 45px;
+                        }
+			/* ****************************** */
+
+			/* ****************************** */
+			/* *******  Comic  Image  ******* */
+			/* ****************************** */
+ 			.comic { text-align: center; }
+			.comic img {
+			   padding:5px;
+			   width: 800px;
+			   height: 900px;
+			}
+			/* ****************************** */
+
+			/* ****************************** */
+			/* *******  GRAPH  SPACE  ******* */
+			/* ****************************** */                        
 			aside h2 {
-			   font:28px Anton, sans-serif;
-			   padding-top: 40px;
+			   font:38px Anton, sans-serif;
+			   padding-top: 20px;
 			}
 			/* ****************************** */
 
@@ -96,60 +251,102 @@
     			   text-align: center;
 			}
 			.double-graph .graph {
-			   display: inline-block;
-			   padding: 40px;
+		          display: inline-block;
+		          padding: 0px;
+		          width: 49%;
+		          overflow: overlay;
 			}			
 			/* ****************************** */
 
 			/* ****************************** */
 			/* *******      GRAPH     ******* */
 			/* ****************************** */
-
-			.container.graph {
-			    text-align: center;
-			    padding: 25px;
-			}
-
-			.axis text {
-			   stroke: #fff;
-			   font-size: 15px;
-			}
-			
-			.axis path {
-			   stroke: #fff;
-			}
-
 			.legend {
-			    background: rgba(255,255,255,.5);
-			    border: #fff;
-			    position: relative;
 			    top: -300px;
 			    left: 250px;
-			    width: 112px;
-			    font-size: 15px;
-			    padding: 10px;
+			    width: 112px;			   
+			}
+
+			.container.graph{
+			   padding-top:40px;
+			   transform: scale(0.8, 0.8);
+                           -ms-transform: scale(0.8, 0.8);
+			   -webkit-transform: scale(0.8, 0.8);
+			   margin-left: -70px;
+			}
+
+						
+			/* ****************************** */
+
+                        /* *********************************************************** */
+			}
+
+			/* *********************************************************** */
+			/* **********              Big Screen               ********** */
+                        /* *********************************************************** */
+                	@media screen and (min-width: 2501px) {
+
+			.title-header { 
+   			   font-size:38px!important;
+			}
+
+			body {
+			     font-size:18px;
+			}
+
+			aside {
+			    float: right;
+			    width: 33%;
+			    margin: 0;
+			    height: 1000px;
+			}
+
+			article {
+			    height: 1000px;
+			    width:66%;
+			    float:left;
+			}
+
+			/* ****************************** */
+			/* *******     GAUGES     ******* */
+			/* ****************************** */
+			aside h2 {font:30px Anton, sans-serif!important;}
+			aside h3 {font-size:26px!important;}
+
+			.double-graph {
+			   height:350px;
+			   width:100%;
+			}
+
+			.double-graph .graph{
+			  display:inline-block;
+			  width:48%;
 			}
 			/* ****************************** */
 
-                        @media screen and (max-width: 1500px) {
-                            article {
-                                float:none!important;
-                                width:100%!important;
-                            }
-                            
-                            
-                            .legend {
-                                top: 1250px;
-                                right: 75px;
-                            }
-                            
-                            
-                        }
-                	 @media screen and (min-width: 2500px) {
-                           .legend {
-                                top: 1250//900px;
-				right: 300px; 
-                           }
+			/* ****************************** */
+			/* *******     GRAPHS     ******* */
+			/* ****************************** */
+			.legend {
+			    top: 850px;
+			    right:300px;
+			}
+
+			#visualisation {
+			   margin-left: -56px;
+			}
+
+			 .comic img {
+			   width:1000px!important; 
+			   height:900px!important;
+			}
+ 
+			.container.graph {
+			    text-align: center;
+		            padding: 25px;
+			    padding-top: 170px;
+			}
+
                         }
 </style>
     </head>
@@ -222,7 +419,7 @@
     </div>
 </aside>
             <footer>
-                Copyright &copy; I-SENSE
+                Copyright &copy; 2017, <a href="http://isense.fau.edu/" target="_blank">Institute of Sensing and Embedded Network Systems Engineering</a>
             </footer>
         </div>
         

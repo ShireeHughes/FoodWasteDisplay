@@ -1,375 +1,59 @@
 <!doctype html>
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-            
-            <title>Food Waste at Atlantic Dining Hall</title>
-            <meta name="description" content="food waste, FAU, Florida Atlantic University, I-SENSE, Institute of Sensing and Embedded Systems Engineering, IoT, Internet of Things, sustainability">
-                <meta name="author" content="Shiree Hughes">
-                    
-                    <!-- ************************************** -->
-                    <!-- * Links for fonts and CSS Stylesheet * -->
-                    <!-- ************************************** -->
-<!--                    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/stylesheet.css" />-->
-<!--                    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/0f27ca0e45d821c1f70e33d4c7da2b9679d08a0a/ambientTrashStyle.css"></script> -->
-                    <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" />
-                    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
-                    <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet" />
-                    <script src='https://use.fontawesome.com/2016971a2a.js'></script>
 
-                    <!-- ************************************** -->
-                    <!-- *  Links for D3 and JQuery scripts   * -->
-                    <!-- ************************************** -->
-                    <!--  <script src="https://d3js.org/d3.v3.min.js"></script>-->
-                    <script src="https://d3js.org/d3.v4.min.js"></script>
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-                    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/c423c47816567edf6fcf64f63edf8c10acd5d828/JavaScript/liquidFillGauge.js"></script>
-                    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/server-side-calculations/JavaScript/retreiveData.js"></script>
-                    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/JavaScript/graphData.js"></script>
-                    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/b1956f542ce864c7267adcf4ee97cc6d5e622604/JavaScript/ambientTrash.js"></script>
+<head>
+    <meta charset="utf-8">
 
-                    <!--[if lt IE 9]>
+    <title>Food Waste at Atlantic Dining Hall</title>
+    <meta name="description" content="food waste, FAU, Florida Atlantic University, I-SENSE, Institute of Sensing and Embedded Systems Engineering, IoT, Internet of Things, sustainability">
+    <meta name="author" content="Shiree Hughes">
+
+    <!-- ************************************** -->
+    <!-- * Links for fonts and CSS Stylesheet * -->
+    <!-- ************************************** -->
+    <!--                    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/stylesheet.css" />-->
+    <!--                    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/0f27ca0e45d821c1f70e33d4c7da2b9679d08a0a/ambientTrashStyle.css"></script> -->
+    <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet" />
+    <script src='https://use.fontawesome.com/2016971a2a.js'></script>
+
+    <!-- ************************************** -->
+    <!-- *  Links for D3 and JQuery scripts   * -->
+    <!-- ************************************** -->
+    <!--  <script src="https://d3js.org/d3.v3.min.js"></script>-->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/c423c47816567edf6fcf64f63edf8c10acd5d828/JavaScript/liquidFillGauge.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/server-side-calculations/JavaScript/retreiveData.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/JavaScript/graphData.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/b1956f542ce864c7267adcf4ee97cc6d5e622604/JavaScript/ambientTrash.js"></script>
+
+    <!--[if lt IE 9]>
                      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
                      <![endif]-->
-                    
-                    <style>
-			/* *********************************************************** */
-			/* **********          Regardless of Size           ********** */
-                        /* *********************************************************** */
-			body {
-			   font: 18px Pontano Sans, Ahiti;
-			}
+</head>
 
-			aside {
-                          background: #00338C;
-                          color:#fff; 
-                          height: 1000px;
-                        }
-
-		
-			/* ****************************** */
-			/* *******      GRAPH     ******* */
-			/* ****************************** */
-			.double-graph {
-    			   text-align: center;
-			}
-
-			.container.graph {
-			    text-align: center;
-			    padding: 25px;
-			}
-
-			.axis text {
-			   stroke: #fff;
-			   font-size: 15px;
-			}
-			
-			.axis path {
-			   fill: none;
-                           stroke: #fff!important;
-                           shape-rendering: crispEdges;
-			}
-
-			.legend {
-			    background: rgba(255,255,255,.5);
-			    border: #fff;
-			    position: relative;			    
-			    font-size: 15px;
-			    padding: 10px;
-			}
-
-			.legend span:nth-child(1) i { color:deepskyblue; }
-			.legend span:nth-child(2) i { color:lightcoral; }
-			.legend span:nth-child(3) i { color:forestgreen; }
-			.legend span:nth-child(4) i { color:darkseagreen; }
-			.legend span:nth-child(5) i { color:goldenrod; }
-			.legend span:nth-child(6) i { color:darkorange; }
-			.legend span:nth-child(7) i { color:crimson; }
-			.legend span:nth-child(8) i { color:darkmagenta; }
-			.legend span:nth-child(9) i { color:indigo; }
-			.legend span:nth-child(10) i { color:red; }
-			.legend span:nth-child(11) i { color:black; }
-			.legend span:nth-child(12) i { color:darkgray; }
-			/* ****************************** */
-
-			/* ****************************** */
-			/* *******  Comic  Image  ******* */
-			/* ****************************** */
- 			.comic { text-align: center; }
-			/* ****************************** */
-
-			/* ****************************** */
-			/* *******     FOOTER     ******* */
-			/* ****************************** */
-			footer {
-			   text-align: center;
-			   font-size: 13px;
-			   padding:10px;
-			   color: #cc0000;
-			}
-			/* ****************************** */      
-			
-			/* ****************************** */
-			/* ******* Header section ******* */
-			/* ****************************** */
-			.title-header {
-   			   background: #cc0000;
- 			   padding: 5px;
-			   text-align: center;
-                           font-family: Anton, sans-serif;
-			   color: #fff;
-                        }
-
-			/* *** Cafe Name Emphasis *** */			
-			.adh {
-			   text-shadow: #fff 1px 1px;
-                           color: #00338c;
-			}
-			/* ****************************** */
-
-			/* *********************************************************** */
-
-
-                        /* *********************************************************** */
-			/* **********                 Compact               ********** */
-                        /* *********************************************************** */
-                        @media screen and (max-width: 1500px) {
-
-			/* ****************************** */
-			/* ******* Header section ******* */
-			/* ****************************** */
-			.title-header {
-                           font: 28px Anton, sans-serif;
-                        }
-			/* ****************************** */
-
-			/* ****************************** */
-			/* *******  Comic  Image  ******* */
-			/* ****************************** */
-			.comic img {
-			   padding:5px;
-			   width:900px;
-			   height: 900px;
-			}
-			/* ****************************** */
-
-			/* ****************************** */
-			/* *******  GRAPH  SPACE  ******* */
-			/* ****************************** */
-                 	aside h2 {
-			   font-size:28px;
-			   padding-top: 40px;
-			}
-			/* ****************************** */
-
-			/* ****************************** */
-			/* *******     GAUGES     ******* */
-			/* ****************************** */
-			aside h3 {
-			   font:25px Athiti, sans-serif;
-			}
-			
-			.double-graph .graph {
-			   display: inline-block;
-			   padding: 40px;
-			}			
-			/* ****************************** */
-
-			/* ****************************** */
-			/* *******      GRAPH     ******* */
-			/* ****************************** */
-			.legend {
-			    top: -300px;
-			    left: 250px;
-			    width: 112px;
-			}
-			/* ****************************** */			                                  
-                        }
-
-
-			/* *********************************************************** */
-			/* **********               Desktop                 ********** */
-                        /* *********************************************************** */
-                	@media screen and (min-width: 1500px) and (max-width: 2500px) {
-
-			/* ****************************** */
-			/* *******     General    ******* */
-			/* ****************************** */
-			body {
-			   font: 18px Pontano Sans, Ahiti;
-			}
-
-			article {
-			    float: left;
-			    width: 60%;
-			    height: 920px;
-			}
-
-			aside {
-			    float: right;
-			    width: 40%;
-			    height: 920px;
-			}
-			/* ****************************** */
-
-			/* ****************************** */
-			/* ******* Header section ******* */
-			/* ****************************** */
-			.title-header {
-                           font-size: 45px;
-                        }
-			/* ****************************** */
-
-			/* ****************************** */
-			/* *******  Comic  Image  ******* */
-			/* ****************************** */
- 			.comic { text-align: center; }
-			.comic img {
-			   padding:5px;
-			   width: 800px;
-			   height: 900px;
-			}
-			/* ****************************** */
-
-			/* ****************************** */
-			/* *******  GRAPH  SPACE  ******* */
-			/* ****************************** */                        
-			aside h2 {
-			   font:38px Anton, sans-serif;
-			   padding-top: 20px;
-			}
-			/* ****************************** */
-
-			/* ****************************** */
-			/* *******     GAUGES     ******* */
-			/* ****************************** */
-			aside h3 {
-			   font:25px Athiti, sans-serif;
-			}
-			.double-graph {
-    			   text-align: center;
-			}
-			.double-graph .graph {
-		          display: inline-block;
-		          padding: 0px;
-		          width: 49%;
-		          overflow: overlay;
-			}			
-			/* ****************************** */
-
-			/* ****************************** */
-			/* *******      GRAPH     ******* */
-			/* ****************************** */
-			.legend {
-			    top: -300px;
-			    left: 250px;
-			    width: 112px;			   
-			}
-
-			.container.graph{
-			   padding-top:40px;
-			   transform: scale(0.8, 0.8);
-                           -ms-transform: scale(0.8, 0.8);
-			   -webkit-transform: scale(0.8, 0.8);
-			   margin-left: -70px;
-			}
-
-						
-			/* ****************************** */
-
-                        /* *********************************************************** */
-			}
-
-			/* *********************************************************** */
-			/* **********              Big Screen               ********** */
-                        /* *********************************************************** */
-                	@media screen and (min-width: 2501px) {
-
-			.title-header { 
-   			   font-size:38px!important;
-			}
-
-			body {
-			     font-size:18px;
-			}
-
-			aside {
-			    float: right;
-			    width: 33%;
-			    margin: 0;
-			    height: 1000px;
-			}
-
-			article {
-			    height: 1000px;
-			    width:66%;
-			    float:left;
-			}
-
-			/* ****************************** */
-			/* *******     GAUGES     ******* */
-			/* ****************************** */
-			aside h2 {font:30px Anton, sans-serif!important;}
-			aside h3 {font-size:26px!important;}
-
-			.double-graph {
-			   height:350px;
-			   width:100%;
-			}
-
-			.double-graph .graph{
-			  display:inline-block;
-			  width:48%;
-			}
-			/* ****************************** */
-
-			/* ****************************** */
-			/* *******     GRAPHS     ******* */
-			/* ****************************** */
-			.legend {
-			    top: 850px;
-			    right:300px;
-			}
-
-			#visualisation {
-			   margin-left: -56px;
-			}
-
-			 .comic img {
-			   width:1000px!important; 
-			   height:900px!important;
-			}
- 
-			.container.graph {
-			    text-align: center;
-		            padding: 25px;
-			    padding-top: 170px;
-			}
-
-                        }
-</style>
-    </head>
-    
-    <body>
-        <!--  <script src="js/scripts.js"></script> -->
-        <div class="outer">
-            <header>
-                <div class="title-header">
-                    <h1>Overview <span class="adh">Atlantic Dining Hall</span> <span id="date"></span><h1>
+<body>
+    <!--  <script src="js/scripts.js"></script> -->
+    <div class="outer">
+        <header>
+            <div class="title-header">
+                <h1>Overview <span class="adh">Atlantic Dining Hall</span> <span id="date"></span><h1>
                         </div>
             </header>
-            
+
             <article>
                 <div class="main-display">
                     <div>
                         <div class="comic" style="text-align:center;">
-                            
+
                         </div>
                     </div>
                 </div>
             </article>
-            
+
             <aside>
     <div class="charts-tips-more">
         <div>
@@ -422,8 +106,7 @@
                 Copyright &copy; 2017, <a href="http://isense.fau.edu/" target="_blank">Institute of Sensing and Embedded Network Systems Engineering</a>
             </footer>
         </div>
-        
-        
+
         <!-- *************** SCRIPTS *************** -->        
         <script>
             function writeDate() {
@@ -431,15 +114,15 @@
                 var dd = today.getDate();
                 var mm = today.getMonth()+1; //January is 0!
                 var yyyy = today.getFullYear();
-                
+
                 if(dd<10) {
                     dd='0'+dd
                 }
-                
+
                 if(mm<10) {
                     mm='0'+mm
                 }
-                
+
                 today = mm+'/'+dd+'/'+yyyy;
                 //$('#date').html(today);
                 document.getElementById('date').innerHTML = today;
@@ -448,7 +131,7 @@
             }
         </script>
         <script>writeDate();</script>
-        
+
         <script>
             //<![CDATA[
             //create data sets
@@ -459,15 +142,15 @@
             var cafe1Total = 0;
             var cafe2Total = 0;
             var totalWaste = 0;
-            
+
             //function for creating a timestamp in D3
             //var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
             var parseTime = d3.timeParse("%b %d, %Y %I:%M:%S %p");
-            
+
             //call to retrieve data from MongoDB
             retrieveData();
 	    graphComic(totalWaste);
-            
+
             /*
              * Function to return max value
              * between value a and value b
@@ -478,7 +161,7 @@
                 return a;
             }
         }
-        
+
         /*
          * Function called in jsonp callback
          * this function parses the incoming JSON 
@@ -493,12 +176,12 @@
             var max = 0;
             var max2=0; var last2 =0;
 	    var max1=0; var last1 =0;
-	    
+
             if(result.length == 1 && result[0].max != null) {
                 var todaysTotal = cafe1Total + cafe2Total;
                 loadLiquidFillGauge("fillgauge1", todaysTotal/result[0].max*100, config1);
                 loadLiquidFillGauge("fillgauge2", todaysTotal/result[0].min*100, config1);
-                
+
             } else {
                     cafe2Total = 0;
                     cafe1Total = 0;
@@ -509,7 +192,7 @@
      //add to cafe 1 dataset
      if (current.trash_can_id == "cafe_1") {
          if (new Date(current.timestamp).getHours() >= 6) {
-             
+
              if (cafe1Total == 0) {
                  cafe1Total = current.weight;
                  max1 = current.weight;
@@ -536,7 +219,7 @@
              });
          }
      }                        
-                        
+
                         //add to cafe 2 dataset
                         if(current.trash_can_id == "cafe_2") {
                             if(new Date(current.timestamp).getHours() >= 6) {
@@ -587,7 +270,6 @@ cafe2Total = current.weight; }
 		    } else {
                        start = new Date(2017,0,20);
 		    }
-                    
 
 		    //graph everything
                     d3.selectAll(".graph svg > *").remove(); 		//remove old graphs                   
@@ -605,7 +287,7 @@ cafe2Total = current.weight; }
                     data4 = [];
             }
         }
-        
+
         function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
             return "<h4>"+n+"</h4><table>"+
             "<tr><td>Low</td><td>"+(d.low)+"</td></tr>"+
@@ -613,7 +295,7 @@ cafe2Total = current.weight; }
             "<tr><td>High</td><td>"+(d.high)+"</td></tr>"+
             "</table>";
         }
-        
+
                   //]]>
             </script>
     </body>

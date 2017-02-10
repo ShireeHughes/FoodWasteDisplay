@@ -1,247 +1,378 @@
-.title-header { 
-     padding: 5px;
-     text-align: center;
-     background: #cc0000;
-font-size:38px!important;
-  }
+/* *********************************************************** */
 
-  .title-header h1 {
-     color:#fff;
-     font-family: Anton;
-  }
-  .adh {     color: #00338C; text-shadow: 1px 1px #fff;}
-  body {
-     font-size:18px;
-     font-family:Athiti, Pontano Sans;
-  }
-  aside {
-    float: right;
-    width: 33%;
-    margin: 0;
+
+/* **********          Regardless of Size           ********** */
+
+
+/* *********************************************************** */
+
+body {
+    font: 18px Pontano Sans, Ahiti;
+}
+
+aside {
     background: #00338C;
-    border-left:#003366 2px solid;
-    color:#fff;
+    color: #fff;
     height: 1000px;
-  }
-
-  h2 { font-family:Anton; }
-  article {
-    height: 1000px;
-    width:66%;
-    float:left;
-  }
-
-  footer {
-    width: 100%;
-    font-size: 12px;
-    text-align: center;    
-  }
-  .main-display, .charts-tips-more {
-    padding: 0px 25px;
-  }
-.double-graph h2 {font-size:30px!important;}
-.double-graph h3 {font-size:26px!important;}
-                    .axis path {
-                        fill: none;
-                        stroke: #fff!important;
-                        shape-rendering: crispEdges;
-                    }
-                    .axis text {
-                        font-family: Pontano Sans;
-                        font-size: 15px!important;
-                        stroke:#fff!important;
-                    }
-
-/* **********************************
- * US Map CSS                       *
- * **********************************/
-
-.state{
-	fill: none;
-	stroke: #a9a9a9;
-	stroke-width: 1;
-}
-.state:hover{
-	fill-opacity:0.5;
 }
 
-.map-legend {
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,ffffee+0,800026+100,207cca+100 */
-    position: absolute;
-    top: 893px;
-    right: 63px;
-    background: #1e5799; /* Old browsers */
-    background: -moz-linear-gradient(left,  #1e5799 0%, #ffffee 0%, #800026 100%, #207cca 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left,  #1e5799 0%,#ffffee 0%,#800026 100%,#207cca 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right,  #1e5799 0%,#ffffee 0%,#800026 100%,#207cca 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#207cca',GradientType=1 ); /* IE6-9 */
-    width:500px;
-}
-
-.map-legend li {
-    list-style-type: none;
-    display: inline-block;
-    width: 33%;
-}
-
-.map-legend li:nth-child(1) { color:#00338c;}
-.map-legend li:nth-child(2) { text-align: center;}
-.map-legend li:nth-child(3) { text-align: right; }
-
-#statesvg {
-    height: 900px;
-    padding-bottom: 0px;
-    margin-bottom: -150px;
-  -moz-transform: scale(0.60, 0.60); 
-  -webkit-transform: scale(0.60, 0.60); 
-  -o-transform: scale(0.60, 0.60);
-  -ms-transform: scale(0.60, 0.60);
-  transform: scale(0.60, 0.60); 
-  -moz-transform-origin: top left;
-  -webkit-transform-origin: top left;
-  -o-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-}
-
-.citation {    
-    font-size: 13px;
-    text-align: right;
-    position: absolute;
-    top: 820px;
-    right: 63px;
-    word-wrap: break-word;
-    width: 250px;
-}
-
-.citation a { color: #cc0000!important; }
-
-#tooltip {   
-	position: absolute;           
-	text-align: center;
-	padding: 20px;             
-	margin: 10px;
-	font: 12px sans-serif;        
-	background: lightsteelblue;   
-	border: 1px;      
-	border-radius: 2px;           
-	pointer-events: none;  
-        z-index:400;       
-}
-#tooltip h4{
-	margin:0;
-	font-size:14px;
-}
-#tooltip{
-	background:rgba(0,0,0,0.9);
-	border:1px solid grey;
-	border-radius:5px;
-	font-size:12px;
-	width:auto;
-	padding:4px;
-	color:white;
-	opacity:0;
-}
-#tooltip table{
-	table-layout:fixed;
-}
-#tooltip tr td{
-	padding:0;
-	margin:0;
-}
-#tooltip tr td:nth-child(1){
-	width:50px;
-}
-#tooltip tr td:nth-child(2){
-	text-align:center;
-}
-
-/* *************************************
- * LINE GRAPH CSS 
- * *************************************/
-#visualisation {
-   margin-left: -56px;
-}
-
+/* ****************************** */
+/* *******      GRAPH     ******* */
+/* ****************************** */
 .double-graph {
-   height:350px;
-   width:100%;
+    text-align: center;
 }
 
-.double-graph .graph{
-  display:inline-block;
-  width:48%;
+.container.graph {
+    text-align: center;
+    padding: 25px;
 }
 
-.container {
-	text-align:center;
-	padding:20px;
-}
-.legend span {
-    display: block;
-    padding: 2px;
+.axis text {
+    stroke: #fff;
+    font-size: 15px;
 }
 
-.legend span:nth-child(1) i { color:deepskyblue; }
-.legend span:nth-child(2) i { color:lightcoral; }
-.legend span:nth-child(3) i { color:forestgreen; }
-.legend span:nth-child(4) i { color:darkseagreen; }
-.legend span:nth-child(5) i { color:goldenrod; }
-.legend span:nth-child(6) i { color:darkorange; }
-.legend span:nth-child(7) i { color:crimson; }
-.legend span:nth-child(8) i { color:darkmagenta; }
-.legend span:nth-child(9) i { color:indigo; }
-.legend span:nth-child(10) i { color:red; }
-.legend span:nth-child(11) i { color:black; }
-.legend span:nth-child(12) i { color:darkgray; }
-
+.axis path {
+    fill: none;
+    stroke: #fff!important;
+    shape-rendering: crispEdges;
+}
 
 .legend {
-    border: 1px #333 solid;
-    background: rgba(200, 200, 200,.5);
+    background: rgba(255, 255, 255, .5);
+    border: #fff;
+    position: relative;
+    font-size: 15px;
     padding: 10px;
+}
+
+.legend span:nth-child(1) i {
+    color: deepskyblue;
+}
+
+.legend span:nth-child(2) i {
+    color: lightcoral;
+}
+
+.legend span:nth-child(3) i {
+    color: forestgreen;
+}
+
+.legend span:nth-child(4) i {
+    color: darkseagreen;
+}
+
+.legend span:nth-child(5) i {
+    color: goldenrod;
+}
+
+.legend span:nth-child(6) i {
+    color: darkorange;
+}
+
+.legend span:nth-child(7) i {
+    color: crimson;
+}
+
+.legend span:nth-child(8) i {
+    color: darkmagenta;
+}
+
+.legend span:nth-child(9) i {
+    color: indigo;
+}
+
+.legend span:nth-child(10) i {
+    color: red;
+}
+
+.legend span:nth-child(11) i {
+    color: black;
+}
+
+.legend span:nth-child(12) i {
+    color: darkgray;
+}
+/* ****************************** */
+
+/* ****************************** */
+/* *******  Comic  Image  ******* */
+/* ****************************** */
+.comic {
+    text-align: center;
+}
+/* ****************************** */
+
+/* ****************************** */
+/* *******     FOOTER     ******* */
+/* ****************************** */
+footer {
+    text-align: center;
     font-size: 13px;
-    top: 850px;
-    right:300px;
-    position: absolute;
+    padding: 10px;
+    color: #cc0000;
+}
+/* ****************************** */
+
+/* ****************************** */
+/* ******* Header section ******* */
+/* ****************************** */
+
+.title-header {
+    background: #cc0000;
+    padding: 5px;
+    text-align: center;
+    font-family: Anton, sans-serif;
+    color: #fff;
 }
 
- .comic img {
-	width:1000px!important; 
-	height:900px!important;
-}
-       
 
+/* *** Cafe Name Emphasis *** */
+
+.adh {
+    text-shadow: #fff 1px 1px;
+    color: #00338c;
+}
+
+
+/* ****************************** */
+
+
+/* *********************************************************** */
+
+
+/* *********************************************************** */
+
+
+/* **********                 Compact               ********** */
+
+
+/* *********************************************************** */
 
 @media screen and (max-width: 1500px) {
+    /* ****************************** */
+    /* ******* Header section ******* */
+    /* ****************************** */
+    .title-header {
+        font: 28px Anton, sans-serif;
+    }
+    /* ****************************** */
+
+    /* ****************************** */
+    /* *******  Comic  Image  ******* */
+    /* ****************************** */
+    .comic img {
+        padding: 5px;
+        width: 900px;
+        height: 900px;
+    }
+    /* ****************************** */
+
+    /* ****************************** */
+    /* *******  GRAPH  SPACE  ******* */
+    /* ****************************** */
+    aside h2 {
+        font-size: 28px;
+        padding-top: 40px;
+    }
+    /* ****************************** */
+
+    /* ****************************** */
+    /* *******     GAUGES     ******* */
+    /* ****************************** */
+    aside h3 {
+        font: 25px Athiti, sans-serif;
+    }
+    .double-graph .graph {
+        display: inline-block;
+        padding: 40px;
+    }
+    /* ****************************** */
+
+    /* ****************************** */
+    /* *******      GRAPH     ******* */
+    /* ****************************** */
+    .legend {
+        top: -300px;
+        left: 250px;
+        width: 112px;
+    }
+    /* ****************************** */
+}
+/* *********************************************************** */
+
+
+/* *********************************************************** */
+
+
+/* **********               Desktop                 ********** */
+
+
+/* *********************************************************** */
+
+@media screen and (min-width: 1500px) and (max-width: 2500px) {
+    /* ****************************** */
+    /* *******     General    ******* */
+    /* ****************************** */
+    body {
+        font: 18px Pontano Sans, Ahiti;
+    }
     article {
-        float:none!important;
-        width:100%!important;
+        float: left;
+        width: 60%;
+        height: 920px;
     }
-    
     aside {
-        float: none!important;
-        width: 100%!important;
-        margin: 0;
-        background: #00338C;
-        border-left:#003366 2px solid;
-        color:#fff;
-        height: 1000px;
+        float: right;
+        width: 40%;
+        height: 920px;
     }
-    
-    .us-map {
+    /* ****************************** */
+
+    /* ****************************** */
+    /* ******* Header section ******* */
+    /* ****************************** */
+    .title-header {
+        font-size: 45px;
+    }
+    /* ****************************** */
+
+    /* ****************************** */
+    /* *******  Comic  Image  ******* */
+    /* ****************************** */
+    .comic {
         text-align: center;
     }
-    .map-legend {
-        position: absolute;
-        top: 1893px;
-        right: 63px;
-        width:500px;
+    .comic img {
+        padding: 5px;
+        width: 800px;
+        height: 900px;
     }
+    /* ****************************** */
+
+    /* ****************************** */
+    /* *******  GRAPH  SPACE  ******* */
+    /* ****************************** */
+    aside h2 {
+        font: 38px Anton, sans-serif;
+        padding-top: 20px;
+    }
+    /* ****************************** */
+
+    /* ****************************** */
+    /* *******     GAUGES     ******* */
+    /* ****************************** */
+    aside h3 {
+        font: 25px Athiti, sans-serif;
+    }
+    .double-graph {
+        text-align: center;
+    }
+    .double-graph .graph {
+        display: inline-block;
+        padding: 0px;
+        width: 49%;
+        overflow: overlay;
+    }
+    /* ****************************** */
+
+    /* ****************************** */
+    /* *******      GRAPH     ******* */
+    /* ****************************** */
     .legend {
-        top: 1250px;
-        right: 75px;
+        top: -300px;
+        left: 250px;
+        width: 112px;
     }
-    
-    
+    .container.graph {
+        padding-top: 40px;
+        transform: scale(0.8, 0.8);
+        -ms-transform: scale(0.8, 0.8);
+        -webkit-transform: scale(0.8, 0.8);
+        margin-left: -70px;
+    }
+    /* ****************************** */
+}
+/* *********************************************************** */
+
+
+/* *********************************************************** */
+
+
+/* **********              Big Screen               ********** */
+
+
+/* *********************************************************** */
+
+@media screen and (min-width: 2501px) {
+    .title-header {
+        font-size: 38px!important;
+    }
+    body {
+        font-size: 18px;
+    }
+    aside {
+        float: right;
+        width: 33%;
+        margin: 0;
+        height: 1000px;
+    }
+    article {
+        height: 1000px;
+        width: 66%;
+        float: left;
+    }
+
+    /* ****************************** */
+    /* *******  Comic  Image  ******* */
+    /* ****************************** */
+    .comic {
+        text-align: center;
+    }
+    .comic img {
+        padding: 5px;
+        width: 1000px;
+        height: 900px;
+    }
+    /* ****************************** */
+
+    /* ****************************** */
+    /* *******     GAUGES     ******* */
+    /* ****************************** */
+    aside h2 {
+        font: 30px Anton, sans-serif!important;
+    }
+    aside h3 {
+        font-size: 26px!important;
+    }
+    .double-graph {
+        height: 350px;
+        width: 100%;
+    }
+    .double-graph .graph {
+        display: inline-block;
+        width: 48%;
+    }
+    /* ****************************** */
+
+    /* ****************************** */
+    /* *******     GRAPHS     ******* */
+    /* ****************************** */
+    .legend {
+        top: 850px;
+        right: 300px;
+    }
+    #visualisation {
+        margin-left: -56px;
+    }
+    .comic img {
+        width: 1000px!important;
+        height: 900px!important;
+    }
+    .container.graph {
+        text-align: center;
+        padding: 25px;
+        padding-top: 170px;
+    }
 }

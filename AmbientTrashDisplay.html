@@ -182,8 +182,10 @@
    		                 max1 = current.weight;
    		             } else {
     		                if (last1 - current.weight > 5) {
-    		                    max1 = 0;
-    		                    cafe1Total = cafe1Total + current.weight;
+				    if(current.weight < 1) {
+	    		                    max1 = 0;
+	    		                    cafe1Total = cafe1Total + current.weight;
+				    }
      		               } else {
       		                  if (max1 < current.weight) {
       		                      cafe1Total = cafe1Total - max1 + current.weight;
@@ -192,7 +194,6 @@
        		             }
        		         }
        		         last1 = current.weight;
-
       		          data.push({
       		              "x": parseTime(current.timestamp),
       		              "y": current.weight

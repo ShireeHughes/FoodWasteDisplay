@@ -46,26 +46,29 @@
         </header>
 <style>
 .inner-table {width:400px;}
-.pizza-table img { width:90px; height: 90px;}
+.pizza-table img { width:150px;}// height: 90px;}
 .pizza-table {width:100px; height:90px; padding:0px; margin-top:0px; margin-bottom:0px;}
+.total-slices {
+    position: absolute;
+    font-family: Anton;
+    font-size: 50px;
+    right: 34%;
+    top: 35%;
+}
 </style>
         <article>
             <div class="main-display">
+	        <div class="total-slices"></div>
                 <div>
 		    <table>
 		    <tr>
                        <td>
 			  <table class="inner-table">
-			     <tr class="pizza-table"><td id="top"></td></tr>
-			     <tr class="pizza-table"><td id="eight"></td></tr>
-			     <tr class="pizza-table"><td id="seven"></td></tr>
-			     <tr class="pizza-table"><td id="six"></td></tr>
-			     <tr class="pizza-table"><td id="five"></td></tr>
-			     <tr class="pizza-table"><td id="four"></td></tr>
-			     <tr class="pizza-table"><td id="three"></td></tr>
-			     <tr class="pizza-table"><td id="two"></td></tr>
-			     <tr class="pizza-table"><td id="one"></td></tr>
-			     <tr class="pizza-table"><td id="bottom"></td></tr>
+			     <tr class="pizza-table"><td id="top"></td><td id="top-2"></td></tr>
+			     <tr class="pizza-table"><td id="three"></td><td id="three-2"></td></tr>
+			     <tr class="pizza-table"><td id="two"></td><td id="two-2"></td></tr>
+			     <tr class="pizza-table"><td id="one"></td><td id="one-2"></td></tr>
+			     <tr class="pizza-table"><td id="bottom"></td><td id="bottom-2"></td></tr>
 			  </table>
                        </td>
                        <td>
@@ -284,7 +287,7 @@
                 d3.selectAll(".graph svg > *").remove(); 		//remove old graphs                   
                 graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
                 getMaxMin();					//graph fil gauges
-		graphComic(totalWaste);				//display proper number of trash bags
+		getSlices(totalWaste);				//display proper number of slices
 
 		//set timer to update everything 1 minute from now
                 setTimeout(retrieveData, 60000);
@@ -296,6 +299,77 @@
                 data4 = [];
             }
         }
+
+        function getSlices(totalWaste) {
+           var numSlices = Math.floor(totalWaste / .34);
+           drawSlices(numSlices);
+        }
+
+        function drawSlices(numSlices) {
+           var pies = Math.floor(numSlices/8);
+	   var slices = numSlices - (8*pies);
+	   var bottom,one,two,three,top,bottom2,one2,two2,three2,top2;
+console.log(pies + " " + slices);
+ 	   if(pies <= 17) { bottom = pies; } 
+ 	   else {bottom = 17;}
+
+ 	   if(pies > 17 && pies <= 42) { one = pies-17; } 
+ 	   else if(pies > 42) {one = 25;}
+	   else {one = 0;}
+
+
+ 	   if(pies > 42 && pies <= 67) { two = pies-(17+25); } 
+ 	   else if(pies > 67) {two = 25;}
+	   else {two = 0;}
+
+ 	   if(pies > 67 && pies <= 92) { three = pies-(17+25+25); } 
+ 	   else if(pies > 92) {three = 25;}
+	   else {three = 0;}
+
+	   if(pies > 92 && pies <= 117) { top = pies-(17+25+25+25); } 
+ 	   else if(pies > 117) {top = 25;}
+	   else {top = 0;}
+
+	   if(pies > 117 && pies <= 142) { bottom2 = pies-(17+25+25+25+25); } 
+ 	   else if(pies > 142) {bottom2 = 25;}
+	   else {bottom2 = 0;}
+
+	   if(pies > 142 && pies <= 167) { one2 = pies-(17+25+25+25+25+25); } 
+ 	   else if(pies > 167) {one2 = 25;}
+	   else {one2 = 0;}
+
+	   if(pies > 167 && pies <= 192) { two2 = pies-(17+25+25+25+25+25+25); } 
+ 	   else if(pies > 192) {two2 = 25;}
+	   else {two2 = 0;}
+
+	   if(pies > 192 && pies <= 217) { three2 = pies-(17+25+25+25+25+25+25+25); } 
+ 	   else if(pies > 217) {three2 = 25;}
+	   else {three2 = 0;}
+
+	   if(pies > 217 && pies <= 242) { top2 = pies-(17+25+25+25+25+25+25+25+25); } 
+ 	   else if(pies > 242) {top2 = 25;}
+	   else {top2 = 0;}
+
+	
+	   //write total
+	   $(".total-slices").html("<center>" + numSlices + " slices<br />" + "or<br />" + numSlices/8 + " Pizzas</center>");
+	   //set main image
+	   var imgName = "table-"+slices;
+           var bottomName = "side-"+bottom;
+           $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/pizza-boxes/Images/" + imgName + ".png?raw=true' alt='hi' class='inline'/>");
+
+	   //set side images
+           $("#bottom").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/pizza-boxes/Images/side-" + bottom + ".png?raw=true' alt='hi' class='inline'/>");
+           $("#one").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/pizza-boxes/Images/Panel-" + one + ".png?raw=true' alt='hi' class='inline'/>");
+           $("#two").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/pizza-boxes/Images/Panel-" + two + ".png?raw=true' alt='hi' class='inline'/>");
+           $("#three").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/pizza-boxes/Images/Panel-" + three + ".png?raw=true' alt='hi' class='inline'/>");
+	   $("#bottom-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/pizza-boxes/Images/side-" + bottom2 + ".png?raw=true' alt='hi' class='inline'/>");
+           $("#one-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/pizza-boxes/Images/Panel-" + one2 + ".png?raw=true' alt='hi' class='inline'/>");
+           $("#two-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/pizza-boxes/Images/Panel-" + two2 + ".png?raw=true' alt='hi' class='inline'/>");
+           $("#three-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/pizza-boxes/Images/Panel-" + three2 + ".png?raw=true' alt='hi' class='inline'/>");
+           $("#top").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/pizza-boxes/Images/Panel-" + top + ".png?raw=true' alt='hi' class='inline'/>");
+           $("#top-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/pizza-boxes/Images/Panel-" + top2 + ".png?raw=true' alt='hi' class='inline'/>");
+	}
 
         function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
             return "<h4>"+n+"</h4><table>"+

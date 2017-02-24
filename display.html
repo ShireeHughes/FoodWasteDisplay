@@ -1,314 +1,388 @@
 <!doctype html>
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
+            
+            <title>Food Waste at Atlantic Dining Hall</title>
+            <meta name="description" content="food waste, FAU, Florida Atlantic University, I-SENSE, Institute of Sensing and Embedded Systems Engineering, IoT, Internet of Things, sustainability">
+                <meta name="author" content="Shiree Hughes">
+                    
+                    <!-- ************************************** -->
+                    <!-- * Links for fonts and CSS Stylesheet * -->
+                    <!-- ************************************** -->
+                    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/7b3378e6ef9edc5e88c07c5c72442a089d5e7f65/stylesheet.css" />
+                    <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" />
+                    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
+                    <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet" />
+                    <script src='https://use.fontawesome.com/2016971a2a.js'></script>
 
-  <title>Food Waste at Atlantic Dining Hall</title>
-  <meta name="description" content="food waste, FAU, Florida Atlantic University, I-SENSE, Institute of Sensing and Embedded Systems Engineering, IoT, Internet of Things, sustainability">
-  <meta name="author" content="Shiree Hughes">
-
-  <!-- ************************************** -->
-  <!-- * Links for fonts and CSS Stylesheet * -->
-  <!-- ************************************** -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/7b3378e6ef9edc5e88c07c5c72442a089d5e7f65/stylesheet.css" />
-  <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet" />
-
-  <!-- ************************************** -->
-  <!-- *  Links for D3 and JQuery scripts   * -->
-  <!-- ************************************** -->
-<!--  <script src="https://d3js.org/d3.v3.min.js"></script>-->
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/6592ba070277840936d1f394cfb72deeb374814a/JavaScript/liquidFillGauge.js"></script>
-  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/dd9fb85d815e1cbd3bbed698d3b6cc7511d525c2/retreiveData.js"></script>
-  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/7b3378e6ef9edc5e88c07c5c72442a089d5e7f65/JavaScript/graphData.js"></script>
-
-    <!--[if lt IE 9]>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
-  <![endif]-->
-
-<style>
-.axis path {
-    fill: none;
-    stroke: #fff!important;
-    shape-rendering: crispEdges;
-}
-.axis text {
-    font-family: Pontano Sans;
-    font-size: 15px!important;
-    stroke:#fff!important;
-}</style>
-</head>
-
-<body>
-<!--  <script src="js/scripts.js"></script> -->
-  <div class="outer">
-    <header>
-    <div class="title-header">
-      <h1>Overview <span class="adh">Atlantic Dining Hall</span> <span id="date"></span><h1>
-    </div>
-    </header>
-
-    <article>
-    <div class="main-display">
-       <div>
-          <div class="comic" style="text-align:center;">
-              <h2>Reach For Your Goals</h2>
-              <img src="https://github.com/ShireeHughes/FoodWasteDisplay/blob/master/Images/1.png?raw=true" /> 
-<!--		   <img src="file:///Users/shughes/Documents/FoodWasteDisplay/Images/1.png" alt="hi" class="inline"/>-->
-          </div>
-       </div>
-    </div>
-   </article>
-
-    <aside>
-    <div class="charts-tips-more">
-       <div>
-
-          <div class="double-graph">
-             <div class="graph">
-                <h2>Total Food Wasted in 24hours</h2>
-        	<svg id="fillgauge1" width="97%" height="250" onclick="gauge1.update(NewValue());"></svg>
-             </div>
-             <div class="graph">
-                  <div class="container"> 
-                      <h2>Food Waste</h2>
-        	      <svg id="visualisation" width="500" height="250"></svg>
-		    </div>
-
-		    <div class="legend">
-		        <span class="key"><i class="fa fa-square"></i> Trash Can #1</span>
-		  	<span class="key"><i class="fa fa-square"></i> Trash Can #2</span>
-<!--		  	<span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #1</span>
-		  	<span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #2</span> -->
-		    </div>
-
-             </div>
-	  </div>
-
-          <div class="us-map">
-             <h2>Children Living in Food-Insecure Households (2014)*</h2>
-             <div id="tooltip"></div><!-- div to hold tooltip. -->
-             <svg width="960" height="600" id="statesvg"></svg> <!-- svg to hold the map. -->
-             <script src="http://bl.ocks.org/NPashaP/raw/a74faf20b492ad377312/3513ad985b2fa93ea35f2fc864cb30540c298171/uStates.js"></script> <!-- creates uStates. -->
-             <div class="map-legend">
-                 <li>0%</li><li>25%</li><li>50%</li>
-              </div> 
-               <p class="citation">*Craig Gundersen et al. "<a href="http://www.feedingamerica.org/hunger-in-america/our-research/map-the-meal-gap/2014/map-the-meal-gap-2014-exec-summ.pdf" target="_blank">Map the Meal Gap</a>". <i>Feeding America</i>, pg. 30-31. 2015</p>
-          </div>
-          <svg id="visualisation" width="900" height="500"></svg>
-          <svg id="fillgauge1" width="97%" height="250" onclick="gauge1.update(NewValue());"></svg>
-<!--<svg id="fillgauge2" width="97%" height="250" onclick="gauge2.update(NewValue());"></svg>
-<svg id="fillgauge3" width="19%" height="200" onclick="gauge3.update(NewValue());"></svg>
-<svg id="fillgauge4" width="19%" height="200" onclick="gauge4.update(NewValue());"></svg>
-<svg id="fillgauge5" width="19%" height="200" onclick="gauge5.update(NewValue());"></svg>
-<svg id="fillgauge6" width="19%" height="200" onclick="gauge6.update(NewValue());"></svg>-->
-<script language="JavaScript">
-    var config1 = liquidFillGaugeDefaultSettings();
-    config1.waveAnimateTime = 1000;
-    var gauge1 = loadLiquidFillGauge("fillgauge1", 40, config1);
-
-    function NewValue(){
-        if(Math.random() > .5){
-            return Math.round(Math.random()*100);
-        } else {
-            return (Math.random()*100).toFixed(1);
-        }
-    }
-</script>
-
-       </div>
-       <div>
-          <h2>Tips</h2>
-          <ol>
-             <li>Tip 1</li>
-             <li>Tip 2</li>
-             <li>Tip 3</li>
-             <li>Tip 4</li>
-             <li>Tip 5</li>
-          </ol>
-       </div>
-    </div>
-    </aside>
-
-    <footer>
-       Copyright &copy; I-SENSE
-    </footer>
-  </div>
-
-
-  <!-- *************** SCRIPTS *************** -->
-  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/004c0a8a8b1379bdc787be7d97b564597d160ad8/Map.js"></script>  
-
-  <script>
-    function writeDate() {
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth()+1; //January is 0!
-      var yyyy = today.getFullYear();
-
-      if(dd<10) {
-          dd='0'+dd
-      } 
-
-      if(mm<10) {
-          mm='0'+mm
-      } 
-
-      today = mm+'/'+dd+'/'+yyyy;
-      //$('#date').html(today);
-      document.getElementById('date').innerHTML = today;
-      console.log(today);
-      //document.write(today);
-    }
-  </script>
-  <script>writeDate();</script>
-
-<script>        
-//<![CDATA[
-//create data sets
-var data = [],
-    data2 = [],
-    data3 = [],
-    data4 = [];
-
-//function for creating a timestamp in D3
-//var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
-var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
-
-//call to retrieve data from MongoDB
-retreiveData();
-
-/*
- * Function to return max value
- * between value a and value b
- */
-function findMax(a,b) {
-   if(a < b) { return b; }
-   else {
-      return a;
-   }
-}
-
-/* 
- * Function called in jsonp callback
- * this function parses the incoming JSON 
- * and creates two datasets: one for cafe1 
- * and one for cafe2
- * samples for each trash can are used to
- * create cumulative data points
- * 
- */
-function getData(result) {
-    var ndx;
-    var cafe1Total = 0;
-    var cafe2Total = 0;
-    var max = 0;
-
-    //place samples in the correct dataset
-    for(ndx = 0; ndx < result.length; ndx++) {
-        var current = result[ndx];
-        //add to cafe 1 dataset
-        if(current.trash_can_id == "cafe_1") {
-           if(current.weight != 0) {
-              if(ndx > 0) {
-                 cafe1Total -= result[ndx-1].weight;
-              }
-              cafe1Total += current.weight;
-           }           
-           data.push({
-               "x":parseTime(current.timestamp.$date),
-               "y":current.weight
-             });
-           data3.push({
-               "x":parseTime(current.timestamp.$date),
-               "y":cafe1Total
-             });
-                          
-        }
-
+                    <!-- ************************************** -->
+                    <!-- *  Links for D3 and JQuery scripts   * -->
+                    <!-- ************************************** -->
+                    <!--  <script src="https://d3js.org/d3.v3.min.js"></script>-->
+                    <script src="https://d3js.org/d3.v4.min.js"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+                    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/6592ba070277840936d1f394cfb72deeb374814a/JavaScript/liquidFillGauge.js"></script>
+                    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/server-side-calculations/JavaScript/retreiveData.js"></script>
+                    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/7b3378e6ef9edc5e88c07c5c72442a089d5e7f65/JavaScript/graphData.js"></script>
+                    
+                    <!--[if lt IE 9]>
+                     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+                     <![endif]-->
+                    
+                    <style>
+                        
+                        @media screen and (max-width: 1500px) {
+                            article {
+                                float:none!important;
+                                width:100%!important;
+                            }
+                            
+                            aside {
+                                float: none!important;
+                                width: 100%!important;
+                                margin: 0;
+                                background: #00338C;
+                                border-left:#003366 2px solid;
+                                color:#fff;
+                                height: 1000px;
+                            }
+                            
+                            .us-map {
+                                text-align: center;
+                            }
+                            .map-legend {
+                                position: absolute;
+                                top: 1893px;
+                                right: 63px;
+                                width:500px;
+                            }
+                            .legend {
+                                top: 1250px;
+                                right: 75px;
+                            }
+                            
+                            
+                        }
+                    .axis path {
+                        fill: none;
+                        stroke: #fff!important;
+                        shape-rendering: crispEdges;
+                    }
+                    .axis text {
+                        font-family: Pontano Sans;
+                        font-size: 15px!important;
+                        stroke:#fff!important;
+                    }</style>
+    </head>
     
-        //add to cafe 2 dataset
-        if(current.trash_can_id == "cafe_2") {
-           if(current.weight != 0) {
-              if(ndx > 0) {
-                 cafe2Total -= result[ndx-1].weight;
+    <body>
+        <!--  <script src="js/scripts.js"></script> -->
+        <div class="outer">
+            <header>
+                <div class="title-header">
+                    <h1>Overview <span class="adh">Atlantic Dining Hall</span> <span id="date"></span><h1>
+                        </div>
+            </header>
+            
+            <article>
+                <div class="main-display">
+                    <div>
+                        <div class="comic" style="text-align:center;">
+                            <h2>Reach For Your Goals</h2>
+                            <img src="https://github.com/ShireeHughes/FoodWasteDisplay/blob/master/Images/1.png?raw=true" />
+                            <!--		   <img src="file:///Users/shughes/Documents/FoodWasteDisplay/Images/1.png" alt="hi" class="inline"/>-->
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <aside>
+    <div class="charts-tips-more">
+        <div>
+
+            <div class="double-graph">
+                <h2>Total Food Wasted in 24hours</h2>
+                <div class="graph">
+                    <h3>Compared to Max Waste</h3>
+                    <svg id="fillgauge1" width="100%" height="200" onclick="gauge1.update(NewValue());"></svg>
+                </div>
+                <div class="graph">
+                    <h3>Compared to Min Waste</h3>
+                    <svg id="fillgauge2" width="100%" height="200" onclick="gauge2.update(NewValue());"></svg>
+                </div>
+            </div>
+<!--            <div class="double-graph">
+                <div class="graph"> -->
+                    <div class="container graph">
+                        <h2>Food Waste</h2>
+                        <svg id="visualisation" width="700" height="300"></svg>
+                    </div>
+
+                    <div class="legend">
+                        <span class="key"><i class="fa fa-square"></i> Trash Can #1</span>
+                        <span class="key"><i class="fa fa-square"></i> Trash Can #2</span>
+                        <!--		  	<span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #1</span>
+                                     <span class="key"><i class="fa fa-square"></i> Total Waste in Trash Can #2</span> -->
+                    </div>
+
+<!--                </div>
+                <div class="graph"> -->
+                    <div class="us-map">
+                        <h2>Children Living in Food-Insecure Households (2014)*</h2>
+                        <div id="tooltip"></div>
+                        <!-- div to hold tooltip. -->
+                        <svg width="960" height="600" id="statesvg"></svg>
+                        <!-- svg to hold the map. -->
+                        <script src="http://bl.ocks.org/NPashaP/raw/a74faf20b492ad377312/3513ad985b2fa93ea35f2fc864cb30540c298171/uStates.js"></script>
+                        <!-- creates uStates. -->
+                        <div class="map-legend">
+                            <li>0%</li>
+                            <li>25%</li>
+                            <li>50%</li>
+                        </div>
+                        <p class="citation">*Craig Gundersen et al. "<a href="http://www.feedingamerica.org/hunger-in-america/our-research/map-the-meal-gap/2014/map-the-meal-gap-2014-exec-summ.pdf" target="_blank">Map the Meal Gap</a>". <i>Feeding America</i>, pg. 30-31. 2015</p>
+                    </div>
+<!--                </div>
+            </div> -->
+            <script language="JavaScript">
+                var config1 = liquidFillGaugeDefaultSettings();
+                config1.waveAnimateTime = 1000;
+                var gauge1 = loadLiquidFillGauge("fillgauge1", 0, config1);
+                var gauge2 = loadLiquidFillGauge("fillgauge2", 0, config1);
+
+                function NewValue() {
+                    if (Math.random() > .5) {
+                        return Math.round(Math.random() * 100);
+                    } else {
+                        return (Math.random() * 100).toFixed(1);
+                    }
+                }
+            </script>
+
+        </div>
+        <!--                    <div>
+                        <h2>Tips</h2>
+                        <ol>
+                            <li>Tip 1</li>
+                            <li>Tip 2</li>
+                            <li>Tip 3</li>
+                            <li>Tip 4</li>
+                            <li>Tip 5</li>
+                        </ol>
+                    </div>-->
+    </div>
+</aside>
+            <footer>
+                Copyright &copy; I-SENSE
+            </footer>
+        </div>
+        
+        
+        <!-- *************** SCRIPTS *************** -->
+        <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/004c0a8a8b1379bdc787be7d97b564597d160ad8/Map.js"></script>
+        
+        <script>
+            function writeDate() {
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1; //January is 0!
+                var yyyy = today.getFullYear();
+                
+                if(dd<10) {
+                    dd='0'+dd
+                }
+                
+                if(mm<10) {
+                    mm='0'+mm
+                }
+                
+                today = mm+'/'+dd+'/'+yyyy;
+                //$('#date').html(today);
+                document.getElementById('date').innerHTML = today;
+                console.log(today);
+                //document.write(today);
+            }
+        </script>
+        <script>writeDate();</script>
+        
+        <script>
+            //<![CDATA[
+            //create data sets
+            var data = [],
+            data2 = [],
+            data3 = [],
+            data4 = [];
+            var cafe1Total = 0;
+            var cafe2Total = 0;
+            
+            //function for creating a timestamp in D3
+            //var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
+            var parseTime = d3.timeParse("%b %d, %Y %I:%M:%S %p");
+            
+            //call to retrieve data from MongoDB
+            retrieveData();
+            
+            /*
+             * Function to return max value
+             * between value a and value b
+             */
+        function findMax(a,b) {
+            if(a < b) { return b; }
+            else {
+                return a;
+            }
+        }
+        
+        /*
+         * Function called in jsonp callback
+         * this function parses the incoming JSON 
+         * and creates two datasets: one for cafe1 
+         * and one for cafe2
+         * samples for each trash can are used to
+         * create cumulative data points
+         * 
+         */
+        function getData(result) {
+            var ndx;
+            var max = 0;
+            var max2=0; var last2 =0;
+	    
+            if(result.length == 1 && result[0].max != null) {
+                var todaysTotal = cafe1Total + cafe2Total;
+console.log("TOT: " + todaysTotal);
+                console.log(result);
+                loadLiquidFillGauge("fillgauge1", todaysTotal/result[0].max*100, config1);
+                loadLiquidFillGauge("fillgauge2", todaysTotal/result[0].min*100, config1);
+                
+            } else {
+                    cafe2Total = 0;
+
+                    //place samples in the correct dataset
+                    for(ndx = 0; ndx < result.length; ndx++) {
+                        var current = result[ndx];
+                        //add to cafe 1 dataset
+                        if(current.trash_can_id == "cafe_1") {
+                            /*           if(current.weight != 0) {
+                             if(ndx > 0) {
+                             cafe1Total -= result[ndx-1].weight;
+                             }
+                             cafe1Total += current.weight;
+                             }  */
+                            cafe1Total = current.total;
+                            data.push({
+                                      "x":parseTime(current.timestamp),
+                                      "y":current.weight
+                                      });
+                                      data3.push({
+                                                 "x":parseTime(current.timestamp),
+                                                 "y":current.total
+                                                 });
+                                                 
+                        }
+                        
+                        
+                        //add to cafe 2 dataset
+                        if(current.trash_can_id == "cafe_2") {
+//                            cafe2Total = current.total;
+if(cafe2Total == 0) { cafe2Total = current.weight; }
+           else {
+              if(last2 - current.weight > 5) {
+                 max2 = 0;
+                 cafe2Total = cafe2Total + current.weight;
+              } else {
+                 if(max2 < current.weight) {
+                   cafe2Total = cafe2Total - max2 + current.weight;
+                   max2 = current.weight;
+                 }
               }
-              cafe2Total += current.weight;
            }
-           data2.push({
-              "x":parseTime(current.timestamp.$date),
-              "y":current.weight
-           });
-	   data4.push({
-               "x":parseTime(current.timestamp.$date),
-               "y":cafe2Total
-             });
+           last2 = current.weight;
+                            data2.push({
+                                       "x":parseTime(current.timestamp),
+                                       "y":current.weight
+                                       });
+                                       data4.push({
+                                                  "x":parseTime(current.timestamp),
+                                                  "y":cafe2Total//current.total
+                                                  });
+                        }
+                        
+                        //save max
+                        if( max < cafe1Total || max < cafe2Total ) {
+                            max = findMax(cafe1Total, cafe2Total);
+                        }
+                        /*         if(max < current.weight) {
+                         max = current.weight;
+                         }*/
+                    }
+                    if(max == 0) {max = 5;}
+                    console.log("caf1 = " +cafe1Total);
+                    console.log("caf2 = "+cafe2Total);
+
+                    console.log(cafe2Total+cafe1Total);
+                    var start;
+                    if(data[0].x < data2[0].x) { start = data[0].x; }
+                    else { start = data2[0].x; }
+                    
+//                    d3.selectAll(".double-graph svg > *").remove();
+                    d3.selectAll(".graph svg > *").remove();
+                    
+                    //     graphDataMultiLine(max, start, [data, data2,data3,data4]);
+                    //     graphDataMultiLine(max, start, [data, data2]);
+                    graphDataMultiLine(max, start, [data3, data4]);
+                    getMaxMin()
+                    console.log(start);
+                    setTimeout(retrieveData, 60000);
+                    data = []
+                    data2 = [];
+                    data3 = [];
+                    data4 = [];
+            }
         }
-
-        //save max
-        if( max < cafe1Total || max < cafe2Total ) {
-           max = findMax(cafe1Total, cafe2Total);
+        
+        function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
+            return "<h4>"+n+"</h4><table>"+
+            "<tr><td>Low</td><td>"+(d.low)+"</td></tr>"+
+            "<tr><td>Average</td><td>"+(d.avg)+"</td></tr>"+
+            "<tr><td>High</td><td>"+(d.high)+"</td></tr>"+
+            "</table>";
         }
-/*         if(max < current.weight) {
-            max = current.weight;
-          }*/
-     }
-     if(max == 0) {max = 5;}
-console.log(cafe2Total+cafe1Total);
-     var start;
-     if(data[0].x < data2[0].x) { start = data[0].x; }
-     else { start = data2[0].x; }
+        
+        var sampleData ={};	/* Sample random data. */	
+        ["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
+         "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
+         "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT", 
+         "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN", 
+         "WI", "MO", "AR", "OK", "KS", "LS", "VA"]
+         .forEach(function(d){ 
+                  var low=Math.round(100*Math.random()), 
+                  mid=Math.round(100*Math.random()), 
+                  high=Math.round(100*Math.random());
+                  sampleData[d]={low:d3.min([low,mid,high]), high:d3.max([low,mid,high]), 
+                  avg:Math.round((low+mid+high)/3), color:d3.interpolate("#ffffcc", "#800026")(low/100)}; 
+                  });
+                  
+                  /* draw states on id #statesvg */	
+                  uStates.draw("#statesvg", sampleData, tooltipHtml);
+                  
+                  d3.select(self.frameElement).style("height", "600px");
+                  //]]>
+            </script>
+        <style>
+            .comic img {width:1200px;}
+            article {
+    height: 1000px;
+    width: 60%!important;
+    float: left;
+}
 
-//     d3.selectAll("svg > *").remove();
-
-//     graphDataMultiLine(max, start, [data, data2,data3,data4]);
-  //     graphDataMultiLine(max, start, [data, data2]);
-       graphDataMultiLine(max,[data3, data4]);
-console.log(start);
-     setTimeout(retreiveData, 60000);
-      data = []
-      data2 = [];
-      data3 = [];
-      data4 = [];
- }
-
-function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
-		return "<h4>"+n+"</h4><table>"+
-			"<tr><td>Low</td><td>"+(d.low)+"</td></tr>"+
-			"<tr><td>Average</td><td>"+(d.avg)+"</td></tr>"+
-			"<tr><td>High</td><td>"+(d.high)+"</td></tr>"+
-			"</table>";
-	}
-	
-	var sampleData ={};	/* Sample random data. */	
-	["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
-	"ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
-	"MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT", 
-	"CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN", 
-	"WI", "MO", "AR", "OK", "KS", "LS", "VA"]
-		.forEach(function(d){ 
-			var low=Math.round(100*Math.random()), 
-				mid=Math.round(100*Math.random()), 
-				high=Math.round(100*Math.random());
-			sampleData[d]={low:d3.min([low,mid,high]), high:d3.max([low,mid,high]), 
-					avg:Math.round((low+mid+high)/3), color:d3.interpolate("#ffffcc", "#800026")(low/100)}; 
-		});
-	
-	/* draw states on id #statesvg */	
-	uStates.draw("#statesvg", sampleData, tooltipHtml);
-	
-	d3.select(self.frameElement).style("height", "600px");
-//]]>
-</script>
-<style>
-
-
-
-
-</style>
-  </body>
+            aside {
+    width: 39%!important;
+}
+            
+            
+            </style>
+    </body>
 </html>

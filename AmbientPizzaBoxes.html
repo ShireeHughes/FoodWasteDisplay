@@ -162,7 +162,7 @@
 
             //call to retrieve data from MongoDB
             retrieveData();
-	    graphComic(totalWaste);
+	    drawSlices(totalWaste);
 
         /*
          * Function to return max value
@@ -193,7 +193,11 @@
             if(result.length == 1 && result[0].max != null) {
                 var todaysTotal = cafe1Total + cafe2Total;
                 loadLiquidFillGauge("fillgauge1", todaysTotal/result[0].max*100, config1);
-                loadLiquidFillGauge("fillgauge2", todaysTotal/result[0].min*100, config1);
+ 		if(result[0].min == 0 && todaysTotal > 0) {
+	           loadLiquidFillGauge("fillgauge2", 100+todaysTotal/1, config1);
+		} else {
+                   loadLiquidFillGauge("fillgauge2", todaysTotal/result[0].min*100, config1);
+		}
 
             } else {
                     cafe2Total = 0;

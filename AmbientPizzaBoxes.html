@@ -45,7 +45,12 @@
             </div>
         </header>
 <style>
-.inner-table {width:400px;}
+//.inner-table {width:400px;}
+.inner-table li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 .pizza-table img { width:150px;}// height: 90px;}
 .pizza-table {width:100px; height:90px; padding:0px; margin-top:0px; margin-bottom:0px;}
 .total-slices {
@@ -63,13 +68,20 @@
 		    <table>
 		    <tr>
                        <td>
-			  <table class="inner-table">
+<!--			  <table class="inner-table">
 			     <tr class="pizza-table"><td id="top"></td><td id="top-2"></td></tr>
 			     <tr class="pizza-table"><td id="three"></td><td id="three-2"></td></tr>
 			     <tr class="pizza-table"><td id="two"></td><td id="two-2"></td></tr>
 			     <tr class="pizza-table"><td id="one"></td><td id="one-2"></td></tr>
 			     <tr class="pizza-table"><td id="bottom"></td><td id="bottom-2"></td></tr>
-			  </table>
+			  </table>-->
+			  <ul class="inner-table">
+				<li class="pizza-table" id="top"></li>
+				<li class="pizza-table" id="three"></li>
+				<li class="pizza-table" id="two"></li>
+				<li class="pizza-table" id="one"></li>
+				<li class="pizza-table" id="bottom"></li>
+			  </ul>
                        </td>
                        <td>
                           <div class="comic" style="text-align:center;">
@@ -215,7 +227,7 @@
    		                 max1 = current.weight;
    		             } else {
     		                if (last1 - current.weight > 5) {
-				    if(current.weight < 1) {
+				    if(current.weight < 1 || last1 - current.weight > 20) {
 	    		                    max1 = 0;
 	    		                    cafe1Total = cafe1Total + current.weight;
 				    }

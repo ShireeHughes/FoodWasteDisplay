@@ -344,9 +344,8 @@ tr.outer-table {
  	   if(pies > 67 && pies <= 92) { three = pies-(17+25+25); } 
  	   else if(pies > 92) {three = 25;}
 	   else {three = 0;}
-
 	   if(pies > 92 && pies <= 109) { bottom2 = pies-(17+25+25+25); } 
- 	   else if(pies > 117) {bottom2 = 17;}
+ 	   else if(pies > 109) {bottom2 = 17; console.log(bottom2 + "mid");}
 	   else {bottom2 = 0;}
 
 	   if(pies > 109 && pies <= 134) { one2 = pies-(17+25+25+25+17); } 
@@ -409,6 +408,7 @@ tr.outer-table {
            }
 
 	   outerHTML = $(".outer-table").html();
+console.log("S - " + bottom2);
            if(bottom2 > 0) {
 	       if(outerHTML.indexOf("second") == -1) {
 		   $(".outer-table").html(outerHTML.substring(0,outerHTML.indexOf("</ul>")+5)+"<ul id='second' class='inner-table'></ul>" + outerHTML.substring(outerHTML.indexOf("</ul>")+5,outerHTML.length));

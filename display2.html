@@ -73,6 +73,7 @@
             </div>
         </header>
 <style>
+.comic img {width:800px!important;}
 tr.outer-table {
     max-height: 900px;
     overflow: hidden;
@@ -101,7 +102,7 @@ tr.outer-table {
     font-family: Anton;
     font-size: 50px;
     right: 47%;
-    background: rgba(255,255,255,.5);
+    background: rgba(255,255,255,.75);
     border: #cc0000 1px solid;
     top: 35%;
 }
@@ -406,7 +407,7 @@ tr.outer-table {
 	   //write total
 	   $(".total-slices").html("<center>" + numSlices + " slices<br />" + "or<br />" + numSlices/8 + " Pizzas</center>");
 	   //set main image
-           var commitPath = "7abd8bfbd4877882f6aca47d839ebfbd92365b85";
+           var commitPath = "ff3d13377aec6398afe8af10a60019cc7db8347f";
 	   var imgName = "table-"+slices;
            var bottomName = "side-"+bottom;
            var innerHTML;
@@ -487,8 +488,8 @@ tr.outer-table {
            $("#top").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + top + ".png?raw=true' alt='hi' class='inline'/>");
            $("#top-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + top2 + ".png?raw=true' alt='hi' class='inline'/>");
 
-           if(pies > 67) {	        $(".pizza-table img").css("width","225px");
-		$(".pizza-table img").css("height", "225px");
+           if(pies > 67) {	        $(".pizza-table img").css("width","175px");
+		$(".pizza-table img").css("height", "175px");
 	   }
 	}
      

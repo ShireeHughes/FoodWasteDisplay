@@ -29,7 +29,7 @@ aside {
 }
 
 .axis text {
-    stroke: #fff;
+    stroke: #fff!important;
     font-size: 15px;
 }
 

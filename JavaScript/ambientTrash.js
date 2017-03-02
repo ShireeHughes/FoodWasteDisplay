@@ -2,7 +2,7 @@ function graphComic(totalWaste) {
     var numBags = Math.floor(totalWaste / 20);
 
     if (totalWaste == 0) {
-        $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene.png?raw=true' alt='hi' class='inline'/>");
+        $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/cb0b2ad2363992264cc67f8813261a828bc5bfb3/Images/beach_scene.png?raw=true' alt='hi' class='inline'/>");
         return;
     }
 

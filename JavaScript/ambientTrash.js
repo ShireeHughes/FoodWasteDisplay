@@ -6,7 +6,7 @@ function graphComic(totalWaste) {
         return;
     }
 
-    var imageName = "https://github.com/ShireeHughes/FoodWasteDisplay/blob/server-side-calculations/Images/beach_scene_";
+    var imageName = "https://github.com/ShireeHughes/FoodWasteDisplay/blob/cb0b2ad2363992264cc67f8813261a828bc5bfb3/Images/beach_scene_";
     if(numBags == 0) {
        imageName += "00.png";
     } else if(numBags < 10) {

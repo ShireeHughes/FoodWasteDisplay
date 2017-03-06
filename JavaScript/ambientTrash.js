@@ -1,8 +1,8 @@
-function graphComic(totalWaste) {
+function graphComic(totalWaste, location) {
     var numBags = Math.floor(totalWaste / 20);
 
     if (totalWaste == 0) {
-        $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/cb0b2ad2363992264cc67f8813261a828bc5bfb3/Images/beach_scene.png?raw=true' alt='hi' class='inline'/>");
+        $("#"+location).html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/cb0b2ad2363992264cc67f8813261a828bc5bfb3/Images/beach_scene.png?raw=true' alt='hi' class='inline'/>");
         return;
     }
 
@@ -15,11 +15,11 @@ function graphComic(totalWaste) {
        imageName += numBags + ".png";
     }    
 
-    $(".comic").html("<img src='" + imageName + "?raw=true' alt='hi' class='inline'/>");
+    $("#"+location).html("<img src='" + imageName + "?raw=true' alt='hi' class='inline'/>");
 
 }
 
-function drawSlices(numSlices) {
+function drawSlices(numSlices,location) {
            var pies = Math.floor(numSlices/8);
 	   var slices = numSlices - (8*pies);
 	   var bottom,one,two,three,top,bottom2,one2,two2,three2,top2;
@@ -72,7 +72,7 @@ function drawSlices(numSlices) {
            var bottomName = "side-"+bottom;
            var innerHTML;
 
-           $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/" + imgName + ".png?raw=true' alt='hi' class='inline'/>");
+           $("#"+location).html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/" + imgName + ".png?raw=true' alt='hi' class='inline'/>");
 	   //set side images
            $("#bottom").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/side-" + bottom + ".png?raw=true' alt='hi' class='inline'/>");
 

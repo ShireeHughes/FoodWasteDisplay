@@ -27,7 +27,7 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/c423c47816567edf6fcf64f63edf8c10acd5d828/JavaScript/liquidFillGauge.js"></script>
-    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/827fc8d672e576d0e7ae6a0f4dcfb101489ccb6b/JavaScript/retreiveData.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/2c96a579cc94e8108d936f9210aaf8225435144d/JavaScript/retreiveData.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/JavaScript/graphData.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/8dea524dcde956e26f8a05a14feada8db53af731/JavaScript/ambientTrash.js"></script>
 
@@ -215,15 +215,25 @@
             var max2=0; var last2 =0;
 	    var max1=0; var last1 =0;
 
-            if(result.length == 1 && result[0].max != null) {
-                var todaysTotal = cafe1Total + cafe2Total;
-                loadLiquidFillGauge("fillgauge1", todaysTotal/result[0].max*100, config1);
-		if(result[0].min == 0) {
-		   loadLiquidFillGauge("fillgauge2", 100+todaysTotal, config1);
-		} else {
-                   loadLiquidFillGauge("fillgauge2", todaysTotal/result[0].min*100, config1);
-		}
 
+        if(result.length == 7) {
+            var wmax = 0;
+            var wmin = 1000;
+            
+            for(i=0; i<7; i++) {
+                if(result[i].total < wmin && result[i].total != 0) {
+                    wmin = result[i].total;
+                }
+                
+                if(result[i].total > wmax) {
+                    wmax = result[i].total;
+                }
+                }
+                var todaysTotal = cafe1Total + cafe2Total;
+                
+                loadLiquidFillGauge("fillgauge1", todaysTotal/wmax*100, config1);
+                loadLiquidFillGauge("fillgauge2", todaysTotal/wmin*100, config1);
+            
             } else {
                     cafe2Total = 0;
                     cafe1Total = 0;
@@ -313,9 +323,9 @@
 		}
 
 		//graph everything
-                d3.selectAll(".graph svg > *").remove(); 		//remove old graphs                   
-                graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
-                getMaxMin();					//graph fil gauges
+        d3.selectAll(".graph svg > *").remove(); 		//remove old graphs
+        graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
+        getWeek("02-03-2017");					//graph fil gauges
 		graphComic(totalWaste);				//display proper number of trash bags
 
 		//set timer to update everything 1 minute from now

@@ -49,11 +49,11 @@ function getData(result) {
     var max1=0; var last1 =0;
     
     
-    if(result.length == 7) {
+    if(result.length > 0 && result.length <= 7) {
         var wmax = 0;
         var wmin = 1000;
         
-        for(i=0; i<7; i++) {
+        for(i=0; i<result.length; i++) {
             if(result[i].total < wmin && result[i].total != 0) {
                 wmin = result[i].total;
             }
@@ -146,13 +146,14 @@ function getData(result) {
         
         totalWaste = cafe2Total+cafe1Total;
         console.log(totalWaste);
+        
         var start;
         
         if(data.length > 0) {
             if(data[0].x < data2[0].x) { start = data[0].x; }
             else { start = data2[0].x; }
         } else {
-            start = new Date(2017,0,20);
+            start = new Date();
         }
         
         //graph everything
@@ -163,13 +164,15 @@ function getData(result) {
         if(skipWeek) {
             getWeek("02-03-2017");
         } else {
-            getWeek(start);
+            dateToDisplay = (start.getMonth()+1)+"-"+start.getDate()+"-"+start.getFullYear();
+            getWeek(dateToDisplay);
         }
         
         imagery(totalWaste);				//display proper number of trash bags
         
         //set timer to update everything 1 minute from now
         setTimeout(retrieveData, 60000);
+        
         //reset data arrays
         data = []
         data2 = [];

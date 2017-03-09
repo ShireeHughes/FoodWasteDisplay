@@ -209,7 +209,8 @@
 		}
 
 		//graph everything
-                d3.selectAll(".graph svg > *").remove(); 		//remove old graphs                   
+        d3.selectAll(".graph svg > *").remove(); 		//remove old graphs
+                d3.selectAll(".linegraph svg > *").remove(); 		//remove old graphs
                 graphDataMultiLine(max, start, end, [data3, data4]);	//graph line graph of total waste
                 getMaxMin();					//graph fil gauges
 		graphComic(totalWaste, "trash");				//display proper number of trash bags

@@ -82,11 +82,11 @@ function getData(result) {
                         cafe1Total = current.weight;
                         max1 = current.weight;
                     } else {
-                        if (last1 - current.weight > 5) {
-                            if(current.weight < 1) {
-                                max1 = 0;
+                        if (last1 - current.weight > 5 || current.weight < .05) {
+//                            if(current.weight < 1) {
+                                max1 = current.weight;
                                 cafe1Total = cafe1Total + current.weight;
-                            }
+ //                           }
                         } else {
                             if (max1 < current.weight) {
                                 cafe1Total = cafe1Total - max1 + current.weight;
@@ -110,12 +110,12 @@ function getData(result) {
             if(current.trash_can_id == "cafe_2") {
                 if(new Date(current.timestamp).getHours() >= 6) {
                     if(cafe2Total == 0) {
-                        max1 = current.weight;
+                        max2 = current.weight;
                         cafe2Total = current.weight;
                     }
                     else {
-                        if(last2 - current.weight > 5) {
-                            max2 = 0;
+                        if(last2 - current.weight > 5 || current.weight < .05) {
+                            max2 = current.weight;
                             cafe2Total = cafe2Total + current.weight;
                         } else {
                             if(max2 < current.weight) {

@@ -48,7 +48,6 @@ function getData(result) {
     var max2=0; var last2 =0;
     var max1=0; var last1 =0;
     
-    
     if(result.length > 0 && result.length <= 7) {
         var wmax = 0;
         var wmin = 1000;
@@ -150,19 +149,20 @@ function getData(result) {
         var start;
         
         if(data.length > 0) {
-            if(data[0].x < data2[0].x) { start = data[0].x; }
-            else { start = data2[0].x; }
+            if(data[0].x < data2[0].x) { start = data[0].x; end = data[data.length-1].x; }
+	            else { start = data2[0].x; end = data2[data2.length-1].x; }
         } else {
-            start = new Date();
+            start = new Date(2017,2,20);
+	    end = new Date();
         }
         
         //graph everything
         d3.selectAll(".graph svg > *").remove(); 		//remove old graphs
-        graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
-
+	
+        graphDataMultiLine(max, start, end, [data3, data4]);	//graph line graph of total waste
         //graph fil gauges
         if(skipWeek) {
-            getWeek("02-03-2017");
+            getWeek("03-03-2017");
         } else {
             dateToDisplay = (start.getMonth()+1)+"-"+start.getDate()+"-"+start.getFullYear();
             getWeek(dateToDisplay);

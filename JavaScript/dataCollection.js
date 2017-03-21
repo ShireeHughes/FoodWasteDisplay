@@ -47,12 +47,16 @@ function getData(result) {
     var max = 0;
     var max2=0; var last2 =0;
     var max1=0; var last1 =0;
-    
-    if(result.length > 0 && result.length <= 7) {
+    if(result.length == 0) {
+	console.log("No data");
+    }
+    else if(result.length > 0 && result.length <= 8) {
         var wmax = 0;
         var wmin = 1000;
-        
-        for(i=0; i<result.length; i++) {
+        var length; 
+	if(result.length >= 7) { length = 7;}
+        else { length = result.length; }
+        for(i=0; i<length; i++) {
             if(result[i].total < wmin && result[i].total != 0) {
                 wmin = result[i].total;
             }
@@ -62,7 +66,6 @@ function getData(result) {
             }
         }
         var todaysTotal = cafe1Total + cafe2Total;
-        
         loadLiquidFillGauge("fillgauge1", todaysTotal/wmax*100, config1);
         loadLiquidFillGauge("fillgauge2", todaysTotal/wmin*100, config1);
         

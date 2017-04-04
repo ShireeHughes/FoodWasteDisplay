@@ -27,7 +27,7 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/c423c47816567edf6fcf64f63edf8c10acd5d828/JavaScript/liquidFillGauge.js"></script>
-    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/827fc8d672e576d0e7ae6a0f4dcfb101489ccb6b/JavaScript/retreiveData.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/fd3e48e4ddf1c2fa7fbef1b5045f70e13a388467/JavaScript/retreiveData.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/JavaScript/graphData.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/b1956f542ce864c7267adcf4ee97cc6d5e622604/JavaScript/ambientTrash.js"></script>
 
@@ -131,14 +131,14 @@ tr.outer-table {
         <aside>
             <div class="charts-tips-more">
                 <div class="double-graph">
-                    <center><h2>Food Wasted in 24 Hours</h2></center>
+                    <center><h2>Food Wasted Today</h2></center>
                     <div class="graph">
-                        <h3>Compared to Weekly Max</h3>
-                        <svg id="fillgauge1" width="100%" height="300"></svg>
+                        <h3>Max of the Week</h3>
+                        <div id="fillgauge1" width="100%" height="300"></div>
                     </div>
                     <div class="graph">
-                        <h3>Compared to Weekly Min</h3>
-                        <svg id="fillgauge2" width="100%" height="300"></svg>
+                        <h3>Min of the Week</h3>
+                        <div id="fillgauge2" width="100%" height="300"></div>
                     </div>
                 </div>
 <br />
@@ -239,15 +239,30 @@ tr.outer-table {
             var max2=0; var last2 =0;
 	    var max1=0; var last1 =0;
 
-            if(result.length == 1 && result[0].max != null) {
-                var todaysTotal = cafe1Total + cafe2Total;
-                loadLiquidFillGauge("fillgauge1", todaysTotal/result[0].max*100, config1);
- 		if(result[0].min == 0) {
-	           loadLiquidFillGauge("fillgauge2", 100+todaysTotal/1, config1);
-		} else {
-                   loadLiquidFillGauge("fillgauge2", todaysTotal/result[0].min*100, config1);
+	    if(result.legnth == 0) {
+		$(".total-slices").html("<center>System Currently Down.<br />Re-establishing Connection</center>");
+		$(".total-slices").css("border","none");
 		}
-
+           else if(result.length > 0 && result.length <= 8) {
+                
+		var wmax = 0;
+		var wmin = 1000;
+		var length = result.length;
+		if(result.length >= 7) {length =7;}
+		for(i=0; i<length; i++) {
+            	   if(result[i].total < wmin && result[i].total != 0) {
+            	    wmin = result[i].total;
+           	   }
+            
+          	  if(result[i].total > wmax) {
+                    wmax = result[i].total;
+            	}
+        	}
+       		 var todaysTotal = cafe1Total + cafe2Total;
+		$("#fillgauge1").html("<center><div class='weekmax'>"+ Math.round(wmax) + "lbs</div><div class='weekslice'>&asymp; "+ Math.ceil(wmax/.34) +" slices of pizza</center>");	
+		$("#fillgauge2").html("<center><div class='weekmax'>"+ Math.round(wmin) + "lbs</div><div class='weekslice'>&asymp; "+ Math.ceil(wmin/.34) +" slices of pizza</center>");
+//       		 loadLiquidFillGauge("fillgauge1", todaysTotal/wmax*100, config1);
+  //     		 loadLiquidFillGauge("fillgauge2", todaysTotal/wmin*100, config1);
             } else {
                     cafe2Total = 0;
                     cafe1Total = 0;
@@ -263,10 +278,22 @@ tr.outer-table {
    		                 cafe1Total = current.weight;
    		                 max1 = current.weight;
    		             } else {
-    		                if (last1 - current.weight > 5) {
-				    if(current.weight < 1 || last1 - current.weight > 20) {
+    		                if (last1 - current.weight > 1) {
+				    if(current.weight < 1 || last1 - current.weight > 10) {
 	    		                    max1 = 0;
 	    		                    cafe1Total = cafe1Total + current.weight;
+				    } else {
+					spike = 0;
+					for (j=ndx-2; j>ndx-7;j--) {
+						if (j >=0 ) {
+						  if(result[j].weight - result[j+1] < -1) { spike += -1; }
+						  else {spike += 1;}
+						} 
+					}
+					if(spike > 0) {
+						cafe1Total = cafe1Total - max1 + current.weight;
+						max1 = current.weight;
+					}
 				    }
      		               } else {
       		                  if (max1 < current.weight) {
@@ -291,14 +318,27 @@ tr.outer-table {
                      if(current.trash_can_id == "cafe_2") {
                          if(new Date(current.timestamp).getHours() >= 6) {
                              if(cafe2Total == 0) { 
-                		max1 = current.weight;
+                		max2 = current.weight;
 				cafe2Total = current.weight;
 			     }
                              else {
-                             if(last2 - current.weight > 5) {
-                                max2 = 0;
-                                cafe2Total = cafe2Total + current.weight;
-                             } else {
+                              if (last2 - current.weight > 1) {
+				    if(current.weight < 1 || last2 - current.weight > 10) {
+	    		                    max2 = 0;
+	    		                    cafe2Total = cafe2Total + current.weight;
+				    } else {
+					spike = 0;
+					for (j=ndx-2; j>ndx-7;j--) {
+						if (j >=0 ) {
+						  if(result[j].weight - result[j+1] < -1) { spike += -1; }
+						  else {spike += 1;}
+						} 
+					}
+					if(spike > 0) {
+						cafe2Total = cafe2Total - max1 + current.weight;
+						max1 = current.weight;
+					}
+				    }                             } else {
                                 if(max2 < current.weight) {
                                     cafe2Total = cafe2Total - max2 + current.weight;
                                     max2 = current.weight;
@@ -339,7 +379,7 @@ tr.outer-table {
 		//graph everything
                 d3.selectAll(".graph svg > *").remove(); 		//remove old graphs                   
                 graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
-                getMaxMin();					//graph fil gauges
+                getWeek(new Date());					//graph fil gauges
 		getSlices(totalWaste);				//display proper number of slices
 
 		//set timer to update everything 1 minute from now
@@ -405,7 +445,7 @@ tr.outer-table {
 
 	
 	   //write total
-	   $(".total-slices").html("<center>" + numSlices + " slices<br />" + "or<br />" + numSlices/8 + " Pizzas</center>");
+	   $(".total-slices").html("<center><div style='font-size:30px;font-family:athiti;'>It Could Be</div>" + numSlices + " slices<br />" + "(" + numSlices/8 + " Pizzas)</center>");
 	   //set main image
            var commitPath = "ff3d13377aec6398afe8af10a60019cc7db8347f";
 	   var imgName = "table-"+slices;
@@ -515,6 +555,7 @@ tr.outer-table {
             aside {
     width: 39%!important;
 }
+.weekmax{font-size:30px;} .weekslice{font-size:48px;font-family:anton;}
                         </style>
 </body>
 

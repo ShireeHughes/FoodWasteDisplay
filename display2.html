@@ -133,11 +133,11 @@ tr.outer-table {
                 <div class="double-graph">
                     <center><h2>Food Wasted Today</h2></center>
                     <div class="graph">
-                        <h3>Max of the Week</h3>
+                        <h3 style="font-size:35px!important"><center>Max of the Week</center></h3>
                         <div id="fillgauge1" width="100%" height="300"></div>
                     </div>
                     <div class="graph">
-                        <h3>Min of the Week</h3>
+                        <h3  style="font-size:35px!important"><center>Min of the Week</center></h3>
                         <div id="fillgauge2" width="100%" height="300"></div>
                     </div>
                 </div>
@@ -250,13 +250,18 @@ tr.outer-table {
 		var length = result.length;
 		if(result.length >= 7) {length =7;}
 		for(i=0; i<length; i++) {
-            	   if(result[i].total < wmin && result[i].total != 0) {
-            	    wmin = result[i].total;
-           	   }
-            
-          	  if(result[i].total > wmax) {
-                    wmax = result[i].total;
-            	}
+		   time = new Date(result[i].timestamp);
+		   today = new Date();
+		   if(time.getDay==today.getDay() && time.getMonth() == today.getMonth()) {}
+		   else {
+	            	   if(result[i].total < wmin && result[i].total != 0) {
+	            	    wmin = result[i].total;
+	           	   }
+	            
+	          	  if(result[i].total > wmax) {
+        	            wmax = result[i].total;
+            		}
+			}
         	}
        		 var todaysTotal = cafe1Total + cafe2Total;
 		$("#fillgauge1").html("<center><div class='weekmax'>"+ Math.round(wmax) + "lbs</div><div class='weekslice'>&asymp; "+ Math.ceil(wmax/.34) +" slices of pizza</center>");	
@@ -555,7 +560,7 @@ tr.outer-table {
             aside {
     width: 39%!important;
 }
-.weekmax{font-size:30px;} .weekslice{font-size:48px;font-family:anton;}
+.weekmax{font-size:35px;} .weekslice{font-size:48px;font-family:anton;}
                         </style>
 </body>
 

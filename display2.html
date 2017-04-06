@@ -252,7 +252,7 @@ tr.outer-table {
 		for(i=0; i<length; i++) {
 		   time = new Date(result[i].timestamp);
 		   today = new Date();
-		   if(time.getDay==today.getDay() && time.getMonth() == today.getMonth()) {}
+		   if(time.getDay()==today.getDay() && time.getMonth() == today.getMonth()) {}
 		   else {
 	            	   if(result[i].total < wmin && result[i].total != 0) {
 	            	    wmin = result[i].total;

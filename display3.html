@@ -1,0 +1,600 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="1800">
+    <!-- Refresh the page every 30 minutes to prevent hang-up with server -->
+
+    <title>Food Waste at Atlantic Dining Hall</title>
+    <meta name="description" content="food waste, FAU, Florida Atlantic University, I-SENSE, Institute of Sensing and Embedded Systems Engineering, IoT, Internet of Things, sustainability">
+    <meta name="author" content="Shiree Hughes">
+
+    <!-- ************************************** -->
+    <!-- * Links for fonts and CSS Stylesheet * -->
+    <!-- ************************************** -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/stylesheet.css" />    
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/0f27ca0e45d821c1f70e33d4c7da2b9679d08a0a/ambientTrashStyle.css"></script>
+    <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet" />
+    <script src='https://use.fontawesome.com/2016971a2a.js'></script>
+
+    <!-- ************************************** -->
+    <!-- *  Links for D3 and JQuery scripts   * -->
+    <!-- ************************************** -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/c423c47816567edf6fcf64f63edf8c10acd5d828/JavaScript/liquidFillGauge.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/fd3e48e4ddf1c2fa7fbef1b5045f70e13a388467/JavaScript/retreiveData.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/JavaScript/graphData.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/b1956f542ce864c7267adcf4ee97cc6d5e622604/JavaScript/ambientTrash.js"></script>
+<script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/2c96a579cc94e8108d936f9210aaf8225435144d/JavaScript/bargraph.js"></script>
+    <![if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]>
+<style>
+                        .legend {top:750px!important;}
+                        //.comic img { width:1000px!important; height:900px!important}
+                        #visualisation {margin-left:-50px!important;}
+                        .axis text:nth-child(odd) {display:none;}
+                        
+			 @media screen and (min-width: 2500px) {
+                           .legend {
+                                top: 900px;
+				right: 300px; 
+                           }
+                            
+                            
+                        }
+.adh {text-shadow: #fff 1px1px;}
+.title-header {font-size:38px!important;}
+.double-graph h2 {font-size:30px!important;}
+.double-graph h3 {font-size:26px!important;}
+                    .axis path {
+                        fill: none;
+                        stroke: #fff!important;
+                        shape-rendering: crispEdges;
+                    }
+                    .axis text {
+                        font-family: Pontano Sans;
+                        font-size: 15px!important;
+                        stroke:#fff!important;
+                    }</style>
+
+</head>
+
+<body>
+    <div class="outer">
+        <header>
+            <div class="title-header">
+                <h1>Overview <span class="adh">Atlantic Dining Hall</span> <span id="date"></span><h1>
+            </div>
+        </header>
+<style>
+.comic img {width:800px!important;}
+tr.outer-table {
+    max-height: 900px;
+    overflow: hidden;
+}
+.outer-table td {
+    max-height: 900px!important;
+    overflow: hidden;
+}
+.outer-table ul {
+    display: inline-block;
+    width: 48%!important;
+    padding: 0;
+    margin: 0;
+}
+//.inner-table {height:900px;}
+.inner-table li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom:-7px;
+}
+.pizza-table img { width:250px;}// height: 90px;}
+.pizza-table {width:100px; height:90px; padding:0px; margin-top:0px; margin-bottom:0px;}
+.total-slices {
+    position: absolute;
+    font-family: Anton;
+    font-size: 50px;
+    right: 47%;
+    background: rgba(255,255,255,.75);
+    border: #cc0000 1px solid;
+    top: 35%;
+}
+</style>
+        <article>
+            <div class="main-display">
+	        <div class="total-slices"></div>
+                <div>
+		    <table>
+		    <tr class="outer-table">
+                       <td>
+			  <ul class="inner-table">
+				<li class="pizza-table" id="bottom"></li>
+			  </ul>
+                       </td>
+                       <td>
+                          <div class="comic" style="text-align:center;">
+                          </div>
+                       </td>
+		    </tr>
+		    </table>
+                </div>
+            </div>
+        </article>
+
+        <aside>
+            <div class="charts-tips-more">
+                <div class="double-graph">
+                    <center><h2>Food Wasted Today</h2></center>
+<!--                    <div class="graph">
+                        <h3 style="font-size:35px!important"><center>Max of the Week</center></h3>
+                        <div id="fillgauge1" width="100%" height="300"></div>
+                    </div>
+                    <div class="graph">
+                        <h3  style="font-size:35px!important"><center>Min of the Week</center></h3>
+                        <div id="fillgauge2" width="100%" height="300"></div>
+                    </div>-->
+<svg id="bar" width="700" height="300"></svg>
+                </div>
+<br />
+<br />
+<br />
+<br />
+                <div class="container graph">
+                    <svg id="visualisation" width="700" height="300"></svg>
+                </div>
+
+                <div class="legend">
+                    <span class="key"><i class="fa fa-square"></i> Trash Can #1</span>
+                    <span class="key"><i class="fa fa-square"></i> Trash Can #2</span>
+                </div>
+            </div>
+        </aside>
+
+        <footer>
+            Copyright &copy; 2017, <a href="http://isense.fau.edu/" target="_blank">Institute of Sensing and Embedded Network Systems Engineering</a>
+        </footer>
+    </div>
+
+    <!-- ************************************** -->
+    <!-- *             SCRIPTS                * -->        
+    <!-- ************************************** -->
+
+    <!-- *** LIQUID FILL GUAGE *** -->
+    <script language="JavaScript">
+        var config1 = liquidFillGaugeDefaultSettings();
+        config1.waveAnimateTime = 1000;
+        var gauge1 = loadLiquidFillGauge("fillgauge1", 0, config1);
+        var gauge2 = loadLiquidFillGauge("fillgauge2", 0, config1);
+    </script>    
+
+    <!-- *** DATE FOR HEADER *** -->
+    <script>
+        function writeDate() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if(dd<10) {
+                dd='0'+dd
+            }
+
+            if(mm<10) {
+                mm='0'+mm
+            }
+
+            today = mm+'/'+dd+'/'+yyyy;
+            document.getElementById('date').innerHTML = today;
+        }
+    </script> 
+    <script>writeDate();</script>
+
+   <script>
+       //<![CDATA[
+       //create data sets
+            var data = [],
+            data2 = [],
+            data3 = [],
+            data4 = [];
+            var cafe1Total = 0;
+            var cafe2Total = 0;
+            var totalWaste = 0;
+
+            //function for creating a timestamp in D3
+            //var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
+            var parseTime = d3.timeParse("%b %d, %Y %I:%M:%S %p");
+
+            //call to retrieve data from MongoDB
+            retrieveData();
+
+        /*
+         * Function to return max value
+         * between value a and value b
+         */
+        function findMax(a,b) {
+            if(a < b) { return b; }
+            else {
+                return a;
+            }
+        }
+
+       function storyline(result) {
+          var code = result.code;         
+          switch(code) {
+		case 1: 
+		   break;
+		case 1.5:
+		   break;
+		case 2:
+		   break;
+		case 2.5:
+		   break;
+		case 3:
+		   break;
+	 	case 3.5:
+		   break;
+		case 4:
+		   break;
+	        case 4.5:
+		   break;
+		case 5:
+		   break;
+		case 5.5:
+		   break;
+	  }
+       }
+
+        /*
+         * Function called in jsonp callback
+         * this function parses the incoming JSON 
+         * and creates two datasets: one for cafe1 
+         * and one for cafe2
+         * samples for each trash can are used to
+         * create cumulative data points
+         * 
+         */
+        function getData(result) {
+            var ndx;
+            var max = 0;
+            var max2=0; var last2 =0;
+	    var max1=0; var last1 =0;
+
+	    if(result.legnth == 0) {
+		$(".total-slices").html("<center>System Currently Down.<br />Re-establishing Connection</center>");
+		$(".total-slices").css("border","none");
+		}
+           else if(result.length > 0 && result.length <= 8) {
+                var todaysTotal = cafe1Total + cafe2Total;
+		var wmax = 0;
+		var wmin = 1000;
+		var length = result.length;
+		if(result.length >= 7) {length =7;}
+		for(i=0; i<length; i++) {
+		   time = new Date(result[i].timestamp);
+		   today = new Date();
+console.log(today);
+		   if(time.getDate()==today.getDate() && time.getMonth() == today.getMonth()) {}
+		   else if(time.getDay()==0 || time.getDay()==6){}
+		   else {
+	                data.push({
+	                    "x":time,
+	                    "y":result[i].total
+	                });
+	            }
+                }
+                  data.push({
+	                    "x":today,//parseTime(new Date()),
+	                    "y":todaysTotal
+	                });
+ 	           var config1 = {
+ 	               "data":data,
+ 	               "graphType": 1,
+ 	               "elementID": "#bar",
+ 	               "yLabel": "Weight (lbs)"
+ 	           };
+ 	           d3.selectAll(".bargraph svg > *").remove(); 		//remove old graphs
+ 	            BarGraph(config1);
+            } else {
+                    cafe2Total = 0;
+                    cafe1Total = 0;
+
+                    //place samples in the correct dataset
+ 		   for (ndx = 0; ndx < result.length; ndx++) {
+ 		       var current = result[ndx];
+ 		       //add to cafe 1 dataset
+ 		       if (current.trash_can_id == "cafe_1") {
+  		          if (new Date(current.timestamp).getHours() >= 6) {
+
+  		              if (cafe1Total == 0) {
+   		                 cafe1Total = current.weight;
+   		                 max1 = current.weight;
+   		             } else {
+    		                if (last1 - current.weight > 1) {
+				    if(current.weight < 1 || last1 - current.weight > 10) {
+	    		                    max1 = 0;
+	    		                    cafe1Total = cafe1Total + current.weight;
+				    } else {
+					spike = 0;
+					for (j=ndx-2; j>ndx-7;j--) {
+						if (j >=0 ) {
+						  if(result[j].weight - result[j+1] < -1) { spike += -1; }
+						  else {spike += 1;}
+						} 
+					}
+					if(spike > 0) {
+						cafe1Total = cafe1Total - max1 + current.weight;
+						max1 = current.weight;
+					}
+				    }
+     		               } else {
+      		                  if (max1 < current.weight) {
+      		                      cafe1Total = cafe1Total - max1 + current.weight;
+      		                      max1 = current.weight;
+       		                 }
+       		             }
+       		         }
+       		         last1 = current.weight;
+      		          data.push({
+      		              "x": parseTime(current.timestamp),
+      		              "y": current.weight
+      		          });
+       		         data3.push({
+       		             "x": parseTime(current.timestamp),
+     		               "y": cafe1Total //current.total
+     		           });
+    		        }
+   		     }                        
+
+                     //add to cafe 2 dataset
+                     if(current.trash_can_id == "cafe_2") {
+                         if(new Date(current.timestamp).getHours() >= 6) {
+                             if(cafe2Total == 0) { 
+                		max2 = current.weight;
+				cafe2Total = current.weight;
+			     }
+                             else {
+                              if (last2 - current.weight > 1) {
+				    if(current.weight < 1 || last2 - current.weight > 10) {
+	    		                    max2 = 0;
+	    		                    cafe2Total = cafe2Total + current.weight;
+				    } else {
+					spike = 0;
+					for (j=ndx-2; j>ndx-7;j--) {
+						if (j >=0 ) {
+						  if(result[j].weight - result[j+1] < -1) { spike += -1; }
+						  else {spike += 1;}
+						} 
+					}
+					if(spike > 0) {
+						cafe2Total = cafe2Total - max1 + current.weight;
+						max1 = current.weight;
+					}
+				    }                             } else {
+                                if(max2 < current.weight) {
+                                    cafe2Total = cafe2Total - max2 + current.weight;
+                                    max2 = current.weight;
+                                }
+                            }
+                        }
+                        last2 = current.weight;
+                        data2.push({
+                            "x":parseTime(current.timestamp),
+                            "y":current.weight
+                        });
+                        data4.push({
+                            "x":parseTime(current.timestamp),
+                            "y":cafe2Total//current.total
+                        });
+                    }
+                }
+                //save max
+                if( max < cafe1Total || max < cafe2Total ) {
+                    max = findMax(cafe1Total, cafe2Total);
+                }
+            }
+            if(max == 0) {max = 5;}
+                console.log("caf1 = " +cafe1Total);
+                console.log("caf2 = "+cafe2Total);
+
+                totalWaste = cafe2Total+cafe1Total;
+                console.log(totalWaste);
+                var start;
+
+		if(data.length > 0) {
+	            if(data[0].x < data2[0].x) { start = data[0].x; }
+	            else { start = data2[0].x; }
+		} else {
+                    start = new Date(2017,0,20);
+		}
+
+		//graph everything
+                d3.selectAll(".graph svg > *").remove(); 		//remove old graphs                   
+                graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
+                getWeek(new Date());					//graph fil gauges
+		getSlices(totalWaste);				//display proper number of slices
+
+		//set timer to update everything 1 minute from now
+                setTimeout(retrieveData, 60000);
+
+		//reset data arrays
+                data = []
+                data2 = [];
+                data3 = [];
+                data4 = [];
+            }
+        }
+
+        function getSlices(totalWaste) {
+           var numSlices = Math.floor(totalWaste / .34);
+           drawSlices(numSlices);
+        }
+
+        function drawSlices(numSlices) {
+           var pies = Math.floor(numSlices/8);
+	   var slices = numSlices - (8*pies);
+	   var bottom,one,two,three,top,bottom2,one2,two2,three2,top2;
+
+ 	   if(pies <= 17) { bottom = pies; } 
+ 	   else {bottom = 17;}
+
+ 	   if(pies > 17 && pies <= 42) { one = pies-17; } 
+ 	   else if(pies > 42) {one = 25; }
+	   else {one = 0;}
+
+
+ 	   if(pies > 42 && pies <= 67) { two = pies-(17+25); } 
+ 	   else if(pies > 67) {two = 25;}
+	   else {two = 0;}
+
+ 	   if(pies > 67 && pies <= 92) { three = pies-(17+25+25); } 
+ 	   else if(pies > 92) {three = 25;}
+	   else {three = 0;}
+
+	   if(pies > 92 && pies <= 109) { bottom2 = pies-(17+25+25+25); } 
+ 	   else if(pies > 109) {bottom2 = 17;}
+	   else {bottom2 = 0;}
+
+	   if(pies > 109 && pies <= 134) { one2 = pies-(17+25+25+25+17); } 
+ 	   else if(pies > 134) {one2 = 25;}
+	   else {one2 = 0;}
+
+	   if(pies > 134 && pies <= 159) { two2 = pies-(17+25+25+25+17+25); } 
+ 	   else if(pies > 159) {two2 = 25;}
+	   else {two2 = 0;}
+
+	   if(pies > 159 && pies <= 184) { three2 = pies-(17+25+25+25+17+25+25); } 
+ 	   else if(pies > 184) {three2 = 25;}
+	   else {three2 = 0;}
+
+	   if(pies > 184 && pies <= 209) { four2 = pies-(17+25+25+25+17+25+25+25); } 
+ 	   else if(pies > 209) {four2 = 25;}
+	   else {four2 = 0;}
+
+	   if(pies > 234 && pies <= 259) { top2 = pies-(17+25+25+25+17+25+25+25+25); } 
+ 	   else if(pies > 259) {top2 = 25;}
+	   else {top2 = 0;}
+
+	
+	   //write total
+	   $(".total-slices").html("<center><div style='font-size:30px;font-family:athiti;'>It Could Be</div>" + numSlices + " slices<br />" + "(" + numSlices/8 + " Pizzas)</center>");
+	   //set main image
+           var commitPath = "ff3d13377aec6398afe8af10a60019cc7db8347f";
+	   var imgName = "table-"+slices;
+           var bottomName = "side-"+bottom;
+           var innerHTML;
+
+           $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/" + imgName + ".png?raw=true' alt='hi' class='inline'/>");
+	   //set side images
+           $("#bottom").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/side-" + bottom + ".png?raw=true' alt='hi' class='inline'/>");
+
+	   if(one > 0) {
+	       innerHTML = $(".inner-table").html();
+	       if(innerHTML.indexOf("one") == -1) {
+	               $(".inner-table").html("<li class='pizza-table' id='one'></li>"+ innerHTML);
+		}
+               $("#one").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + one + ".png?raw=true' alt='hi' class='inline'/>");
+	   }
+
+	   if(two > 0) {
+	       innerHTML = $(".inner-table").html();
+	       if(innerHTML.indexOf("two") == -1) {
+	               $(".inner-table").html("<li class='pizza-table' id='two'></li>"+ innerHTML);
+		}
+           $("#two").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + two + ".png?raw=true' alt='hi' class='inline'/>");
+	   }
+
+           if(three > 0) {
+	       innerHTML = $(".inner-table").html();
+	       if(innerHTML.indexOf("three") == -1) {
+	               $(".inner-table").html("<li class='pizza-table' id='three'></li>"+ innerHTML);
+		}
+           $("#three").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + three + ".png?raw=true' alt='hi' class='inline'/>");
+	        $(".pizza-table img").css("width","225px");
+		$(".pizza-table img").css("height", "225px");
+           }
+
+	   outerHTML = $(".outer-table").html();
+           if(bottom2 > 0) {
+	       if(outerHTML.indexOf("second") == -1) {
+		   $(".outer-table").html(outerHTML.substring(0,outerHTML.indexOf("</ul>")+5)+"<ul id='second' class='inner-table'></ul>" + outerHTML.substring(outerHTML.indexOf("</ul>")+5,outerHTML.length));
+	       }
+	       innerHTML = $("#second.inner-table").html();
+	       if(innerHTML.indexOf("bottom-2") == -1) {
+	               $("#second.inner-table").html("<li class='pizza-table' id='bottom-2'></li>"+ innerHTML);
+		}
+	   $("#bottom-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/side-" + bottom2 + ".png?raw=true' alt='hi' class='inline'/>");
+           }
+
+           if(one2 > 0) {
+	       innerHTML = $("#second.inner-table").html();
+	       if(innerHTML.indexOf("one-2") == -1) {
+	               $("#second.inner-table").html("<li class='pizza-table' id='one-2'></li>"+ innerHTML);
+		}
+           $("#one-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + one2 + ".png?raw=true' alt='hi' class='inline'/>");
+           }
+
+           if(two2 > 0) {
+	       innerHTML = $("#second.inner-table").html();
+	       if(innerHTML.indexOf("two-2") == -1) {
+	               $("#second.inner-table").html("<li class='pizza-table' id='two-2'></li>"+ innerHTML);
+		}
+           $("#two-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + two2 + ".png?raw=true' alt='hi' class='inline'/>");
+	   }
+
+           if(three2 > 0) {
+	       innerHTML = $("#second.inner-table").html();
+	       if(innerHTML.indexOf("three-2") == -1) {
+	               $("#second.inner-table").html("<li class='pizza-table' id='three-2'></li>"+ innerHTML);
+		}
+           $("#three-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + three2 + ".png?raw=true' alt='hi' class='inline'/>");
+           }
+
+           if(four2 > 0) {
+	       innerHTML = $("#second.inner-table").html();
+	       if(innerHTML.indexOf("four-2") == -1) {
+	               $("#second.inner-table").html("<li class='pizza-table' id='one-2'></li>"+ innerHTML);
+		}
+           $("#four-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + four2 + ".png?raw=true' alt='hi' class='inline'/>");
+           }
+           $("#top").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + top + ".png?raw=true' alt='hi' class='inline'/>");
+           $("#top-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + top2 + ".png?raw=true' alt='hi' class='inline'/>");
+
+           if(pies > 67) {	        $(".pizza-table img").css("width","175px");
+		$(".pizza-table img").css("height", "175px");
+	   }
+	}
+     
+
+        function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
+            return "<h4>"+n+"</h4><table>"+
+            "<tr><td>Low</td><td>"+(d.low)+"</td></tr>"+
+            "<tr><td>Average</td><td>"+(d.avg)+"</td></tr>"+
+            "<tr><td>High</td><td>"+(d.high)+"</td></tr>"+
+            "</table>";
+        }
+
+       //]]>
+    </script>
+ <style>
+            
+            article {
+    height: 1000px;
+    width: 60%!important;
+    float: left;
+}
+
+            aside {
+    width: 39%!important;
+}
+.weekmax{font-size:35px;} .weekslice{font-size:48px;font-family:anton;}
+                        </style>
+</body>
+
+</html>

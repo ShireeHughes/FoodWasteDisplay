@@ -27,7 +27,8 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/c423c47816567edf6fcf64f63edf8c10acd5d828/JavaScript/liquidFillGauge.js"></script>
-    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/fd3e48e4ddf1c2fa7fbef1b5045f70e13a388467/JavaScript/retreiveData.js"></script>
+<!--    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/fd3e48e4ddf1c2fa7fbef1b5045f70e13a388467/JavaScript/retreiveData.js"></script>-->
+        <script src="file:///home/pi/FoodWasteDisplay/JavaScript/retreiveData.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/JavaScript/graphData.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/b1956f542ce864c7267adcf4ee97cc6d5e622604/JavaScript/ambientTrash.js"></script>
 <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/2c96a579cc94e8108d936f9210aaf8225435144d/JavaScript/bargraph.js"></script>
@@ -210,9 +211,9 @@ tr.outer-table {
             //function for creating a timestamp in D3
             //var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
             var parseTime = d3.timeParse("%b %d, %Y %I:%M:%S %p");
-
+console.log(today);
             //call to retrieve data from MongoDB
-            retrieveData();
+           getStoryline(today);
 
         /*
          * Function to return max value
@@ -229,6 +230,7 @@ tr.outer-table {
           var code = result.code;         
           switch(code) {
 		case 1: 
+	           $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/" + imgName + ".png?raw=true' alt='hi' class='inline'/>");
 		   break;
 		case 1.5:
 		   break;
@@ -418,10 +420,9 @@ console.log(today);
                 d3.selectAll(".graph svg > *").remove(); 		//remove old graphs                   
                 graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
                 getWeek(new Date());					//graph fil gauges
-		getSlices(totalWaste);				//display proper number of slices
-
+		
 		//set timer to update everything 1 minute from now
-                setTimeout(retrieveData, 60000);
+                setTimeout(getStoryline, 60000);
 
 		//reset data arrays
                 data = []
@@ -431,146 +432,7 @@ console.log(today);
             }
         }
 
-        function getSlices(totalWaste) {
-           var numSlices = Math.floor(totalWaste / .34);
-           drawSlices(numSlices);
-        }
 
-        function drawSlices(numSlices) {
-           var pies = Math.floor(numSlices/8);
-	   var slices = numSlices - (8*pies);
-	   var bottom,one,two,three,top,bottom2,one2,two2,three2,top2;
-
- 	   if(pies <= 17) { bottom = pies; } 
- 	   else {bottom = 17;}
-
- 	   if(pies > 17 && pies <= 42) { one = pies-17; } 
- 	   else if(pies > 42) {one = 25; }
-	   else {one = 0;}
-
-
- 	   if(pies > 42 && pies <= 67) { two = pies-(17+25); } 
- 	   else if(pies > 67) {two = 25;}
-	   else {two = 0;}
-
- 	   if(pies > 67 && pies <= 92) { three = pies-(17+25+25); } 
- 	   else if(pies > 92) {three = 25;}
-	   else {three = 0;}
-
-	   if(pies > 92 && pies <= 109) { bottom2 = pies-(17+25+25+25); } 
- 	   else if(pies > 109) {bottom2 = 17;}
-	   else {bottom2 = 0;}
-
-	   if(pies > 109 && pies <= 134) { one2 = pies-(17+25+25+25+17); } 
- 	   else if(pies > 134) {one2 = 25;}
-	   else {one2 = 0;}
-
-	   if(pies > 134 && pies <= 159) { two2 = pies-(17+25+25+25+17+25); } 
- 	   else if(pies > 159) {two2 = 25;}
-	   else {two2 = 0;}
-
-	   if(pies > 159 && pies <= 184) { three2 = pies-(17+25+25+25+17+25+25); } 
- 	   else if(pies > 184) {three2 = 25;}
-	   else {three2 = 0;}
-
-	   if(pies > 184 && pies <= 209) { four2 = pies-(17+25+25+25+17+25+25+25); } 
- 	   else if(pies > 209) {four2 = 25;}
-	   else {four2 = 0;}
-
-	   if(pies > 234 && pies <= 259) { top2 = pies-(17+25+25+25+17+25+25+25+25); } 
- 	   else if(pies > 259) {top2 = 25;}
-	   else {top2 = 0;}
-
-	
-	   //write total
-	   $(".total-slices").html("<center><div style='font-size:30px;font-family:athiti;'>It Could Be</div>" + numSlices + " slices<br />" + "(" + numSlices/8 + " Pizzas)</center>");
-	   //set main image
-           var commitPath = "ff3d13377aec6398afe8af10a60019cc7db8347f";
-	   var imgName = "table-"+slices;
-           var bottomName = "side-"+bottom;
-           var innerHTML;
-
-           $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/" + imgName + ".png?raw=true' alt='hi' class='inline'/>");
-	   //set side images
-           $("#bottom").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/side-" + bottom + ".png?raw=true' alt='hi' class='inline'/>");
-
-	   if(one > 0) {
-	       innerHTML = $(".inner-table").html();
-	       if(innerHTML.indexOf("one") == -1) {
-	               $(".inner-table").html("<li class='pizza-table' id='one'></li>"+ innerHTML);
-		}
-               $("#one").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + one + ".png?raw=true' alt='hi' class='inline'/>");
-	   }
-
-	   if(two > 0) {
-	       innerHTML = $(".inner-table").html();
-	       if(innerHTML.indexOf("two") == -1) {
-	               $(".inner-table").html("<li class='pizza-table' id='two'></li>"+ innerHTML);
-		}
-           $("#two").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + two + ".png?raw=true' alt='hi' class='inline'/>");
-	   }
-
-           if(three > 0) {
-	       innerHTML = $(".inner-table").html();
-	       if(innerHTML.indexOf("three") == -1) {
-	               $(".inner-table").html("<li class='pizza-table' id='three'></li>"+ innerHTML);
-		}
-           $("#three").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + three + ".png?raw=true' alt='hi' class='inline'/>");
-	        $(".pizza-table img").css("width","225px");
-		$(".pizza-table img").css("height", "225px");
-           }
-
-	   outerHTML = $(".outer-table").html();
-           if(bottom2 > 0) {
-	       if(outerHTML.indexOf("second") == -1) {
-		   $(".outer-table").html(outerHTML.substring(0,outerHTML.indexOf("</ul>")+5)+"<ul id='second' class='inner-table'></ul>" + outerHTML.substring(outerHTML.indexOf("</ul>")+5,outerHTML.length));
-	       }
-	       innerHTML = $("#second.inner-table").html();
-	       if(innerHTML.indexOf("bottom-2") == -1) {
-	               $("#second.inner-table").html("<li class='pizza-table' id='bottom-2'></li>"+ innerHTML);
-		}
-	   $("#bottom-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/side-" + bottom2 + ".png?raw=true' alt='hi' class='inline'/>");
-           }
-
-           if(one2 > 0) {
-	       innerHTML = $("#second.inner-table").html();
-	       if(innerHTML.indexOf("one-2") == -1) {
-	               $("#second.inner-table").html("<li class='pizza-table' id='one-2'></li>"+ innerHTML);
-		}
-           $("#one-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + one2 + ".png?raw=true' alt='hi' class='inline'/>");
-           }
-
-           if(two2 > 0) {
-	       innerHTML = $("#second.inner-table").html();
-	       if(innerHTML.indexOf("two-2") == -1) {
-	               $("#second.inner-table").html("<li class='pizza-table' id='two-2'></li>"+ innerHTML);
-		}
-           $("#two-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + two2 + ".png?raw=true' alt='hi' class='inline'/>");
-	   }
-
-           if(three2 > 0) {
-	       innerHTML = $("#second.inner-table").html();
-	       if(innerHTML.indexOf("three-2") == -1) {
-	               $("#second.inner-table").html("<li class='pizza-table' id='three-2'></li>"+ innerHTML);
-		}
-           $("#three-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + three2 + ".png?raw=true' alt='hi' class='inline'/>");
-           }
-
-           if(four2 > 0) {
-	       innerHTML = $("#second.inner-table").html();
-	       if(innerHTML.indexOf("four-2") == -1) {
-	               $("#second.inner-table").html("<li class='pizza-table' id='one-2'></li>"+ innerHTML);
-		}
-           $("#four-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + four2 + ".png?raw=true' alt='hi' class='inline'/>");
-           }
-           $("#top").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + top + ".png?raw=true' alt='hi' class='inline'/>");
-           $("#top-2").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/Panel-" + top2 + ".png?raw=true' alt='hi' class='inline'/>");
-
-           if(pies > 67) {	        $(".pizza-table img").css("width","175px");
-		$(".pizza-table img").css("height", "175px");
-	   }
-	}
-     
 
         function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
             return "<h4>"+n+"</h4><table>"+

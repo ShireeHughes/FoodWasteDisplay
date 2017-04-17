@@ -29,3 +29,11 @@ function getWeek(dateToGet) {
   url: 'http://portal-isense.fau.edu:8080/wrs/mongo?ID=2&DATE='+dateToGet,
   });
 }
+
+function getStoryline(dateToGet) {
+ $.ajax({
+  method:"GET",
+  dataType: "jsonp",
+  url: 'http://portal-isense.fau.edu:8080/wrs/mongo?ID=5&DATE='+dateToGet,
+  });
+}

@@ -34,6 +34,6 @@ function getStoryline(dateToGet) {
  $.ajax({
   method:"GET",
   dataType: "jsonp",
-  url: 'http://portal-isense.fau.edu:8080/wrs/mongo?ID=5&DATE='+dateToGet,
+  url: 'http://portal-isense-dev.fau.edu:8080/wrs/mongo?ID=5&DATE='+dateToGet,
   });
 }

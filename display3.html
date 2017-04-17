@@ -110,22 +110,8 @@ tr.outer-table {
 </style>
         <article>
             <div class="main-display">
-	        <div class="total-slices"></div>
-                <div>
-		    <table>
-		    <tr class="outer-table">
-                       <td>
-			  <ul class="inner-table">
-				<li class="pizza-table" id="bottom"></li>
-			  </ul>
-                       </td>
-                       <td>
                           <div class="comic" style="text-align:center;">
                           </div>
-                       </td>
-		    </tr>
-		    </table>
-                </div>
             </div>
         </article>
 
@@ -412,7 +398,7 @@ tr.outer-table {
                     max = findMax(cafe1Total, cafe2Total);
                 }
             }
-            if(max == 0) {max = 5;}
+                 if(max == 0) {max = 5;}
                 console.log("caf1 = " +cafe1Total);
                 console.log("caf2 = "+cafe2Total);
 
@@ -431,20 +417,21 @@ tr.outer-table {
                 d3.selectAll(".graph svg > *").remove(); 		//remove old graphs                   
                 graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
                 getWeek(new Date());					//graph fil gauges
+console.log(data);
                 value = Math.floor(totalWaste/20) + 1;
                if(value < 10) {imagePath+="0";}
+		else if(value >27) {value =27;}
 		imagePath += value;
                 $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/" + imagePath + ".png?raw=true' alt='hi' class='inline'/>");
 
 		//set timer to update everything 1 minute from now
-                setTimeout(getStoryline, 60000);
-
-		//reset data arrays
+                setTimeout(getStoryline, 60000);		
+            }
+//reset data arrays
                 data = []
                 data2 = [];
                 data3 = [];
                 data4 = [];
-            }
         }
 
 

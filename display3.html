@@ -198,9 +198,13 @@ tr.outer-table {
             //function for creating a timestamp in D3
             //var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
             var parseTime = d3.timeParse("%b %d, %Y %I:%M:%S %p");
-
             //call to retrieve data from MongoDB
-           getStoryline(today);
+	var todayDate = new Date();
+	if(todayDate.getDay() != 0 && todayDate.getDay() != 6){
+            getStoryline();
+	} else {
+             retrieveData();
+        }
 
         /*
          * Function to return max value
@@ -213,7 +217,7 @@ tr.outer-table {
             }
         }
        var code
-       var commitPath="53778f8bd422dd1c2a053cccd3541cd321a17e32";
+       var commitPath="13fbd10d5fa057f57e861477e59d5efef6ab8f45";
        var imagePath;
 
        function storyline(result) {
@@ -416,16 +420,27 @@ tr.outer-table {
 		//graph everything
                 d3.selectAll(".graph svg > *").remove(); 		//remove old graphs                   
                 graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
-                getWeek(new Date());					//graph fil gauges
-console.log(data);
+		todayStr = today.replace('/','-');                
+		todayStr = todayStr.replace('/','-');                
+		getWeek("4-18-2017");					//graph fil gauges
                 value = Math.floor(totalWaste/20) + 1;
                if(value < 10) {imagePath+="0";}
 		else if(value >27) {value =27;}
-		imagePath += value;
+		if(todayDate.getDay()!=0 && todayDate.getDay!=6) {
+			imagePath += value;
+		} else {
+			imagePath = "Weekend/Panel-"
+	               if(value < 10) {imagePath+="0";}
+		       imagePath+=value;
+		}
                 $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/" + imagePath + ".png?raw=true' alt='hi' class='inline'/>");
 
 		//set timer to update everything 1 minute from now
-                setTimeout(getStoryline, 60000);		
+               if(todayDate.getDay()!=0 && todayDate.getDay!=6) {
+	                setTimeout(getStoryline, 60000);		
+		} else {
+              		setTimeout(retreiveData, 60000);
+		}		
             }
 //reset data arrays
                 data = []

@@ -30,10 +30,22 @@ function getWeek(dateToGet) {
   });
 }
 
-function getStoryline(dateToGet) {
+function getStorylineByDate(dateToGet) {
+console.log("story1");
  $.ajax({
   method:"GET",
   dataType: "jsonp",
-  url: 'http://portal-isense-dev.fau.edu:8080/wrs/mongo?ID=5&DATE='+dateToGet,
+  url: 'http://portal-isense.fau.edu:8080/wrs/mongo?ID=5&DATE='+dateToGet,
+  });
+}
+
+function getStoryline() {
+console.log("story1");
+time = new Date();
+dateToGet=time.getMonth()+1 +'-'+time.getDate()+'-'+time.getFullYear();
+ $.ajax({
+  method:"GET",
+  dataType: "jsonp",
+  url: 'http://portal-isense.fau.edu:8080/wrs/mongo?ID=5&DATE='+dateToGet,
   });
 }

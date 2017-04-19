@@ -283,7 +283,7 @@ tr.outer-table {
 		   time = new Date(result[i].timestamp);
 		   today = new Date();
 		   if(time.getDate()==today.getDate() && time.getMonth() == today.getMonth()) {}
-		   else if(time.getDay()==0 || time.getDay()==6){}
+		   else if(time.getDay()==0 || time.getDay()==6 || time.getDate()==17){}
 		   else {
 	                data.push({
 	                    "x":time,
@@ -421,7 +421,7 @@ tr.outer-table {
                 graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
 		todayStr = today.replace('/','-');                
 		todayStr = todayStr.replace('/','-');                
-		getWeek("4-18-2017");					//graph fil gauges
+		getWeek(todayStr);					//graph fil gauges
                 value = Math.floor(totalWaste/20) + 1;
                if(value < 10) {imagePath+="0";}
 		else if(value >27) {value =27;}

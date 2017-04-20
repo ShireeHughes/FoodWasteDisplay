@@ -26,7 +26,6 @@
     <!-- ************************************** -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/c423c47816567edf6fcf64f63edf8c10acd5d828/JavaScript/liquidFillGauge.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/92539335fa2e00b63cd72f96a4d499ac0edc334b/JavaScript/retreiveData.js"></script>
            <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/JavaScript/graphData.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/b1956f542ce864c7267adcf4ee97cc6d5e622604/JavaScript/ambientTrash.js"></script>
@@ -152,17 +151,11 @@ tr.outer-table {
     <!-- *             SCRIPTS                * -->        
     <!-- ************************************** -->
 
-    <!-- *** LIQUID FILL GUAGE *** -->
-    <script language="JavaScript">
-        var config1 = liquidFillGaugeDefaultSettings();
-        config1.waveAnimateTime = 1000;
-        var gauge1 = loadLiquidFillGauge("fillgauge1", 0, config1);
-        var gauge2 = loadLiquidFillGauge("fillgauge2", 0, config1);
-    </script>    
-
     <!-- *** DATE FOR HEADER *** -->
     <script>
-	var today
+	var today;
+    var todayStr;
+    
         function writeDate() {
             today = new Date();
             var dd = today.getDate();
@@ -179,6 +172,8 @@ tr.outer-table {
 
             today = mm+'/'+dd+'/'+yyyy;
             document.getElementById('date').innerHTML = today;
+            todayStr = today.replace("/","-");
+            todayStr = todayStr.replace("/","-");
         }
     </script> 
     <script>writeDate();</script>
@@ -420,8 +415,7 @@ tr.outer-table {
 		//graph everything
                 d3.selectAll(".graph svg > *").remove(); 		//remove old graphs                   
                 graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
-		todayStr = today.replace('/','-');                
-		todayStr = todayStr.replace('/','-');                
+		
 		getWeek(todayStr);					//graph fil gauges
                 value = Math.floor(totalWaste/20) + 1;
                if(value < 10) {imagePath+="0";}

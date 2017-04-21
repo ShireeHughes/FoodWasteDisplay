@@ -213,42 +213,45 @@ tr.outer-table {
        var code
        var commitPath="0a17ef91cdb396bac34afd26d0438e1ecdae742f";
        var imagePath;
+       var average;
 
        function storyline(result) {
-          code = result[0].code; 
-	  code = 2.5;	//delete later
-          switch(code) {
-		case 1: 
+          date = new Date().getDate();
+          todaysTotal = cafe2Total + cafe1Total;
+        switch(date) {
+		case 19:
 		   imagePath = "day1/Panel-";
 		   break;
-		case 1.5:
+		case 20:
+            if(todaysTotal < average) {
+                imagePath = "day2/A/Panel-";
+            } else {
+                imagePath = "day2/B/Panel-";
+            }
 		   break;
-		case 2:
-		   imagePath = "day2/A/Panel-";
-		   break;
-		case 2.5:
-		   imagePath = "day2/B/Panel-";
-		   break;
-		case 3:
-		   imagePath = "day3/A/Panel-";
-		   break;
-	 	case 3.5:
-		   imagePath = "day3/B/Panel-";
-		   break;
-		case 4:
-		   imagePath = "day4/A/Panel-";
-		   break;
-	        case 4.5:
-		   imagePath = "day4/B/Panel-";
-		   break;
-		case 5:
-		   imagePath = "day5/A/Panel-";
-		   break;
-		case 5.5:
-		   imagePath = "day5/B/Panel-";
-		   break;
-	  }
-       }
+		case 21:
+            if(todaysTotal < average) {
+                imagePath = "day3/A/Panel-";
+            } else {
+                imagePath = "day3/B/Panel-";
+            }
+            break;
+        case 24:
+            if(todaysTotal < average) {
+                imagePath = "day4/A/Panel-";
+            } else {
+                imagePath = "day4/B/Panel-";
+            }
+            break;
+		case 25:
+            if(todaysTotal < average) {
+                imagePath = "day5/A/Panel-";
+            } else {
+                imagePath = "day5/B/Panel-";
+            }
+            break;
+        }
+    }
 
         /*
          * Function called in jsonp callback
@@ -274,6 +277,7 @@ tr.outer-table {
 		var wmax = 0;
 		var wmin = 1000;
 		var length = result.length;
+        var sum = 0;
 		if(result.length >= 7) {length =7;}
 		for(i=0; i<length; i++) {
 		   time = new Date(result[i].timestamp);
@@ -285,11 +289,13 @@ tr.outer-table {
 	                    "x":time,
 	                    "y":result[i].total
 	                });
+                    sum += result[i].total;
 	            }
-                }
-                  data.push({
-	                    "x":today,//parseTime(new Date()),
-	                    "y":todaysTotal
+        }
+        average = sum/length;
+        data.push({
+	          "x":today,//parseTime(new Date()),
+              "y":todaysTotal
 	                });
  	           var config1 = {
  	               "data":data,

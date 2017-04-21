@@ -214,10 +214,11 @@ tr.outer-table {
        var commitPath="e6e23227705663552320ab55cbcb33041bec0b87";
        var imagePath;
        var average;
+       var yesterdayTotal;
 
        function storyline(result) {
           date = new Date().getDate();
-          todaysTotal = cafe2Total + cafe1Total;
+          todaysTotal = yesterdayTotal;
         switch(date) {
 		case 19:
 		   imagePath = "day1/Panel-";
@@ -291,6 +292,9 @@ tr.outer-table {
 	                });
                     sum += result[i].total;
 	            }
+                if(time.getDate() == today.getDate()-1) {
+                   yesterdayTotal = result[i].total;
+                }
         }
         average = sum/length;
         data.push({

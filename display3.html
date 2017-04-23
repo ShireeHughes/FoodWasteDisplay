@@ -430,11 +430,12 @@ tr.outer-table {
                 value = Math.floor(totalWaste/20) + 1;
                if(value < 10) {imagePath+="0";}
 		else if(value >27) {value =27;}
-		if(todayDate.getDay()!=0 && todayDate.getDay!=6) {
+		if(todayDate.getDay()!=0 && todayDate.getDay()!=6) {
 			imagePath += value;
 		} else {
 			imagePath = "Weekend/Panel-"
 	               if(value < 10) {imagePath+="0";}
+                   console.log("imagePath");
 		       imagePath+=value;
 		}
                 $(".comic").html("<img src='https://github.com/ShireeHughes/FoodWasteDisplay/blob/" + commitPath + "/Images/" + imagePath + ".png?raw=true' alt='hi' class='inline'/>");
@@ -443,7 +444,7 @@ tr.outer-table {
                if(todayDate.getDay()!=0 && todayDate.getDay!=6) {
 	                setTimeout(getStoryline, 60000);		
 		} else {
-              		setTimeout(retreiveData, 60000);
+              		setTimeout(retrieveData, 60000);
 		}		
             }
 //reset data arrays

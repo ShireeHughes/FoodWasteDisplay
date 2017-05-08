@@ -1,0 +1,187 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="1800">
+    <!-- Refresh the page every 30 minutes to prevent hang-up with server -->
+
+    <title>Food Waste at Atlantic Dining Hall</title>
+    <meta name="description" content="food waste, FAU, Florida Atlantic University, I-SENSE, Institute of Sensing and Embedded Systems Engineering, IoT, Internet of Things, sustainability">
+    <meta name="author" content="Shiree Hughes">
+
+    <!-- ************************************** -->
+    <!-- * Links for fonts and CSS Stylesheet * -->
+    <!-- ************************************** -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/0f27ca0e45d821c1f70e33d4c7da2b9679d08a0a/ambientTrashStyle.css"></script>
+    <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Athiti" rel="stylesheet" />
+    <script src='https://use.fontawesome.com/2016971a2a.js'></script>
+
+    <!-- ************************************** -->
+    <!-- *  Links for D3 and JQuery scripts   * -->
+    <!-- ************************************** -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/c423c47816567edf6fcf64f63edf8c10acd5d828/JavaScript/liquidFillGauge.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/2c96a579cc94e8108d936f9210aaf8225435144d/JavaScript/retreiveData.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/05f5011d4c3c8ffae4e500f85f2f603f1189860d/JavaScript/graphData.js"></script>-->
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/8dea524dcde956e26f8a05a14feada8db53af731/JavaScript/ambientTrash.js"></script>
+  <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/7d7bf3eaecb43ff1023abb40a4432ab976de99bd/JavaScript/dataCollection.js"></script> 
+
+    <![if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]>
+<style>
+                        .legend {top:750px!important;}
+                        .comic img { width:1000px!important; height:900px!important}
+                        #visualisation {margin-left:-50px!important;}
+                        .axis text:nth-child(odd) {display:none;}
+                        @media screen and (max-width: 1500px) {
+                            article {
+                                float:none!important;
+                                width:100%!important;
+                            }
+                            
+                            aside {
+                                float: none!important;
+                                width: 100%!important;
+                                margin: 0;
+                                background: #00338C;
+                                border-left:#003366 2px solid;
+                                color:#fff;
+                                height: 1000px;
+                            }
+                            
+                            .legend {
+                                top: 1250px;
+                                right: 75px;
+                            }
+                            
+                            
+                        }
+			 @media screen and (min-width: 2500px) {
+                           .legend {
+                                top: 900px;
+				right: 300px; 
+                           }
+                            
+                            
+                        }
+.adh {text-shadow: #fff 1px1px;}
+.title-header {font-size:38px!important;}
+.double-graph h2 {font-size:30px!important;}
+.double-graph h3 {font-size:26px!important;}
+                    .axis path {
+                        fill: none;
+                        stroke: #fff!important;
+                        shape-rendering: crispEdges;
+                    }
+                    .axis text {
+                        font-family: Pontano Sans;
+                        font-size: 15px!important;
+                        stroke:#fff!important;
+                    }</style>
+</head>
+
+<body>
+    <div class="outer">
+        <header>
+            <div class="title-header">
+                <h1>Overview <span class="adh">Atlantic Dining Hall</span> <span id="date"></span><h1>
+            </div>
+        </header>
+
+        <article>
+            <div class="main-display">
+                <div>
+                    <div class="comic" style="text-align:center;">
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <aside>
+            <div class="charts-tips-more">
+                <div class="double-graph">
+                    <center><h2>Food Wasted in 24 Hours</h2></center>
+                    <div class="graph">
+                        <center><h3>Compared to Weekly Max</h3></center>
+                        <svg id="fillgauge1" width="100%" height="300"></svg>
+                    </div>
+                    <div class="graph">
+                        <center><h3>Compared to Weekly Min</h3></center>
+                        <svg id="fillgauge2" width="100%" height="300"></svg>
+                    </div>
+                </div>
+<br />
+<br />
+<br />
+<br />
+                <div class="container graph">
+                    <svg id="visualisation" width="700" height="300"></svg>
+                </div>
+
+                <div class="legend">
+                    <span class="key"><i class="fa fa-square"></i> Trash Can #1</span>
+                    <span class="key"><i class="fa fa-square"></i> Trash Can #2</span>
+                </div>
+            </div>
+        </aside>
+
+        <footer>
+            Copyright &copy; 2017, <a href="http://isense.fau.edu/" target="_blank">Institute of Sensing and Embedded Network Systems Engineering</a>
+        </footer>
+    </div>
+
+    <!-- ************************************** -->
+    <!-- *             SCRIPTS                * -->        
+    <!-- ************************************** -->
+
+    <!-- *** LIQUID FILL GUAGE *** -->
+    <script language="JavaScript">
+        var config1 = liquidFillGaugeDefaultSettings();
+        config1.waveAnimateTime = 1000;
+        var gauge1 = loadLiquidFillGauge("fillgauge1", 0, config1);
+        var gauge2 = loadLiquidFillGauge("fillgauge2", 0, config1);
+    </script>    
+
+    <!-- *** DATE FOR HEADER *** -->
+    <script>
+        setFlags(1, true);
+        function writeDate() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if(dd<10) {
+                dd='0'+dd
+            }
+
+            if(mm<10) {
+                mm='0'+mm
+            }
+
+            today = mm+'/'+dd+'/'+yyyy;
+            document.getElementById('date').innerHTML = today;
+        }
+    </script> 
+    <script>writeDate();</script>
+</body>
+ <style>
+            .comic img {width:1200px; height:1000px;}
+            article {
+    height: 1000px;
+    width: 60%!important;
+    float: left;
+}
+
+            aside {
+    width: 39%!important;
+}
+                        </style>
+</html>

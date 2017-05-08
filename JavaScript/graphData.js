@@ -60,8 +60,8 @@ function getColor(value) {
  * function to create a multiline graph 
  * supports up to 12 lines (colorless)
  */
-function graphDataMultiLine(max, yesterday, datasets) {
-   var today = new Date();
+function graphDataMultiLine(max, yesterday, today, datasets) {
+//   var today = new Date();
 //   var yesterday = new Date(new Date().setHours(today.getHours() - 24));
    var height = $('#visualisation').height();
    var width = $('#visualisation').width();

@@ -7,8 +7,8 @@
     <meta http-equiv="refresh" content="1800">
     <!-- Refresh the page every 30 minutes to prevent hang-up with server -->
 
-    <title>Food Waste at Atlantic Dining Hall</title>
-    <meta name="description" content="food waste, FAU, Florida Atlantic University, I-SENSE, Institute of Sensing and Embedded Systems Engineering, IoT, Internet of Things, sustainability">
+    <title>Food Waste</title>
+    <meta name="description" content="food waste, FAU, AD Henderson, I-SENSE, Institute of Sensing and Embedded Systems Engineering, IoT, Internet of Things, sustainability">
     <meta name="author" content="Shiree Hughes">
 
     <!-- ************************************** -->
@@ -28,7 +28,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/c423c47816567edf6fcf64f63edf8c10acd5d828/JavaScript/liquidFillGauge.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/fd3e48e4ddf1c2fa7fbef1b5045f70e13a388467/JavaScript/retreiveData.js"></script>
-    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/85f2dc8605d954eb4d3bd315990ec7c7763b70af/JavaScript/graphData.js"></script>
+    <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/05f5011d4c3c8ffae4e500f85f2f603f1189860d/JavaScript/graphData.js"></script>
     <script src="https://cdn.rawgit.com/ShireeHughes/FoodWasteDisplay/b1956f542ce864c7267adcf4ee97cc6d5e622604/JavaScript/ambientTrash.js"></script>
 
     <![if lt IE 9]>
@@ -69,7 +69,7 @@
     <div class="outer">
         <header>
             <div class="title-header">
-                <h1>Overview <span class="adh">Atlantic Dining Hall</span> <span id="date"></span><h1>
+                <h1>Food Waste Overview <span class="adh"><span id="date"></span></span> <h1>
             </div>
         </header>
 <style>
@@ -277,7 +277,8 @@ tr.outer-table {
  		       var current = result[ndx];
  		       //add to cafe 1 dataset
  		       if (current.trash_can_id == "cafe_1") {
-  		          if (new Date(current.timestamp).getHours() >= 6) {
+console.log(new Date(current.timestamp).getHours());
+  		          if (new Date(current.timestamp).getHours() >= 10 && new Date(current.timestamp).getHours() < 13) {
 
   		              if (cafe1Total == 0) {
    		                 cafe1Total = current.weight;
@@ -321,7 +322,7 @@ tr.outer-table {
 
                      //add to cafe 2 dataset
                      if(current.trash_can_id == "cafe_2") {
-                         if(new Date(current.timestamp).getHours() >= 6) {
+                         if(new Date(current.timestamp).getHours() >= 10 && new Date(current.timestamp).getHours() < 13) {
                              if(cafe2Total == 0) { 
                 		max2 = current.weight;
 				cafe2Total = current.weight;
@@ -376,14 +377,15 @@ tr.outer-table {
 
 		if(data.length > 0) {
 	            if(data[0].x < data2[0].x) { start = data[0].x; }
-	            else { start = data2[0].x; }
+	            else { start = data2[0].x;}
+		    end = data[data.length-1].x;
 		} else {
                     start = new Date(2017,0,20);
 		}
 
 		//graph everything
                 d3.selectAll(".graph svg > *").remove(); 		//remove old graphs                   
-                graphDataMultiLine(max, start, [data3, data4]);	//graph line graph of total waste
+                graphDataMultiLine(max, start, end, [data3, data4]);	//graph line graph of total waste
                 getWeek(new Date());					//graph fil gauges
 		getSlices(totalWaste);				//display proper number of slices
 
